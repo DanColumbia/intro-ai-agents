@@ -176,6 +176,7 @@ h1 { font-size: 48px; font-weight: 500; line-height: 1.2; margin-bottom: 24px; l
 }
 .tier-num-a { background: #185FA5; }
 .tier-num-b { background: #0F6E56; }
+.tier-num-c { background: #993C1D; }
 .tier-text { display: flex; flex-direction: column; gap: 2px; }
 .tier-label { font-size: 12px; color: #888780; letter-spacing: 2px; text-transform: uppercase; }
 .tier-title { font-size: 20px; font-weight: 500; }
@@ -374,6 +375,108 @@ h1 { font-size: 48px; font-weight: 500; line-height: 1.2; margin-bottom: 24px; l
 .note { background: #FAF9F5; border-left: 3px solid #444441; border-radius: 0 10px 10px 0; padding: 16px 20px; margin-top: 20px; font-size: 13px; color: #5F5E5A; line-height: 1.75; }
 .note b { color: #1F1E1B; font-weight: 500; }
 .note-label { font-size: 11px; color: #888780; letter-spacing: 1px; margin-bottom: 6px; text-transform: uppercase; }
+
+/* ========== PAYMENT VISUALS ========== */
+.ltv-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 16px; }
+.ltv-card { background: #F1EFE8; border-radius: 10px; padding: 14px 14px; text-align: center; border-top: 3px solid; }
+.ltv-1 { border-top-color: #185FA5; }
+.ltv-2 { border-top-color: #1D9E75; }
+.ltv-3 { border-top-color: #BA7517; }
+.ltv-4 { border-top-color: #D4537E; }
+.ltv-asset { font-size: 11px; color: #5F5E5A; letter-spacing: 0.3px; }
+.ltv-pct { font-size: 22px; font-weight: 500; margin: 6px 0 4px; }
+.ltv-1 .ltv-pct { color: #0C447C; }
+.ltv-2 .ltv-pct { color: #04342C; }
+.ltv-3 .ltv-pct { color: #412402; }
+.ltv-4 .ltv-pct { color: #4B1528; }
+.ltv-desc { font-size: 10px; color: #888780; line-height: 1.4; }
+
+.payment-flow-cards { display: grid; grid-template-columns: 1fr 24px 1fr 24px 1fr; gap: 6px; align-items: center; margin-top: 18px; }
+.pf-card { background: #F1EFE8; border-radius: 10px; padding: 16px 14px; text-align: center; }
+.pf-icon { width: 36px; height: 36px; margin: 0 auto 8px; border-radius: 9px; display: flex; align-items: center; justify-content: center; }
+.pf-1 .pf-icon { background: #E1F5EE; color: #0F6E56; }
+.pf-2 .pf-icon { background: #EEEDFE; color: #534AB7; }
+.pf-3 .pf-icon { background: #FAEEDA; color: #854F0B; }
+.pf-title { font-size: 12px; font-weight: 500; }
+.pf-desc { font-size: 10px; color: #5F5E5A; margin-top: 4px; line-height: 1.5; }
+
+.merchant-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-top: 16px; }
+.merchant-tile { background: #F1EFE8; border-radius: 8px; padding: 10px 6px; text-align: center; }
+.merchant-emoji { font-size: 18px; margin-bottom: 4px; }
+.merchant-name { font-size: 10px; font-weight: 500; color: #444441; }
+.merchant-tag { font-size: 9px; color: #888780; margin-top: 2px; }
+
+.compare-banks { margin-top: 16px; }
+.cb-row {
+  display: grid;
+  grid-template-columns: 130px 1fr 1fr 1fr;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 0.5px solid rgba(0,0,0,0.06);
+  font-size: 12px;
+}
+.cb-row:last-child { border-bottom: none; }
+.cb-row.cb-head { font-size: 10px; color: #888780; letter-spacing: 0.5px; text-transform: uppercase; padding: 8px 0; border-bottom: 0.5px solid rgba(0,0,0,0.1); }
+.cb-cell-pos { color: #1D9E75; font-weight: 500; }
+.cb-cell-neg { color: #E24B4A; }
+.cb-cell-mid { color: #BA7517; }
+.cb-feature { font-weight: 500; color: #2C2C2A; }
+
+/* ========== CREDIT CARD VISUAL ========== */
+.credit-card-mock {
+  background: linear-gradient(135deg, #1F1E1B 0%, #2C2C2A 50%, #04342C 100%);
+  border-radius: 14px;
+  padding: 22px 24px;
+  color: #FAF9F5;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1.586 / 1;
+  max-width: 360px;
+  margin-top: 16px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.18);
+}
+.credit-card-mock::before {
+  content: "";
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 180px; height: 180px;
+  background: radial-gradient(circle, rgba(93, 202, 165, 0.25), transparent 70%);
+}
+.credit-card-mock::after {
+  content: "";
+  position: absolute;
+  bottom: -60px; left: -30px;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(127, 119, 221, 0.15), transparent 70%);
+}
+.cc-inner { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; justify-content: space-between; }
+.cc-top { display: flex; justify-content: space-between; align-items: flex-start; }
+.cc-brand { font-size: 14px; font-weight: 500; letter-spacing: -0.3px; display: flex; align-items: center; gap: 8px; }
+.cc-brand-logo {
+  width: 22px; height: 22px;
+  background: linear-gradient(135deg, #5DCAA5, #1D9E75);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+}
+.cc-tier { font-size: 9px; color: #5DCAA5; letter-spacing: 1.5px; }
+.cc-chip {
+  width: 36px; height: 28px;
+  background: linear-gradient(135deg, #D4A35A, #C09040);
+  border-radius: 5px;
+  display: flex; align-items: center; justify-content: center;
+}
+.cc-number { font-family: 'Courier New', monospace; font-size: 17px; letter-spacing: 2.5px; margin-top: 14px; }
+.cc-bottom { display: flex; justify-content: space-between; align-items: flex-end; }
+.cc-name { font-size: 10px; letter-spacing: 0.5px; }
+.cc-name-val { font-size: 12px; font-weight: 500; margin-top: 2px; }
+.cc-visa {
+  font-size: 18px;
+  font-weight: 500;
+  font-style: italic;
+  letter-spacing: 1px;
+  color: #FAF9F5;
+}
 
 /* ========== USP SECTION ========== */
 .usp-section { margin-top: 80px; }
@@ -760,6 +863,83 @@ h1 { font-size: 48px; font-weight: 500; line-height: 1.2; margin-bottom: 24px; l
 }
 .por-link { color: #5DCAA5; cursor: pointer; }
 
+/* ========== DEMO PAYMENT CARD ========== */
+.payment-section {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.demo-credit-card {
+  background: linear-gradient(135deg, #1F1E1B 0%, #2C2C2A 50%, #04342C 100%);
+  border-radius: 14px;
+  padding: 22px 24px;
+  color: #FAF9F5;
+  position: relative;
+  overflow: hidden;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+}
+.demo-credit-card::before {
+  content: "";
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 180px; height: 180px;
+  background: radial-gradient(circle, rgba(93, 202, 165, 0.25), transparent 70%);
+}
+.demo-credit-card::after {
+  content: "";
+  position: absolute;
+  bottom: -60px; left: -30px;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(127, 119, 221, 0.15), transparent 70%);
+}
+.dcc-inner { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; justify-content: space-between; }
+.dcc-top { display: flex; justify-content: space-between; align-items: flex-start; }
+.dcc-brand { font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 7px; }
+.dcc-brand-logo {
+  width: 20px; height: 20px;
+  background: linear-gradient(135deg, #5DCAA5, #1D9E75);
+  border-radius: 5px;
+  display: flex; align-items: center; justify-content: center;
+}
+.dcc-tier { font-size: 9px; color: #5DCAA5; letter-spacing: 1.5px; margin-top: 8px; }
+.dcc-chip {
+  width: 32px; height: 24px;
+  background: linear-gradient(135deg, #D4A35A, #C09040);
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+}
+.dcc-number { font-family: 'Courier New', monospace; font-size: 14px; letter-spacing: 2px; margin: 12px 0 8px; }
+.dcc-bottom { display: flex; justify-content: space-between; align-items: flex-end; }
+.dcc-name-label { font-size: 9px; opacity: 0.7; }
+.dcc-name { font-size: 11px; font-weight: 500; margin-top: 1px; }
+.dcc-visa { font-size: 16px; font-weight: 500; font-style: italic; letter-spacing: 1px; }
+
+.credit-line-card {
+  background: #FFFFFF;
+  border: 0.5px solid rgba(0,0,0,0.08);
+  border-radius: 12px;
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+}
+.cl-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.cl-title { font-size: 14px; font-weight: 500; }
+.cl-tag { font-size: 10px; padding: 2px 8px; border-radius: 8px; background: #FAEEDA; color: #854F0B; letter-spacing: 0.3px; }
+.cl-amount { font-size: 22px; font-weight: 500; line-height: 1.2; }
+.cl-amount-label { font-size: 11px; color: #888780; margin-top: 2px; }
+.cl-meta-row { display: flex; justify-content: space-between; font-size: 11px; color: #5F5E5A; margin-top: 14px; }
+.cl-bar-track { height: 6px; background: #F1EFE8; border-radius: 3px; margin-top: 6px; overflow: hidden; }
+.cl-bar-fill { height: 100%; background: linear-gradient(90deg, #1D9E75, #5DCAA5); border-radius: 3px; }
+.cl-foot { font-size: 10px; color: #888780; margin-top: 10px; padding-top: 10px; border-top: 0.5px solid rgba(0,0,0,0.06); }
+.cl-rate { color: #1D9E75; font-weight: 500; }
+
+@media (max-width: 1024px) {
+  .payment-section { grid-template-columns: 1fr; }
+}
+
 .quick-actions {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -880,6 +1060,7 @@ h1 { font-size: 48px; font-weight: 500; line-height: 1.2; margin-bottom: 24px; l
 .act-sell { background: #FCEBEB; color: #E24B4A; }
 .act-deposit { background: #E6F1FB; color: #378ADD; }
 .act-rebal { background: #EEEDFE; color: #7F77DD; }
+.act-card { background: #FAEEDA; color: #BA7517; }
 .act-text { font-size: 12px; }
 .act-time { font-size: 10px; color: #888780; margin-top: 1px; }
 .act-amt { font-size: 12px; font-weight: 500; text-align: right; }
@@ -923,6 +1104,10 @@ footer-section {
   .row { grid-template-columns: 1fr; gap: 6px; }
   .row .k { padding-top: 0; }
   .tier-flow, .portfolio-bars, .private-bank-cmp { grid-template-columns: 1fr; }
+  .ltv-grid { grid-template-columns: repeat(2, 1fr); }
+  .merchant-grid { grid-template-columns: repeat(3, 1fr); }
+  .payment-flow-cards { grid-template-columns: 1fr; }
+  .cb-row { grid-template-columns: 1fr; gap: 4px; }
   .flow-diagram { grid-template-columns: 1fr; }
   .flow-arrow { transform: rotate(90deg); padding: 4px 0; }
   .asset-grid { grid-template-columns: repeat(2, 1fr); }
@@ -956,6 +1141,7 @@ footer-section {
 <a class="top-nav-link" href="#intro">平台介绍</a>
 <a class="top-nav-link" href="#layer-a">投资人体验</a>
 <a class="top-nav-link" href="#layer-b">运营与技术</a>
+<a class="top-nav-link" href="#layer-c">支付与消费</a>
 <a class="top-nav-link" href="#usp">核心卖点</a>
 <a class="top-nav-link" href="#demo">产品 Demo</a>
 </div>
@@ -999,6 +1185,8 @@ footer-section {
 <span class="hero-tag">私募信贷</span>
 <span class="hero-tag">USDT 出入金</span>
 <span class="hero-tag">链上储备证明</span>
+<span class="hero-tag">资产质押消费</span>
+<span class="hero-tag">Visa 卡支付</span>
 </div>
 <div class="hero-jump">
 <a href="#layer-a" class="hero-btn">浏览平台介绍 →</a>
@@ -1534,6 +1722,273 @@ footer-section {
 </div>
 </section>
 
+<div class="tier-header" id="layer-c">
+<div class="tier-num tier-num-c">C</div>
+<div class="tier-text">
+<span class="tier-label">Layer 03</span>
+<span class="tier-title">支付与消费层</span>
+</div>
+</div>
+
+<section class="module m-coral">
+<div class="module-head">
+<div class="module-icon icon-coral">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+</div>
+<span class="module-num">09</span>
+<span class="module-title">资产质押消费</span>
+<span class="module-pill pill-amber">支付</span>
+</div>
+<p class="module-tag">不卖资产也能花钱——把私行级证券质押贷款带到链上。</p>
+
+<div class="row">
+<div class="k">客户价值</div>
+<div class="v">用户持有的代币化资产可以作为抵押品，瞬时获得 USDT 信贷额度用于消费——<strong>不需要卖出资产、不触发税务事件、不打乱投资组合</strong>。私行客户最熟悉的服务（高盛 PWM、瑞银 Lombard Lending），现在用 USDT 结算 + 智能合约实现，几秒钟到账。<br><br>典型场景：客户持有 100 万美债代币，临时要付 20 万美元的孩子学费——传统路径要赎回美债（损失利息+市价波动）、提现到银行（T+2）、再汇款（手续费+时间）；Bridge 路径是抵押 30 万美债代币、即时拿 20 万 USDT、刷卡或转账完成。<strong>资产不动，钱已经花了。</strong></div>
+</div>
+
+<div class="row">
+<div class="k">LTV 分级</div>
+<div class="v">不同资产类别的可借出比例（Loan-to-Value）按风险定价。<strong>这是合规放贷业务的核心参数，由独立信贷委员会按 Basel 风控框架设定</strong>。
+<div class="ltv-grid">
+<div class="ltv-card ltv-1">
+<div class="ltv-asset">代币化美债</div>
+<div class="ltv-pct">70%</div>
+<div class="ltv-desc">最稳定抵押品<br>清算阈值 85%</div>
+</div>
+<div class="ltv-card ltv-2">
+<div class="ltv-asset">代币化美股</div>
+<div class="ltv-pct">50%</div>
+<div class="ltv-desc">蓝筹个股 / 指数 ETF<br>清算阈值 70%</div>
+</div>
+<div class="ltv-card ltv-3">
+<div class="ltv-asset">代币化黄金</div>
+<div class="ltv-pct">60%</div>
+<div class="ltv-desc">实物分配黄金<br>清算阈值 75%</div>
+</div>
+<div class="ltv-card ltv-4">
+<div class="ltv-asset">对冲基金 / 私募信贷</div>
+<div class="ltv-pct">30%</div>
+<div class="ltv-desc">流动性较低<br>清算阈值 50%</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="k">利率与定价</div>
+<div class="v">浮动利率，按 SOFR + 风险溢价 + 平台利差计算。<strong>典型水平 6-9% APR</strong>，比信用卡循环利率（18-25%）低得多，比私行 Lombard Lending（5-7%）略高一些——但 Bridge 的优势是<strong>开户瞬时到账</strong>，私行 Lombard 要走 1-2 周授信流程。利率每月透明披露在 Dashboard。</div>
+</div>
+
+<div class="row">
+<div class="k">合规结构</div>
+<div class="v">在<strong>开曼或 BVI 设立独立 Lending SPV</strong>，持有放贷牌照（Cayman MS Act / BVI Financing Act）。SPV 资金来源：股东资本 + 机构信贷额度（与对冲基金、家族办公室合作）。<strong>不动用客户资产做杠杆——这是 FTX/Celsius 暴雷的根本原因</strong>，平台不踩这条红线。
+<br><br>抵押品的链上锁定由智能合约自动执行，清算逻辑公开可审计：当抵押品价值跌破清算阈值，合约自动卖出抵押资产偿还贷款，剩余返还用户钱包。这套机制比传统券商的"保证金电话 + 手动清算"更快、更透明。</div>
+</div>
+
+<div class="note">
+<div class="note-label">给股东的关键说明</div>
+质押消费功能不仅是产品差异化，更是<b>平台第二大收入引擎</b>。私行客户的 Lombard Lending 余额通常占 AUM 的 15-25%。如果 Bridge 达到 5 亿美元 AUM、质押率 20%、净利差 4%，<b>仅这一项业务年收入约 400 万美元</b>，且毛利率高于 80%。这是私行业务模式的核心利润来源——我们要复制它。
+</div>
+</section>
+
+<section class="module m-purple">
+<div class="module-head">
+<div class="module-icon icon-purple">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M6 12h.01M10 12h.01"/></svg>
+</div>
+<span class="module-num">10</span>
+<span class="module-title">Visa 卡支付</span>
+<span class="module-pill pill-amber">支付</span>
+</div>
+<p class="module-tag">USDT 直接刷卡消费，全球 1 亿+商户接受。</p>
+
+<div class="row">
+<div class="k">客户价值</div>
+<div class="v">用户在 Bridge 的 USDT 余额或质押授信额度可以直接通过 Visa 卡消费。<strong>支付时刻 USDT 自动转换为商户接收的法币（美元、欧元、日元等）</strong>，用户无需提前换汇、无需开海外银行账户、无需绑定第三方钱包。卡片本身是标准国际 Visa 借记卡或信用卡，<strong>全球 200 多个国家、1 亿+ 商户网络无缝接受</strong>。
+
+<div class="credit-card-mock">
+<div class="cc-inner">
+<div class="cc-top">
+<div class="cc-brand">
+<div class="cc-brand-logo">
+<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="2.5"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>
+</div>
+Bridge
+</div>
+<div class="cc-chip">
+<svg width="20" height="14" viewBox="0 0 24 16" fill="none" stroke="#704812" stroke-width="1.2"><rect x="2" y="2" width="20" height="12" rx="1"/><path d="M2 6h20M2 10h20M8 2v12M16 2v12"/></svg>
+</div>
+</div>
+<div>
+<div class="cc-tier">PRIVATE</div>
+<div class="cc-number">5412 •••• •••• 8847</div>
+</div>
+<div class="cc-bottom">
+<div>
+<div class="cc-name">持卡人</div>
+<div class="cc-name-val">CHEN WEI</div>
+</div>
+<div class="cc-visa">VISA</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="k">支付流水线</div>
+<div class="v">
+<div class="payment-flow-cards">
+<div class="pf-card pf-1">
+<div class="pf-icon">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M16 12l-4 4-4-4M12 8v8"/></svg>
+</div>
+<div class="pf-title">用户刷卡</div>
+<div class="pf-desc">线上 / 线下 / NFC<br>商户收单银行结算</div>
+</div>
+<div class="flow-arrow">→</div>
+<div class="pf-card pf-2">
+<div class="pf-icon">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M8 21H3v-5M21 3l-7 7M3 21l7-7"/></svg>
+</div>
+<div class="pf-title">USDT 转法币</div>
+<div class="pf-desc">发卡机构内置兑换<br>实时市价 + 0.5% 价差</div>
+</div>
+<div class="flow-arrow">→</div>
+<div class="pf-card pf-3">
+<div class="pf-icon">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>
+</div>
+<div class="pf-title">商户到账</div>
+<div class="pf-desc">商户收到法币<br>感受不到 USDT 存在</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="k">合规结构</div>
+<div class="v"><strong>不自己发卡——这是关键的合规决策</strong>。Visa 网络只接入持牌银行，所以 Bridge 与<strong>立陶宛或塞浦路斯的持牌发卡银行</strong>（Bankera、Pannercard、Modulr 等）合作发行 Bridge 品牌卡。<br><br>这种结构有三个关键好处：(1) <strong>平台不持有客户法币</strong>，不触发 MTL（Money Transmitter License）要求；(2) <strong>USDT 到法币的转换由发卡银行内置完成</strong>，平台不做外汇兑换业务；(3) <strong>风险隔离</strong>——发卡银行受 EU 监管直接监督，万一卡业务出问题不污染平台主体。<br><br>这一安排借鉴 Crypto.com Card、Coinbase Card 的成熟模式——这些产品全部都是和持牌银行合作发卡，没有任何加密平台敢自己发 Visa 卡。</div>
+</div>
+
+<div class="row">
+<div class="k">支持的应用</div>
+<div class="v">Visa 网络的全球商户都自动支持。无需任何"对接"——只要商户接受 Visa，Bridge 卡就能用。
+<div class="merchant-grid">
+<div class="merchant-tile">
+<div class="merchant-emoji">🌍</div>
+<div class="merchant-name">携程</div>
+<div class="merchant-tag">国际订房</div>
+</div>
+<div class="merchant-tile">
+<div class="merchant-emoji">📦</div>
+<div class="merchant-name">Amazon</div>
+<div class="merchant-tag">全站购物</div>
+</div>
+<div class="merchant-tile">
+<div class="merchant-emoji">🍿</div>
+<div class="merchant-name">Netflix</div>
+<div class="merchant-tag">订阅</div>
+</div>
+<div class="merchant-tile">
+<div class="merchant-emoji">🚗</div>
+<div class="merchant-name">Uber</div>
+<div class="merchant-tag">全球打车</div>
+</div>
+<div class="merchant-tile">
+<div class="merchant-emoji">🏨</div>
+<div class="merchant-name">Booking</div>
+<div class="merchant-tag">酒店预订</div>
+</div>
+<div class="merchant-tile">
+<div class="merchant-emoji">✈️</div>
+<div class="merchant-name">Expedia</div>
+<div class="merchant-tag">机票</div>
+</div>
+<div class="merchant-tile">
+<div class="merchant-emoji">🍎</div>
+<div class="merchant-name">Apple Store</div>
+<div class="merchant-tag">App / 服务</div>
+</div>
+<div class="merchant-tile">
+<div class="merchant-emoji">🎵</div>
+<div class="merchant-name">Spotify</div>
+<div class="merchant-tag">订阅</div>
+</div>
+<div class="merchant-tile">
+<div class="merchant-emoji">💻</div>
+<div class="merchant-name">Google Pay</div>
+<div class="merchant-tag">绑卡支付</div>
+</div>
+<div class="merchant-tile">
+<div class="merchant-emoji">📱</div>
+<div class="merchant-name">Apple Pay</div>
+<div class="merchant-tag">钱包绑定</div>
+</div>
+<div class="merchant-tile">
+<div class="merchant-emoji">🛒</div>
+<div class="merchant-name">eBay</div>
+<div class="merchant-tag">跨境电商</div>
+</div>
+<div class="merchant-tile">
+<div class="merchant-emoji">+</div>
+<div class="merchant-name">1 亿+</div>
+<div class="merchant-tag">全球商户</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="k">对比加密同行</div>
+<div class="v">
+<div class="compare-banks">
+<div class="cb-row cb-head">
+<div></div>
+<div>Bridge Card</div>
+<div>Crypto.com</div>
+<div>普通银行卡</div>
+</div>
+<div class="cb-row">
+<div class="cb-feature">资产质押消费</div>
+<div class="cb-cell-pos">✓ 不卖资产</div>
+<div class="cb-cell-neg">✗ 必须先卖币</div>
+<div class="cb-cell-neg">✗ 不支持</div>
+</div>
+<div class="cb-row">
+<div class="cb-feature">底层资产</div>
+<div class="cb-cell-pos">✓ 美股美债 RWA</div>
+<div class="cb-cell-mid">○ 仅原生加密</div>
+<div class="cb-cell-pos">✓ 法币</div>
+</div>
+<div class="cb-row">
+<div class="cb-feature">全球商户接受</div>
+<div class="cb-cell-pos">✓ Visa 1 亿+</div>
+<div class="cb-cell-pos">✓ Visa 1 亿+</div>
+<div class="cb-cell-pos">✓ Visa 1 亿+</div>
+</div>
+<div class="cb-row">
+<div class="cb-feature">无需海外银行账户</div>
+<div class="cb-cell-pos">✓</div>
+<div class="cb-cell-pos">✓</div>
+<div class="cb-cell-neg">✗ 必须开户</div>
+</div>
+<div class="cb-row">
+<div class="cb-feature">现金返还</div>
+<div class="cb-cell-pos">1-3% USDT</div>
+<div class="cb-cell-pos">1-5% CRO</div>
+<div class="cb-cell-mid">0-2%</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="note">
+<div class="note-label">给股东的真相提醒</div>
+不要承诺"对接美团、支付宝、微信"——这三家用的是<b>境内银联+人民币结算</b>，不是 Visa 网络。中国大陆居民绑定 Visa 卡到这些应用受外汇管制限制，平台无法"绕过"。诚实的故事是："Bridge 卡覆盖全球 Visa 网络的 1 亿+商户，包含携程、亚马逊、Booking、Apple Store 等所有国际化应用——这是 Visa 网络的固有能力，不需要平台做任何对接"。
+</div>
+</section>
+
 <div class="usp-section" id="usp">
 <div class="section-divider">
 <h2 class="section-title">三大核心卖点</h2>
@@ -1601,23 +2056,28 @@ footer-section {
 <div class="demo-intro-inner">
 <div class="demo-intro-eyebrow">● Live Product Preview</div>
 <h2 class="demo-intro-title">这是用户登录后<br>实际看到的产品</h2>
-<p class="demo-intro-sub">前面讲的所有模块、所有卖点、所有合规设计，最终都收敛到这个仪表盘。<strong>下面就是用户每天打开 Bridge 看到的画面</strong>——总资产、链上储备证明、持仓、市场动态、活动流。</p>
+<p class="demo-intro-sub">前面讲的所有模块、所有卖点、所有合规设计，最终都收敛到这个仪表盘。<strong>下面就是用户每天打开 Bridge 看到的画面</strong>——总资产、链上储备证明、Visa 卡 + 质押额度、持仓、市场动态、活动流。</p>
 
-<div class="demo-features">
+<div class="demo-features" style="grid-template-columns: repeat(4, 1fr);">
 <div class="demo-feature">
 <div class="demo-feature-num">01</div>
 <div class="demo-feature-title">PoR 在首屏</div>
-<div class="demo-feature-desc">链上储备健康度模块固定显示，实时脉冲。</div>
+<div class="demo-feature-desc">链上储备健康度模块实时脉冲显示。</div>
 </div>
 <div class="demo-feature">
 <div class="demo-feature-num">02</div>
-<div class="demo-feature-title">机构资产可见</div>
-<div class="demo-feature-desc">Pershing Square、Maple 私募信贷在持仓列表。</div>
+<div class="demo-feature-title">Visa 卡 + 质押</div>
+<div class="demo-feature-desc">资产不卖也能消费，Visa 全球可用。</div>
 </div>
 <div class="demo-feature">
 <div class="demo-feature-num">03</div>
-<div class="demo-feature-title">USDT 多链入金</div>
-<div class="demo-feature-desc">活动流标注 Tron、以太坊等链来源。</div>
+<div class="demo-feature-title">机构资产可见</div>
+<div class="demo-feature-desc">Pershing Square、Maple 私募信贷。</div>
+</div>
+<div class="demo-feature">
+<div class="demo-feature-num">04</div>
+<div class="demo-feature-title">USDT 多链</div>
+<div class="demo-feature-desc">Tron、以太坊等链入金灵活。</div>
 </div>
 </div>
 </div>
@@ -1669,6 +2129,10 @@ footer-section {
 <div class="nav-item">
 <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 23V1M19 16l-7 7-7-7"/></svg>
 <span>提现</span>
+</div>
+<div class="nav-item">
+<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+<span>支付与卡</span>
 </div>
 <div class="nav-item">
 <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
@@ -1780,6 +2244,58 @@ footer-section {
 </div>
 </div>
 
+<div class="payment-section">
+<div class="demo-credit-card">
+<div class="dcc-inner">
+<div class="dcc-top">
+<div>
+<div class="dcc-brand">
+<div class="dcc-brand-logo">
+<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="2.5"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>
+</div>
+Bridge
+</div>
+<div class="dcc-tier">PRIVATE</div>
+</div>
+<div class="dcc-chip">
+<svg width="18" height="12" viewBox="0 0 24 16" fill="none" stroke="#704812" stroke-width="1.2"><rect x="2" y="2" width="20" height="12" rx="1"/><path d="M2 6h20M2 10h20M8 2v12M16 2v12"/></svg>
+</div>
+</div>
+<div>
+<div class="dcc-number">5412 •••• •••• 8847</div>
+<div class="dcc-bottom">
+<div>
+<div class="dcc-name-label">持卡人</div>
+<div class="dcc-name">CHEN WEI</div>
+</div>
+<div class="dcc-visa">VISA</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="credit-line-card">
+<div class="cl-head">
+<div class="cl-title">质押授信额度</div>
+<div class="cl-tag">已激活</div>
+</div>
+<div class="cl-amount">$580,000</div>
+<div class="cl-amount-label">最大可用额度（基于持仓）</div>
+<div style="margin-top: 16px;">
+<div class="cl-meta-row">
+<span>已使用 <strong style="color:#2C2C2A;">$28,400</strong></span>
+<span>可用 <strong style="color:#1D9E75;">$551,600</strong></span>
+</div>
+<div class="cl-bar-track">
+<div class="cl-bar-fill" style="width: 4.9%"></div>
+</div>
+</div>
+<div class="cl-foot">
+当前利率 <span class="cl-rate">7.2% APR</span> · 抵押品由智能合约自动管理 · LTV 5.7% / 70%
+</div>
+</div>
+</div>
+
 <div class="quick-actions">
 <div class="quick-action">
 <div class="qa-icon-wrap qa-1">
@@ -1804,10 +2320,10 @@ footer-section {
 </div>
 <div class="quick-action">
 <div class="qa-icon-wrap qa-4">
-<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
 </div>
-<div class="qa-label">税务报告</div>
-<div class="qa-desc">2026 年报</div>
+<div class="qa-label">我的 Visa 卡</div>
+<div class="qa-desc">全球 1 亿+商户</div>
 </div>
 </div>
 
@@ -2074,6 +2590,28 @@ footer-section {
 </div>
 
 <div class="activity-item">
+<div class="act-icon act-card">
+<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+</div>
+<div>
+<div class="act-text">Visa 消费 · Booking.com</div>
+<div class="act-time">今日 14:08 · 东京酒店</div>
+</div>
+<div class="act-amt">-$3,420</div>
+</div>
+
+<div class="activity-item">
+<div class="act-icon act-card">
+<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+</div>
+<div>
+<div class="act-text">Visa 消费 · Apple Store</div>
+<div class="act-time">今日 11:24</div>
+</div>
+<div class="act-amt">-$1,829</div>
+</div>
+
+<div class="activity-item">
 <div class="act-icon act-buy">
 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>
 </div>
@@ -2138,7 +2676,7 @@ footer-section {
 </div>
 
 <div style="text-align: center; margin-top: 60px; padding: 32px 20px 0; font-size: 12px; color: #888780;">
-Bridge 平台股东陈述材料 · 平台介绍 + 产品 Demo · v3
+Bridge 平台股东陈述材料 · 平台介绍 + 产品 Demo · v4 · 含支付与消费层
 </div>
 </div>
 
