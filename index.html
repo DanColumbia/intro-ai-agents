@@ -3,2358 +3,2144 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WEB3 AI AGENTS // 赛道全景 · 2026.04 复盘</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&family=Syne:wght@500;700;800&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+<title>Bridge — 机构级美元资产，链上极简入口</title>
 <style>
-  :root {
-    --bg: #0a0d0a;
-    --bg-soft: #0f130f;
-    --bg-card: #131813;
-    --grid: rgba(0, 255, 136, 0.04);
-    --line: rgba(0, 255, 136, 0.15);
-    --line-strong: rgba(0, 255, 136, 0.4);
-    --neon: #00ff88;
-    --neon-dim: #00b85f;
-    --orange: #ff6b1a;
-    --cyan: #4dd0ff;
-    --magenta: #ff2d92;
-    --red: #ff3344;
-    --text: #e8f0e8;
-    --text-dim: #7a8a7a;
-    --text-faint: #4a5a4a;
-    --warn: #ffcc00;
-    --font-mono: 'JetBrains Mono', monospace;
-    --font-display: 'Syne', sans-serif;
-    --font-zh: 'Noto Serif SC', serif;
-  }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--font-mono);
-    font-size: 14px;
-    line-height: 1.6;
-    overflow-x: hidden;
-    background-image:
-      linear-gradient(var(--grid) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-    background-size: 32px 32px;
-  }
-
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(ellipse at top, rgba(0, 255, 136, 0.08), transparent 60%),
-                radial-gradient(ellipse at bottom right, rgba(255, 107, 26, 0.05), transparent 50%);
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
-    opacity: 0.05;
-    pointer-events: none;
-    z-index: 1;
-    mix-blend-mode: overlay;
-  }
-
-  .scanline {
-    position: fixed;
-    inset: 0;
-    background: linear-gradient(transparent 50%, rgba(0, 255, 136, 0.02) 50%);
-    background-size: 100% 4px;
-    pointer-events: none;
-    z-index: 2;
-  }
-
-  .container {
-    position: relative;
-    z-index: 10;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 32px;
-  }
-
-  /* ========== TOP BAR ========== */
-  .topbar {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    backdrop-filter: blur(12px);
-    background: rgba(10, 13, 10, 0.85);
-    border-bottom: 1px solid var(--line);
-  }
-
-  .topbar-inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 14px 32px;
-    max-width: 1400px;
-    margin: 0 auto;
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
-  .topbar-left { display: flex; gap: 24px; align-items: center; }
-  .topbar-right { display: flex; gap: 20px; color: var(--text-dim); }
-
-  .live-dot {
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    background: var(--neon);
-    border-radius: 50%;
-    margin-right: 8px;
-    box-shadow: 0 0 12px var(--neon);
-    animation: pulse 1.4s infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(0.8); }
-  }
-
-  /* ========== HERO ========== */
-  .hero {
-    padding: 80px 0 60px;
-    position: relative;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .hero-meta {
-    font-size: 11px;
-    color: var(--text-dim);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin-bottom: 32px;
-    display: flex;
-    gap: 24px;
-    flex-wrap: wrap;
-  }
-
-  .hero-meta span::before {
-    content: '◇';
-    margin-right: 6px;
-    color: var(--neon);
-  }
-
-  .hero h1 {
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: clamp(48px, 9vw, 130px);
-    line-height: 0.92;
-    letter-spacing: -0.04em;
-    margin-bottom: 24px;
-  }
-
-  .hero h1 .line1 { color: var(--text); }
-  .hero h1 .line2 {
-    color: transparent;
-    -webkit-text-stroke: 1.5px var(--neon);
-    font-style: italic;
-  }
-  .hero h1 .line3 {
-    color: var(--orange);
-    position: relative;
-  }
-  .hero h1 .glitch {
-    position: relative;
-    display: inline-block;
-  }
-  .hero h1 .glitch::before {
-    content: 'AGENTS';
-    position: absolute;
-    top: 0; left: 2px;
-    color: var(--cyan);
-    mix-blend-mode: screen;
-    opacity: 0.7;
-    animation: glitch 4s infinite;
-  }
-
-  @keyframes glitch {
-    0%, 95%, 100% { transform: translate(0, 0); opacity: 0; }
-    96% { transform: translate(-2px, 1px); opacity: 0.8; }
-    97% { transform: translate(2px, -1px); opacity: 0.8; }
-    98% { transform: translate(-1px, 2px); opacity: 0.8; }
-  }
-
-  .hero-sub {
-    max-width: 720px;
-    color: var(--text-dim);
-    font-size: 15px;
-    line-height: 1.7;
-    margin-bottom: 48px;
-    border-left: 2px solid var(--neon);
-    padding-left: 20px;
-  }
-
-  .hero-sub .zh { font-family: var(--font-zh); color: var(--text); }
-
-  /* ========== STATS BAR ========== */
-  .stats {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0;
-    border: 1px solid var(--line);
-    background: var(--bg-soft);
-  }
-
-  .stat {
-    padding: 24px 28px;
-    border-right: 1px solid var(--line);
-    position: relative;
-  }
-  .stat:last-child { border-right: none; }
-
-  .stat-label {
-    font-size: 10px;
-    color: var(--text-dim);
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-  }
-  .stat-label::before { content: '> '; color: var(--neon); }
-
-  .stat-value {
-    font-family: var(--font-display);
-    font-size: 36px;
-    font-weight: 800;
-    color: var(--neon);
-    letter-spacing: -0.02em;
-    line-height: 1;
-  }
-  .stat-value.warn { color: var(--orange); }
-  .stat-value.red { color: var(--red); }
-
-  .stat-detail {
-    font-size: 11px;
-    color: var(--text-faint);
-    margin-top: 6px;
-  }
-
-  /* ========== NAV TABS ========== */
-  .tab-nav {
-    display: flex;
-    gap: 0;
-    margin-top: 60px;
-    border-bottom: 1px solid var(--line);
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-  .tab-nav::-webkit-scrollbar { display: none; }
-
-  .tab-btn {
-    background: none;
-    border: none;
-    color: var(--text-dim);
-    font-family: var(--font-mono);
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 18px 24px;
-    cursor: pointer;
-    white-space: nowrap;
-    position: relative;
-    transition: color 0.2s;
-    border-right: 1px solid var(--line);
-  }
-
-  .tab-btn:hover { color: var(--text); }
-
-  .tab-btn.active {
-    color: var(--neon);
-    background: rgba(0, 255, 136, 0.04);
-  }
-
-  .tab-btn.active::after {
-    content: '';
-    position: absolute;
-    left: 0; right: 0; bottom: -1px;
-    height: 2px;
-    background: var(--neon);
-    box-shadow: 0 0 12px var(--neon);
-  }
-
-  .tab-num {
-    color: var(--text-faint);
-    margin-right: 8px;
-    font-size: 10px;
-  }
-
-  /* ========== SECTION ========== */
-  section.module {
-    padding: 80px 0;
-    border-bottom: 1px solid var(--line);
-    scroll-margin-top: 60px;
-  }
-
-  .module-header {
-    display: grid;
-    grid-template-columns: 80px 1fr;
-    gap: 32px;
-    margin-bottom: 56px;
-    align-items: start;
-  }
-
-  .module-num {
-    font-family: var(--font-display);
-    font-size: 64px;
-    font-weight: 800;
-    color: transparent;
-    -webkit-text-stroke: 1px var(--neon);
-    line-height: 1;
-  }
-
-  .module-title-block .tag {
-    display: inline-block;
-    font-size: 10px;
-    color: var(--neon);
-    letter-spacing: 0.2em;
-    border: 1px solid var(--neon);
-    padding: 4px 10px;
-    margin-bottom: 16px;
-    text-transform: uppercase;
-  }
-
-  .module-title-block h2 {
-    font-family: var(--font-display);
-    font-size: clamp(32px, 4.5vw, 56px);
-    font-weight: 700;
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-    margin-bottom: 16px;
-  }
-
-  .module-title-block h2 .zh {
-    font-family: var(--font-zh);
-    color: var(--text);
-  }
-
-  .module-title-block .desc {
-    color: var(--text-dim);
-    max-width: 720px;
-    font-size: 14px;
-  }
-
-  /* ========== CARDS GRID ========== */
-  .grid {
-    display: grid;
-    gap: 1px;
-    background: var(--line);
-    border: 1px solid var(--line);
-  }
-
-  .grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
-  .grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
-
-  .card {
-    background: var(--bg-soft);
-    padding: 32px;
-    position: relative;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    border: none;
-    color: inherit;
-    font-family: inherit;
-    text-align: left;
-    width: 100%;
-  }
-
-  .card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 0; height: 2px;
-    background: var(--neon);
-    transition: width 0.4s ease;
-  }
-
-  .card:hover { background: var(--bg-card); transform: translateY(-2px); }
-  .card:hover::before { width: 100%; }
-
-  .card-corner {
-    position: absolute;
-    top: 12px; right: 12px;
-    font-size: 10px;
-    color: var(--text-faint);
-    letter-spacing: 0.1em;
-  }
-
-  .card-corner .read {
-    color: var(--neon);
-    transition: all 0.3s;
-  }
-
-  .card:hover .card-corner .read { letter-spacing: 0.2em; }
-
-  .card-tag {
-    display: inline-block;
-    font-size: 9px;
-    color: var(--text-dim);
-    letter-spacing: 0.15em;
-    margin-bottom: 16px;
-    border-bottom: 1px solid var(--line-strong);
-    padding-bottom: 6px;
-    width: fit-content;
-    text-transform: uppercase;
-  }
-
-  .card-title {
-    font-family: var(--font-display);
-    font-size: 28px;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    margin-bottom: 6px;
-    color: var(--text);
-  }
-
-  .card-token {
-    font-size: 11px;
-    color: var(--neon);
-    margin-bottom: 16px;
-    letter-spacing: 0.1em;
-  }
-
-  .card-desc {
-    font-size: 13px;
-    color: var(--text-dim);
-    line-height: 1.65;
-    margin-bottom: 20px;
-    flex-grow: 1;
-  }
-
-  .card-stats {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    padding-top: 16px;
-    border-top: 1px dashed var(--line-strong);
-    margin-top: auto;
-  }
-
-  .card-stat {
-    font-size: 10px;
-    color: var(--text-faint);
-    letter-spacing: 0.05em;
-  }
-  .card-stat strong {
-    display: block;
-    color: var(--text);
-    font-size: 13px;
-    font-weight: 500;
-    margin-top: 2px;
-  }
-  .card-stat strong.hi { color: var(--neon); }
-  .card-stat strong.warn { color: var(--orange); }
-  .card-stat strong.red { color: var(--red); }
-
-  /* ========== STATUS BADGE ========== */
-  .status {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    padding: 4px 8px;
-    margin-left: 8px;
-    text-transform: uppercase;
-    font-weight: 500;
-    vertical-align: middle;
-  }
-  .status::before {
-    content: '';
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-  }
-  .status.alive { color: var(--neon); border: 1px solid var(--neon); }
-  .status.alive::before { background: var(--neon); box-shadow: 0 0 6px var(--neon); }
-  .status.struggle { color: var(--orange); border: 1px solid var(--orange); }
-  .status.struggle::before { background: var(--orange); }
-  .status.dead { color: var(--red); border: 1px solid var(--red); }
-  .status.dead::before { background: var(--red); }
-
-  /* ========== HERO LAUNCHPAD COMPARISON ========== */
-  .vs-block {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    gap: 0;
-    border: 1px solid var(--line);
-    background: var(--bg-soft);
-    margin-bottom: 32px;
-  }
-
-  .vs-side { padding: 36px; position: relative; cursor: pointer; transition: background 0.3s; }
-  .vs-side:hover { background: var(--bg-card); }
-  .vs-side.left { border-right: 1px solid var(--line); }
-
-  .vs-divider {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 60px;
-    background:
-      linear-gradient(var(--bg) 0 100%) padding-box,
-      var(--neon);
-    color: var(--neon);
-    font-family: var(--font-display);
-    font-size: 24px;
-    font-weight: 800;
-    font-style: italic;
-    position: relative;
-  }
-
-  .vs-divider::before, .vs-divider::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    width: 1px;
-    height: 40%;
-    background: var(--neon);
-    transform: translateX(-50%);
-  }
-  .vs-divider::before { top: 0; }
-  .vs-divider::after { bottom: 0; }
-
-  .vs-tag {
-    font-size: 10px;
-    color: var(--text-dim);
-    letter-spacing: 0.2em;
-    margin-bottom: 14px;
-  }
-
-  .vs-name {
-    font-family: var(--font-display);
-    font-size: 38px;
-    font-weight: 800;
-    margin-bottom: 4px;
-    letter-spacing: -0.02em;
-  }
-  .vs-side.left .vs-name { color: var(--cyan); }
-  .vs-side.right .vs-name { color: var(--orange); }
-
-  .vs-token {
-    font-size: 12px;
-    color: var(--text-dim);
-    margin-bottom: 24px;
-  }
-
-  .vs-rows {
-    display: grid;
-    gap: 14px;
-    font-size: 13px;
-  }
-
-  .vs-row {
-    display: grid;
-    grid-template-columns: 90px 1fr;
-    gap: 16px;
-    border-bottom: 1px dashed var(--line);
-    padding-bottom: 12px;
-  }
-  .vs-row:last-child { border-bottom: none; }
-  .vs-row .k { color: var(--text-faint); font-size: 11px; }
-  .vs-row .v { color: var(--text); }
-  .vs-row .v.hi { color: var(--neon); }
-  .vs-row .v.warn { color: var(--orange); }
-  .vs-row .v.red { color: var(--red); }
-
-  .vs-link {
-    display: inline-block;
-    margin-top: 20px;
-    font-size: 11px;
-    color: var(--neon);
-    border: 1px solid var(--neon);
-    padding: 8px 14px;
-    letter-spacing: 0.1em;
-    transition: all 0.2s;
-  }
-  .vs-side:hover .vs-link {
-    background: var(--neon);
-    color: var(--bg);
-  }
-
-  /* ========== FRAMEWORK ROWS ========== */
-  .fw-list { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); }
-
-  .fw-item {
-    background: var(--bg-soft);
-    padding: 24px 28px;
-    display: grid;
-    grid-template-columns: auto 200px 1fr auto;
-    gap: 32px;
-    align-items: center;
-    cursor: pointer;
-    transition: background 0.2s;
-    border: none;
-    color: inherit;
-    font-family: inherit;
-    text-align: left;
-    width: 100%;
-  }
-  .fw-item:hover { background: var(--bg-card); }
-
-  .fw-num {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--text-faint);
-  }
-
-  .fw-name {
-    font-family: var(--font-display);
-    font-size: 22px;
-    font-weight: 700;
-  }
-  .fw-name .lang {
-    display: inline-block;
-    font-family: var(--font-mono);
-    font-size: 10px;
-    background: var(--line-strong);
-    color: var(--neon);
-    padding: 2px 8px;
-    margin-left: 8px;
-    vertical-align: middle;
-    border-radius: 2px;
-    font-weight: 400;
-  }
-
-  .fw-desc { color: var(--text-dim); font-size: 13px; }
-
-  .fw-arrow {
-    color: var(--text-faint);
-    font-size: 18px;
-    transition: all 0.2s;
-  }
-  .fw-item:hover .fw-arrow {
-    color: var(--neon);
-    transform: translateX(4px);
-  }
-
-  /* ========== MEME WALL ========== */
-  .meme-wall {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
-
-  .meme {
-    border: 1px solid var(--line);
-    padding: 28px;
-    background: var(--bg-soft);
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s;
-    position: relative;
-  }
-
-  .meme:hover {
-    border-color: var(--orange);
-    transform: rotate(-1deg) scale(1.02);
-  }
-
-  .meme-emoji {
-    font-size: 48px;
-    margin-bottom: 12px;
-    filter: grayscale(0.3);
-  }
-
-  .meme-name {
-    font-family: var(--font-display);
-    font-size: 24px;
-    font-weight: 800;
-    margin-bottom: 4px;
-  }
-  .meme-tag {
-    font-size: 10px;
-    color: var(--orange);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-  }
-
-  /* ========== INSIGHT CALLOUT ========== */
-  .insight {
-    background: linear-gradient(135deg, rgba(0, 255, 136, 0.04), transparent);
-    border: 1px solid var(--line-strong);
-    padding: 36px 40px;
-    margin: 48px 0;
-    position: relative;
-  }
-
-  .insight::before {
-    content: '"';
-    position: absolute;
-    top: -10px;
-    left: 24px;
-    font-size: 80px;
-    font-family: var(--font-display);
-    color: var(--neon);
-    line-height: 1;
-  }
-
-  .insight-label {
-    font-size: 10px;
-    color: var(--neon);
-    letter-spacing: 0.25em;
-    margin-bottom: 16px;
-    padding-left: 36px;
-    text-transform: uppercase;
-  }
-
-  .insight p {
-    font-family: var(--font-zh);
-    font-size: 17px;
-    line-height: 1.75;
-    color: var(--text);
-    padding-left: 36px;
-  }
-
-  /* ========== EVOLUTION FLOW ========== */
-  .evolution {
-    display: flex;
-    align-items: stretch;
-    gap: 0;
-    margin-top: 48px;
-    overflow-x: auto;
-  }
-
-  .evo-step {
-    flex: 1;
-    min-width: 200px;
-    padding: 24px;
-    background: var(--bg-soft);
-    border: 1px solid var(--line);
-    position: relative;
-  }
-
-  .evo-step:not(:last-child) { margin-right: 24px; }
-
-  .evo-step:not(:last-child)::after {
-    content: '→';
-    position: absolute;
-    right: -22px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--neon);
-    font-size: 24px;
-    z-index: 2;
-  }
-
-  .evo-num {
-    font-family: var(--font-display);
-    font-size: 36px;
-    font-weight: 800;
-    color: var(--neon);
-    line-height: 1;
-    opacity: 0.3;
-  }
-
-  .evo-phase {
-    font-size: 10px;
-    color: var(--neon);
-    letter-spacing: 0.15em;
-    margin: 12px 0 8px;
-  }
-
-  .evo-name {
-    font-family: var(--font-display);
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-
-  .evo-desc {
-    font-size: 12px;
-    color: var(--text-dim);
-  }
-
-  /* ========== MODAL ========== */
-  .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(5, 8, 5, 0.85);
-    backdrop-filter: blur(8px);
-    z-index: 200;
-    display: none;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 60px 20px;
-    overflow-y: auto;
-  }
-  .modal-overlay.show { display: flex; animation: fadeIn 0.3s; }
-
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  .modal {
-    background: var(--bg);
-    border: 1px solid var(--neon);
-    max-width: 900px;
-    width: 100%;
-    position: relative;
-    box-shadow: 0 0 60px rgba(0, 255, 136, 0.15);
-    animation: slideUp 0.4s ease;
-  }
-
-  @keyframes slideUp {
-    from { transform: translateY(30px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-  }
-
-  .modal-close {
-    position: absolute;
-    top: 16px; right: 16px;
-    background: var(--bg-soft);
-    border: 1px solid var(--line-strong);
-    color: var(--text-dim);
-    font-family: var(--font-mono);
-    font-size: 14px;
-    padding: 8px 14px;
-    cursor: pointer;
-    letter-spacing: 0.1em;
-    transition: all 0.2s;
-    z-index: 10;
-  }
-  .modal-close:hover {
-    background: var(--neon);
-    color: var(--bg);
-    border-color: var(--neon);
-  }
-
-  .modal-header {
-    padding: 48px 56px 32px;
-    border-bottom: 1px solid var(--line);
-    background:
-      linear-gradient(135deg, rgba(0, 255, 136, 0.08), transparent),
-      var(--bg-soft);
-  }
-
-  .modal-meta {
-    font-size: 10px;
-    color: var(--text-dim);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin-bottom: 16px;
-  }
-  .modal-meta span { color: var(--neon); }
-
-  .modal-title {
-    font-family: var(--font-display);
-    font-size: clamp(36px, 5vw, 56px);
-    font-weight: 800;
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-    margin-bottom: 8px;
-  }
-
-  .modal-token {
-    font-size: 13px;
-    color: var(--neon);
-    letter-spacing: 0.1em;
-    margin-bottom: 16px;
-  }
-
-  .modal-tagline {
-    font-family: var(--font-zh);
-    font-size: 16px;
-    color: var(--text-dim);
-    line-height: 1.6;
-    max-width: 600px;
-  }
-
-  .modal-body {
-    padding: 40px 56px 56px;
-  }
-
-  /* Modal stats grid */
-  .modal-stats {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0;
-    border: 1px solid var(--line);
-    margin-bottom: 40px;
-  }
-  .modal-stat {
-    padding: 18px 20px;
-    border-right: 1px solid var(--line);
-  }
-  .modal-stat:last-child { border-right: none; }
-  .modal-stat .label {
-    font-size: 9px;
-    color: var(--text-dim);
-    letter-spacing: 0.2em;
-    margin-bottom: 8px;
-    text-transform: uppercase;
-  }
-  .modal-stat .label::before { content: '> '; color: var(--neon); }
-  .modal-stat .value {
-    font-family: var(--font-display);
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--text);
-    letter-spacing: -0.01em;
-  }
-  .modal-stat .value.hi { color: var(--neon); }
-  .modal-stat .value.warn { color: var(--orange); }
-  .modal-stat .value.red { color: var(--red); }
-  .modal-stat .delta {
-    font-size: 10px;
-    color: var(--text-faint);
-    margin-top: 4px;
-  }
-
-  /* Modal sections */
-  .modal-section { margin-bottom: 36px; }
-  .modal-section:last-child { margin-bottom: 0; }
-
-  .modal-section-title {
-    font-family: var(--font-display);
-    font-size: 13px;
-    color: var(--neon);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-    border-left: 3px solid var(--neon);
-    padding-left: 14px;
-    line-height: 1.2;
-  }
-
-  .modal-section p,
-  .modal-section li {
-    font-family: var(--font-zh);
-    font-size: 15px;
-    line-height: 1.85;
-    color: var(--text);
-    margin-bottom: 14px;
-  }
-  .modal-section p:last-child { margin-bottom: 0; }
-
-  .modal-section .accent { color: var(--neon); font-family: var(--font-mono); font-weight: 500; }
-  .modal-section .accent-warn { color: var(--orange); font-family: var(--font-mono); font-weight: 500; }
-  .modal-section .accent-red { color: var(--red); font-family: var(--font-mono); font-weight: 500; }
-  .modal-section .accent-cyan { color: var(--cyan); font-family: var(--font-mono); font-weight: 500; }
-
-  .modal-section ul {
-    list-style: none;
-    padding: 0;
-  }
-  .modal-section ul li {
-    padding-left: 24px;
-    position: relative;
-  }
-  .modal-section ul li::before {
-    content: '▸';
-    color: var(--neon);
-    position: absolute;
-    left: 0;
-    top: 1px;
-  }
-
-  /* Verdict box */
-  .verdict {
-    border: 1px dashed var(--line-strong);
-    background: rgba(0, 255, 136, 0.03);
-    padding: 24px 28px;
-    margin-top: 12px;
-  }
-  .verdict-label {
-    font-size: 10px;
-    color: var(--neon);
-    letter-spacing: 0.2em;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-  }
-  .verdict p {
-    font-family: var(--font-zh);
-    font-size: 15px;
-    line-height: 1.8;
-    color: var(--text);
-    margin: 0;
-  }
-
-  /* Timeline within modal */
-  .mini-timeline {
-    border-left: 1px solid var(--line-strong);
-    padding-left: 24px;
-    margin-left: 6px;
-  }
-  .mini-event {
-    margin-bottom: 18px;
-    position: relative;
-  }
-  .mini-event::before {
-    content: '';
-    position: absolute;
-    left: -30px;
-    top: 6px;
-    width: 8px;
-    height: 8px;
-    background: var(--neon);
-    border-radius: 50%;
-    box-shadow: 0 0 8px var(--neon);
-  }
-  .mini-event .when {
-    font-size: 10px;
-    color: var(--neon);
-    letter-spacing: 0.15em;
-    margin-bottom: 4px;
-    font-family: var(--font-mono);
-  }
-  .mini-event .what {
-    font-family: var(--font-zh);
-    font-size: 14px;
-    color: var(--text);
-    line-height: 1.7;
-  }
-
-  /* ========== FOOTER ========== */
-  footer {
-    padding: 48px 0;
-    text-align: center;
-    color: var(--text-faint);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-  }
-
-  footer .ascii {
-    color: var(--neon);
-    font-size: 10px;
-    line-height: 1.2;
-    white-space: pre;
-    margin-bottom: 24px;
-    opacity: 0.6;
-  }
-
-  /* ========== RESPONSIVE ========== */
-  @media (max-width: 900px) {
-    .container { padding: 0 20px; }
-    .topbar-inner { padding: 12px 20px; font-size: 10px; }
-    .topbar-right { display: none; }
-    .stats { grid-template-columns: repeat(2, 1fr); }
-    .stat { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-    .stat:nth-child(2n) { border-right: none; }
-    .stat:nth-last-child(-n+2) { border-bottom: none; }
-    .grid.cols-2, .grid.cols-3 { grid-template-columns: 1fr; }
-    .vs-block { grid-template-columns: 1fr; }
-    .vs-side.left { border-right: none; border-bottom: 1px solid var(--line); }
-    .vs-divider { width: 100%; height: 50px; }
-    .module-header { grid-template-columns: 1fr; gap: 16px; }
-    .module-num { font-size: 40px; }
-    .fw-item { grid-template-columns: 1fr; gap: 12px; }
-    .meme-wall { grid-template-columns: repeat(2, 1fr); }
-    .evolution { flex-direction: column; }
-    .evo-step:not(:last-child) { margin-right: 0; margin-bottom: 24px; }
-    .evo-step:not(:last-child)::after {
-      content: '↓'; right: 50%; bottom: -22px; top: auto; transform: translateX(50%);
-    }
-    .modal-header { padding: 36px 28px 24px; }
-    .modal-body { padding: 28px; }
-    .modal-stats { grid-template-columns: repeat(2, 1fr); }
-    .modal-stat { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-    .modal-stat:nth-child(2n) { border-right: none; }
-    .modal-stat:nth-last-child(-n+2) { border-bottom: none; }
-    .modal-overlay { padding: 20px 12px; }
-  }
-
-  /* Reveal on scroll */
-  .reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .reveal.in {
-    opacity: 1;
-    transform: translateY(0);
-  }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background: #FAF9F5;
+  color: #1F1E1B;
+  line-height: 1.7;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ========== STICKY TOP NAV ========== */
+.top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250, 249, 245, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 0.5px solid rgba(0,0,0,0.06);
+  padding: 14px 32px;
+}
+.top-nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.top-nav-brand {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 17px; font-weight: 500;
+}
+.top-nav-logo {
+  width: 28px; height: 28px;
+  background: linear-gradient(135deg, #5DCAA5, #1D9E75);
+  border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+}
+.top-nav-links {
+  display: flex; gap: 28px;
+  font-size: 13px;
+}
+.top-nav-link {
+  color: #5F5E5A;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+.top-nav-link:hover { color: #1F1E1B; }
+.top-nav-cta {
+  background: #1F1E1B;
+  color: #FAF9F5;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+}
+
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 32px 100px; }
+
+/* ========== HERO ========== */
+.hero {
+  background: linear-gradient(135deg, #1F1E1B 0%, #2C2C2A 100%);
+  color: #FAF9F5;
+  margin: 0 -32px 64px;
+  padding: 80px 64px 90px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-inner { max-width: 980px; margin: 0 auto; position: relative; z-index: 2; }
+.hero::before {
+  content: "";
+  position: absolute;
+  top: -100px; right: -100px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(216, 90, 48, 0.15), transparent 70%);
+  z-index: 1;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  bottom: -150px; left: -100px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(29, 158, 117, 0.12), transparent 70%);
+  z-index: 1;
+}
+.eyebrow { font-size: 12px; color: #9C9A92; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; }
+.eyebrow::before { content: "●"; color: #1D9E75; margin-right: 10px; font-size: 10px; }
+h1 { font-size: 48px; font-weight: 500; line-height: 1.2; margin-bottom: 24px; letter-spacing: -1px; color: #FAF9F5; }
+.lede { font-size: 19px; color: #C2C0B6; line-height: 1.7; max-width: 760px; }
+.lede strong { color: #FAF9F5; font-weight: 500; }
+.kpi-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 44px; }
+.kpi {
+  background: rgba(255,255,255,0.06);
+  border: 0.5px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  padding: 22px 26px;
+  backdrop-filter: blur(8px);
+}
+.kpi-icon { width: 32px; height: 32px; margin-bottom: 14px; display: flex; align-items: center; justify-content: center; border-radius: 8px; }
+.kpi-icon-1 { background: rgba(216, 90, 48, 0.2); }
+.kpi-icon-2 { background: rgba(127, 119, 221, 0.2); }
+.kpi-icon-3 { background: rgba(29, 158, 117, 0.2); }
+.kpi-label { font-size: 12px; color: #9C9A92; margin-bottom: 6px; letter-spacing: 0.5px; }
+.kpi-value { font-size: 24px; font-weight: 500; color: #FAF9F5; }
+.hero-tags { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 8px; }
+.hero-tag {
+  font-size: 12px;
+  padding: 5px 12px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.08);
+  color: #C2C0B6;
+  border: 0.5px solid rgba(255,255,255,0.1);
+}
+.hero-jump {
+  margin-top: 36px;
+  display: flex; gap: 12px; flex-wrap: wrap;
+}
+.hero-btn {
+  background: #FAF9F5;
+  color: #1F1E1B;
+  padding: 11px 22px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.hero-btn-secondary {
+  background: transparent;
+  color: #FAF9F5;
+  border: 0.5px solid rgba(255,255,255,0.25);
+}
+
+/* ========== SECTION DIVIDER (with anchor) ========== */
+.major-divider {
+  margin: 100px -32px 64px;
+  padding: 0 32px;
+  position: relative;
+}
+.major-divider-inner {
+  max-width: 1040px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 60px 0 48px;
+  border-top: 0.5px solid rgba(0,0,0,0.08);
+}
+.divider-eyebrow { font-size: 12px; color: #888780; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 14px; }
+.divider-title { font-size: 32px; font-weight: 500; letter-spacing: -0.5px; margin-bottom: 14px; }
+.divider-sub { font-size: 15px; color: #5F5E5A; max-width: 600px; margin: 0 auto; }
+
+/* ========== TIER HEADERS ========== */
+.tier-header {
+  display: flex; align-items: center; gap: 14px;
+  margin: 64px 0 28px;
+}
+.tier-num {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; font-weight: 500;
+  color: #FAF9F5;
+}
+.tier-num-a { background: #185FA5; }
+.tier-num-b { background: #0F6E56; }
+.tier-text { display: flex; flex-direction: column; gap: 2px; }
+.tier-label { font-size: 12px; color: #888780; letter-spacing: 2px; text-transform: uppercase; }
+.tier-title { font-size: 20px; font-weight: 500; }
+
+/* ========== MODULE CARDS ========== */
+.module {
+  background: #FFFFFF;
+  border: 0.5px solid rgba(0,0,0,0.08);
+  border-radius: 16px;
+  padding: 36px 40px;
+  margin-bottom: 18px;
+  position: relative;
+  overflow: hidden;
+}
+.module::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px; height: 100%;
+}
+.module.m-blue::before { background: #378ADD; }
+.module.m-teal::before { background: #1D9E75; }
+.module.m-amber::before { background: #EF9F27; }
+.module.m-coral::before { background: #D85A30; }
+.module.m-purple::before { background: #7F77DD; }
+.module.m-pink::before { background: #D4537E; }
+
+.module-head { display: flex; align-items: center; gap: 16px; margin-bottom: 8px; flex-wrap: wrap; }
+.module-icon {
+  width: 44px; height: 44px;
+  border-radius: 11px;
+  display: flex; align-items: center; justify-content: center;
+}
+.icon-blue { background: #E6F1FB; color: #185FA5; }
+.icon-teal { background: #E1F5EE; color: #0F6E56; }
+.icon-amber { background: #FAEEDA; color: #854F0B; }
+.icon-coral { background: #FAECE7; color: #993C1D; }
+.icon-purple { background: #EEEDFE; color: #534AB7; }
+.icon-pink { background: #FBEAF0; color: #993556; }
+.module-num { font-size: 13px; color: #888780; font-weight: 500; letter-spacing: 1px; }
+.module-title { font-size: 24px; font-weight: 500; }
+.module-pill { font-size: 11px; padding: 4px 11px; border-radius: 11px; letter-spacing: 0.3px; }
+.pill-blue { background: #E6F1FB; color: #0C447C; }
+.pill-teal { background: #E1F5EE; color: #085041; }
+.pill-amber { background: #FAEEDA; color: #633806; }
+.module-tag { font-size: 14px; color: #5F5E5A; margin-bottom: 28px; padding-left: 60px; }
+
+/* ========== ROWS ========== */
+.row {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 24px;
+  padding: 18px 0;
+  border-bottom: 0.5px solid rgba(0,0,0,0.06);
+}
+.row:last-child { border-bottom: none; padding-bottom: 0; }
+.row .k {
+  font-size: 12px; color: #888780; line-height: 1.5;
+  padding-top: 4px; letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+.row .v { font-size: 14.5px; color: #3D3D3A; line-height: 1.8; }
+.row .v strong { font-weight: 500; color: #1F1E1B; }
+
+/* ========== INLINE VISUALS ========== */
+.tier-flow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 16px; }
+.tier-card { border-radius: 10px; padding: 14px 16px; }
+.tier-card-1 { background: #E1F5EE; }
+.tier-card-2 { background: #FAEEDA; }
+.tier-card-3 { background: #FBEAF0; }
+.tier-card .tc-label { font-size: 11px; font-weight: 500; letter-spacing: 0.5px; }
+.tier-card-1 .tc-label { color: #085041; }
+.tier-card-2 .tc-label { color: #633806; }
+.tier-card-3 .tc-label { color: #72243E; }
+.tier-card .tc-amount { font-size: 14px; font-weight: 500; margin: 4px 0 6px; }
+.tier-card-1 .tc-amount { color: #04342C; }
+.tier-card-2 .tc-amount { color: #412402; }
+.tier-card-3 .tc-amount { color: #4B1528; }
+.tier-card .tc-time { font-size: 12px; }
+.tier-card-1 .tc-time { color: #0F6E56; }
+.tier-card-2 .tc-time { color: #854F0B; }
+.tier-card-3 .tc-time { color: #993556; }
+.tier-card .tc-desc { font-size: 11px; margin-top: 6px; line-height: 1.5; opacity: 0.85; }
+
+.compare-bars { margin-top: 14px; }
+.compare-bar { display: grid; grid-template-columns: 110px 1fr 60px; gap: 12px; align-items: center; padding: 8px 0; }
+.cb-label { font-size: 12px; color: #5F5E5A; }
+.cb-track { height: 8px; background: #F1EFE8; border-radius: 4px; overflow: hidden; }
+.cb-fill { height: 100%; border-radius: 4px; }
+.cb-fill-bad { background: #E24B4A; }
+.cb-fill-mid { background: #EF9F27; }
+.cb-fill-good { background: #1D9E75; }
+.cb-value { font-size: 12px; color: #3D3D3A; font-weight: 500; text-align: right; }
+
+.asset-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 16px; }
+.asset-tile { background: #F1EFE8; border-radius: 8px; padding: 12px 10px; text-align: center; }
+.asset-tile-icon { font-size: 18px; margin-bottom: 6px; }
+.asset-tile-label { font-size: 11px; font-weight: 500; color: #444441; }
+.asset-tile-min { font-size: 10px; color: #888780; margin-top: 2px; }
+
+.flow-diagram { display: grid; grid-template-columns: 1fr 24px 1fr 24px 1fr; gap: 4px; align-items: center; margin-top: 18px; }
+.flow-node { background: #F1EFE8; border-radius: 10px; padding: 14px 12px; text-align: center; }
+.flow-node.fn-1 { background: #E6F1FB; }
+.flow-node.fn-2 { background: #EEEDFE; }
+.flow-node.fn-3 { background: #E1F5EE; }
+.fn-label { font-size: 11px; color: #5F5E5A; margin-bottom: 4px; letter-spacing: 0.3px; }
+.fn-1 .fn-label { color: #185FA5; }
+.fn-2 .fn-label { color: #534AB7; }
+.fn-3 .fn-label { color: #0F6E56; }
+.fn-title { font-size: 12px; font-weight: 500; }
+.fn-1 .fn-title { color: #042C53; }
+.fn-2 .fn-title { color: #26215C; }
+.fn-3 .fn-title { color: #04342C; }
+.flow-arrow { color: #888780; text-align: center; font-size: 16px; }
+
+.portfolio-bars { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 18px; }
+.pb-card { background: #F1EFE8; border-radius: 10px; padding: 16px 14px; }
+.pb-name { font-size: 13px; font-weight: 500; margin-bottom: 12px; color: #2C2C2A; }
+.pb-stack { display: flex; height: 28px; border-radius: 6px; overflow: hidden; }
+.pb-seg { display: flex; align-items: center; justify-content: center; font-size: 10px; color: #FFF; font-weight: 500; }
+.pb-bonds { background: #185FA5; }
+.pb-stocks { background: #D85A30; }
+.pb-gold { background: #BA7517; }
+.pb-alt { background: #534AB7; }
+.pb-legend { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; font-size: 10px; color: #5F5E5A; }
+.pb-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 4px; vertical-align: middle; }
+
+.stat-callout {
+  background: linear-gradient(135deg, #1F1E1B 0%, #2C2C2A 100%);
+  color: #FAF9F5;
+  border-radius: 12px;
+  padding: 22px 26px;
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 22px;
+  align-items: center;
+}
+.stat-big { font-size: 36px; font-weight: 500; color: #5DCAA5; line-height: 1; }
+.stat-text { font-size: 13px; color: #C2C0B6; line-height: 1.7; }
+.stat-text b { color: #FAF9F5; font-weight: 500; }
+
+.architecture { margin-top: 18px; background: #F1EFE8; border-radius: 12px; padding: 22px; }
+.arch-layer { background: #FFF; border-radius: 10px; padding: 14px 18px; margin-bottom: 8px; display: grid; grid-template-columns: 110px 1fr; gap: 16px; align-items: center; }
+.arch-layer:last-child { margin-bottom: 0; }
+.arch-tag { font-size: 11px; padding: 4px 10px; border-radius: 6px; text-align: center; font-weight: 500; }
+.arch-tag-1 { background: #E6F1FB; color: #0C447C; }
+.arch-tag-2 { background: #E1F5EE; color: #085041; }
+.arch-tag-3 { background: #FAEEDA; color: #633806; }
+.arch-tag-4 { background: #EEEDFE; color: #26215C; }
+.arch-text { font-size: 13px; color: #3D3D3A; line-height: 1.6; }
+.arch-text b { color: #1F1E1B; font-weight: 500; }
+
+.aml-tiers { margin-top: 18px; }
+.aml-tier { display: grid; grid-template-columns: 90px 1fr 80px; gap: 16px; align-items: center; padding: 14px 18px; border-radius: 10px; margin-bottom: 8px; }
+.aml-tier-1 { background: #E1F5EE; }
+.aml-tier-2 { background: #FAEEDA; }
+.aml-tier-3 { background: #FBEAF0; }
+.aml-num { width: 56px; height: 32px; border-radius: 6px; font-size: 11px; display: flex; align-items: center; justify-content: center; font-weight: 500; letter-spacing: 0.5px; }
+.aml-1 .aml-num { background: #1D9E75; color: #FFF; }
+.aml-2 .aml-num { background: #BA7517; color: #FFF; }
+.aml-3 .aml-num { background: #D4537E; color: #FFF; }
+.aml-mid { font-size: 12px; line-height: 1.6; }
+.aml-1 .aml-mid { color: #085041; }
+.aml-2 .aml-mid { color: #633806; }
+.aml-3 .aml-mid { color: #72243E; }
+.aml-mid b { font-weight: 500; }
+.aml-time { font-size: 13px; font-weight: 500; text-align: right; }
+.aml-1 .aml-time { color: #04342C; }
+.aml-2 .aml-time { color: #412402; }
+.aml-3 .aml-time { color: #4B1528; }
+
+.por-flow { margin-top: 18px; background: #1F1E1B; border-radius: 14px; padding: 26px 28px; }
+.por-title { font-size: 13px; color: #9C9A92; letter-spacing: 1px; margin-bottom: 16px; text-transform: uppercase; }
+.por-pipeline { display: grid; grid-template-columns: 1fr 20px 1fr 20px 1fr 20px 1fr; gap: 6px; align-items: center; }
+.por-step { background: rgba(255,255,255,0.08); border: 0.5px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 14px 12px; text-align: center; }
+.por-icon { width: 28px; height: 28px; margin: 0 auto 8px; display: flex; align-items: center; justify-content: center; border-radius: 6px; background: rgba(93, 202, 165, 0.2); }
+.por-step-title { font-size: 12px; font-weight: 500; color: #FAF9F5; }
+.por-step-desc { font-size: 11px; color: #9C9A92; margin-top: 4px; line-height: 1.5; }
+.por-arrow { color: #5DCAA5; font-size: 14px; text-align: center; }
+
+.private-bank-cmp { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 18px; }
+.cmp-card { border-radius: 12px; padding: 18px 22px; }
+.cmp-bad { background: #FCEBEB; border-left: 3px solid #E24B4A; }
+.cmp-good { background: #E1F5EE; border-left: 3px solid #1D9E75; }
+.cmp-tag { font-size: 11px; letter-spacing: 0.5px; margin-bottom: 8px; }
+.cmp-bad .cmp-tag { color: #791F1F; }
+.cmp-good .cmp-tag { color: #085041; }
+.cmp-title { font-size: 14px; font-weight: 500; margin-bottom: 8px; }
+.cmp-bad .cmp-title { color: #501313; }
+.cmp-good .cmp-title { color: #04342C; }
+.cmp-body { font-size: 12px; line-height: 1.6; }
+.cmp-bad .cmp-body { color: #791F1F; }
+.cmp-good .cmp-body { color: #085041; }
+
+.note { background: #FAF9F5; border-left: 3px solid #444441; border-radius: 0 10px 10px 0; padding: 16px 20px; margin-top: 20px; font-size: 13px; color: #5F5E5A; line-height: 1.75; }
+.note b { color: #1F1E1B; font-weight: 500; }
+.note-label { font-size: 11px; color: #888780; letter-spacing: 1px; margin-bottom: 6px; text-transform: uppercase; }
+
+/* ========== USP SECTION ========== */
+.usp-section { margin-top: 80px; }
+.section-divider { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
+.section-line { flex: 1; height: 1px; background: rgba(0,0,0,0.1); }
+.section-title { font-size: 28px; font-weight: 500; letter-spacing: -0.3px; }
+.section-sub { font-size: 14px; color: #5F5E5A; margin-bottom: 32px; }
+.usp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.usp { border-radius: 14px; padding: 28px 28px 32px; position: relative; overflow: hidden; }
+.usp-1 { background: linear-gradient(135deg, #E1F5EE, #FFFFFF); border: 0.5px solid rgba(15, 110, 86, 0.2); }
+.usp-2 { background: linear-gradient(135deg, #EEEDFE, #FFFFFF); border: 0.5px solid rgba(83, 74, 183, 0.2); }
+.usp-3 { background: linear-gradient(135deg, #FAECE7, #FFFFFF); border: 0.5px solid rgba(216, 90, 48, 0.2); }
+.usp-num-big { position: absolute; top: 18px; right: 26px; font-size: 56px; font-weight: 500; opacity: 0.2; line-height: 1; }
+.usp-1 .usp-num-big { color: #0F6E56; }
+.usp-2 .usp-num-big { color: #534AB7; }
+.usp-3 .usp-num-big { color: #993C1D; }
+.usp-tag { font-size: 11px; padding: 4px 10px; border-radius: 10px; display: inline-block; margin-bottom: 14px; letter-spacing: 0.5px; }
+.usp-1 .usp-tag { background: rgba(15, 110, 86, 0.12); color: #085041; }
+.usp-2 .usp-tag { background: rgba(83, 74, 183, 0.12); color: #3C3489; }
+.usp-3 .usp-tag { background: rgba(216, 90, 48, 0.12); color: #712B13; }
+.usp-title { font-size: 17px; font-weight: 500; margin-bottom: 12px; line-height: 1.4; }
+.usp-1 .usp-title { color: #04342C; }
+.usp-2 .usp-title { color: #26215C; }
+.usp-3 .usp-title { color: #4A1B0C; }
+.usp-body { font-size: 13px; line-height: 1.7; }
+.usp-1 .usp-body { color: #085041; }
+.usp-2 .usp-body { color: #3C3489; }
+.usp-3 .usp-body { color: #712B13; }
+
+/* ========== TRADEOFF ========== */
+.tradeoff-section { margin-top: 64px; background: #FFFFFF; border-radius: 16px; padding: 40px 44px; border: 0.5px solid rgba(0,0,0,0.08); }
+.tradeoff-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 28px; }
+.tradeoff-item { background: #FAF9F5; border-radius: 12px; padding: 22px 24px; border-top: 3px solid; }
+.tradeoff-item.t-1 { border-top-color: #534AB7; }
+.tradeoff-item.t-2 { border-top-color: #E24B4A; }
+.tradeoff-item.t-3 { border-top-color: #BA7517; }
+.tradeoff-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+.t-1 .tradeoff-icon { background: #EEEDFE; color: #534AB7; }
+.t-2 .tradeoff-icon { background: #FCEBEB; color: #A32D2D; }
+.t-3 .tradeoff-icon { background: #FAEEDA; color: #854F0B; }
+.tradeoff-label { font-size: 14px; font-weight: 500; margin-bottom: 8px; line-height: 1.4; }
+.tradeoff-body { font-size: 12.5px; color: #5F5E5A; line-height: 1.7; }
+
+/* ========== TRANSITION TO DEMO ========== */
+.demo-intro {
+  background: linear-gradient(135deg, #04342C 0%, #085041 50%, #0F6E56 100%);
+  color: #FAF9F5;
+  margin: 100px -32px 0;
+  padding: 80px 32px 120px;
+  position: relative;
+  overflow: hidden;
+}
+.demo-intro::before {
+  content: "";
+  position: absolute;
+  top: -100px; right: -150px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(93, 202, 165, 0.25), transparent 70%);
+}
+.demo-intro::after {
+  content: "";
+  position: absolute;
+  bottom: -200px; left: -100px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(159, 225, 203, 0.15), transparent 70%);
+}
+.demo-intro-inner {
+  max-width: 980px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+.demo-intro-eyebrow { font-size: 12px; color: #5DCAA5; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 18px; }
+.demo-intro-title { font-size: 40px; font-weight: 500; line-height: 1.25; margin-bottom: 20px; letter-spacing: -0.5px; color: #FAF9F5; }
+.demo-intro-sub { font-size: 17px; color: #C2C0B6; line-height: 1.7; max-width: 680px; margin: 0 auto 32px; }
+.demo-intro-sub strong { color: #FAF9F5; font-weight: 500; }
+.demo-features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 40px;
+  text-align: left;
+}
+.demo-feature {
+  background: rgba(255,255,255,0.06);
+  border: 0.5px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 18px 22px;
+  backdrop-filter: blur(8px);
+}
+.demo-feature-num { font-size: 11px; color: #5DCAA5; letter-spacing: 1px; margin-bottom: 6px; }
+.demo-feature-title { font-size: 14px; font-weight: 500; color: #FAF9F5; margin-bottom: 4px; }
+.demo-feature-desc { font-size: 12px; color: #9FE1CB; line-height: 1.6; }
+
+/* ========== APP DEMO ========== */
+.app-demo-wrap {
+  background: #F5F4EE;
+  margin: 0 -32px 0;
+  padding: 50px 32px 80px;
+}
+.app-demo-frame-outer {
+  max-width: 1200px;
+  margin: -90px auto 0;
+  position: relative;
+  z-index: 5;
+}
+.app-demo-window {
+  background: #FAF9F5;
+  border-radius: 16px;
+  border: 0.5px solid rgba(0,0,0,0.1);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.18), 0 10px 30px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+.app-demo-titlebar {
+  background: #1F1E1B;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.window-dot { width: 11px; height: 11px; border-radius: 50%; }
+.dot-r { background: #E24B4A; }
+.dot-y { background: #EF9F27; }
+.dot-g { background: #1D9E75; }
+.window-url {
+  margin-left: auto;
+  margin-right: auto;
+  background: rgba(255,255,255,0.08);
+  color: #9C9A92;
+  font-size: 11px;
+  padding: 4px 14px;
+  border-radius: 6px;
+  font-family: monospace;
+}
+
+/* ========== APP SHELL (inside frame) ========== */
+.app {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  background: #FAF9F5;
+  min-height: 720px;
+}
+
+.sidebar {
+  background: #1F1E1B;
+  color: #C2C0B6;
+  padding: 22px 0;
+  display: flex;
+  flex-direction: column;
+}
+.brand {
+  padding: 0 22px 22px;
+  border-bottom: 0.5px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.brand-logo {
+  width: 30px; height: 30px;
+  background: linear-gradient(135deg, #5DCAA5, #1D9E75);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+}
+.brand-name { font-size: 17px; font-weight: 500; color: #FAF9F5; letter-spacing: -0.3px; }
+.nav { padding: 18px 10px; display: flex; flex-direction: column; gap: 2px; flex: 1; }
+.nav-section { font-size: 10px; color: #5F5E5A; letter-spacing: 1.5px; padding: 14px 12px 8px; text-transform: uppercase; }
+.nav-item {
+  display: flex; align-items: center; gap: 11px;
+  padding: 9px 12px;
+  border-radius: 7px;
+  font-size: 13px;
+  color: #C2C0B6;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.nav-item:hover { background: rgba(255,255,255,0.05); }
+.nav-item.active { background: rgba(93, 202, 165, 0.15); color: #5DCAA5; }
+.nav-icon { width: 15px; height: 15px; opacity: 0.85; }
+
+.sidebar-footer {
+  padding: 14px 22px;
+  border-top: 0.5px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.avatar {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7F77DD, #534AB7);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 500; color: #FFF;
+}
+.user-name { font-size: 12px; color: #FAF9F5; font-weight: 500; }
+.user-tier { font-size: 10px; color: #888780; }
+
+.app-main { padding: 22px 28px 50px; }
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+.greeting { font-size: 12px; color: #5F5E5A; margin-bottom: 2px; }
+.page-title { font-size: 22px; font-weight: 500; letter-spacing: -0.3px; }
+.topbar-actions { display: flex; gap: 8px; align-items: center; }
+.icon-btn {
+  width: 34px; height: 34px;
+  border-radius: 8px;
+  background: #FFFFFF;
+  border: 0.5px solid rgba(0,0,0,0.08);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  position: relative;
+}
+.icon-btn:hover { background: #F1EFE8; }
+.notification-dot {
+  position: absolute;
+  top: 7px; right: 7px;
+  width: 7px; height: 7px;
+  background: #E24B4A;
+  border-radius: 50%;
+  border: 1.5px solid #FFFFFF;
+}
+.btn-primary {
+  background: #1F1E1B;
+  color: #FAF9F5;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.portfolio-hero {
+  background: linear-gradient(135deg, #1F1E1B 0%, #2C2C2A 100%);
+  color: #FAF9F5;
+  border-radius: 14px;
+  padding: 24px 28px;
+  margin-bottom: 14px;
+  position: relative;
+  overflow: hidden;
+}
+.portfolio-hero::before {
+  content: "";
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 320px; height: 320px;
+  background: radial-gradient(circle, rgba(93, 202, 165, 0.18), transparent 70%);
+}
+.portfolio-hero::after {
+  content: "";
+  position: absolute;
+  bottom: -100px; left: 30%;
+  width: 280px; height: 280px;
+  background: radial-gradient(circle, rgba(127, 119, 221, 0.12), transparent 70%);
+}
+.ph-inner { position: relative; z-index: 2; }
+.ph-label { font-size: 11px; color: #9C9A92; margin-bottom: 6px; letter-spacing: 0.5px; }
+.ph-value-row { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
+.ph-value { font-size: 32px; font-weight: 500; letter-spacing: -0.5px; }
+.ph-change {
+  font-size: 12px;
+  padding: 3px 9px;
+  border-radius: 11px;
+  background: rgba(93, 202, 165, 0.18);
+  color: #5DCAA5;
+  font-weight: 500;
+}
+.ph-meta { font-size: 11px; color: #888780; margin-top: 4px; }
+.ph-meta-stats { display: flex; gap: 22px; margin-top: 18px; flex-wrap: wrap; }
+.ph-stat-label { font-size: 10px; color: #888780; }
+.ph-stat-value { font-size: 14px; font-weight: 500; color: #FAF9F5; margin-top: 2px; }
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.card {
+  background: #FFFFFF;
+  border: 0.5px solid rgba(0,0,0,0.08);
+  border-radius: 12px;
+  padding: 20px 22px;
+}
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.card-title { font-size: 14px; font-weight: 500; }
+.card-link { font-size: 11px; color: #5F5E5A; cursor: pointer; }
+
+.chart-tabs { display: flex; gap: 4px; margin-bottom: 16px; }
+.chart-tab { font-size: 11px; padding: 4px 10px; border-radius: 6px; cursor: pointer; color: #5F5E5A; }
+.chart-tab.active { background: #1F1E1B; color: #FAF9F5; font-weight: 500; }
+.chart-area { height: 160px; position: relative; margin-bottom: 8px; }
+.chart-bg-grid line { stroke: rgba(0,0,0,0.05); stroke-width: 1; }
+.chart-y-label { font-size: 9px; fill: #888780; }
+.chart-line { fill: none; stroke: #1D9E75; stroke-width: 2; }
+.chart-area-fill { fill: url(#chartGrad); }
+.chart-x { display: flex; justify-content: space-between; font-size: 9px; color: #888780; padding: 0 4px; }
+
+.allocation-row {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 18px;
+  align-items: center;
+}
+.donut-wrap { position: relative; width: 130px; height: 130px; }
+.donut-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; }
+.donut-label { font-size: 9px; color: #888780; }
+.donut-value { font-size: 16px; font-weight: 500; }
+.allocation-list { display: flex; flex-direction: column; gap: 9px; }
+.alloc-item { display: grid; grid-template-columns: 10px 1fr auto; gap: 10px; align-items: center; }
+.alloc-dot { width: 10px; height: 10px; border-radius: 3px; }
+.alloc-name { font-size: 12px; }
+.alloc-pct { font-size: 12px; font-weight: 500; }
+
+.por-card {
+  background: linear-gradient(135deg, #04342C 0%, #085041 100%);
+  color: #FAF9F5;
+  border-radius: 12px;
+  padding: 20px 22px;
+  margin-bottom: 14px;
+  position: relative;
+  overflow: hidden;
+}
+.por-card::before {
+  content: "";
+  position: absolute;
+  top: -50px; right: -50px;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(93, 202, 165, 0.25), transparent 70%);
+}
+.por-inner { position: relative; z-index: 2; }
+.por-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.por-title-row { display: flex; align-items: center; gap: 10px; }
+.por-title-text { font-size: 14px; font-weight: 500; }
+.por-pulse {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #5DCAA5;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.3); }
+}
+.por-status {
+  font-size: 10px;
+  padding: 3px 9px;
+  border-radius: 10px;
+  background: rgba(93, 202, 165, 0.2);
+  color: #5DCAA5;
+  letter-spacing: 0.5px;
+}
+.por-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.por-stat-label { font-size: 9px; color: #9FE1CB; letter-spacing: 0.5px; margin-bottom: 4px; }
+.por-stat-value { font-size: 15px; font-weight: 500; }
+.por-bar {
+  height: 5px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+.por-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #5DCAA5, #9FE1CB);
+  width: 100%;
+  border-radius: 3px;
+}
+.por-foot {
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 10px;
+  color: #9FE1CB;
+}
+.por-link { color: #5DCAA5; cursor: pointer; }
+
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.quick-action {
+  background: #FFFFFF;
+  border: 0.5px solid rgba(0,0,0,0.08);
+  border-radius: 10px;
+  padding: 14px 12px;
+  text-align: center;
+  cursor: pointer;
+}
+.qa-icon-wrap {
+  width: 36px; height: 36px;
+  border-radius: 9px;
+  margin: 0 auto 9px;
+  display: flex; align-items: center; justify-content: center;
+}
+.qa-1 { background: #E1F5EE; color: #0F6E56; }
+.qa-2 { background: #E6F1FB; color: #185FA5; }
+.qa-3 { background: #FAEEDA; color: #854F0B; }
+.qa-4 { background: #EEEDFE; color: #534AB7; }
+.qa-label { font-size: 11px; font-weight: 500; }
+.qa-desc { font-size: 9px; color: #888780; margin-top: 2px; }
+
+.assets-table { width: 100%; border-collapse: collapse; }
+.assets-table th {
+  text-align: left;
+  font-size: 10px;
+  color: #888780;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  padding: 9px 10px;
+  border-bottom: 0.5px solid rgba(0,0,0,0.08);
+  text-transform: uppercase;
+}
+.assets-table th.right { text-align: right; }
+.assets-table td {
+  padding: 12px 10px;
+  border-bottom: 0.5px solid rgba(0,0,0,0.05);
+  font-size: 12px;
+}
+.assets-table td.right { text-align: right; }
+.assets-table tr:last-child td { border-bottom: none; }
+.assets-table tr:hover { background: #FAF9F5; }
+.asset-cell { display: flex; align-items: center; gap: 10px; }
+.asset-icon {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+  font-weight: 500;
+}
+.ai-spy { background: linear-gradient(135deg, #FAECE7, #F5C4B3); color: #712B13; }
+.ai-tlt { background: linear-gradient(135deg, #E6F1FB, #B5D4F4); color: #0C447C; }
+.ai-gold { background: linear-gradient(135deg, #FAEEDA, #FAC775); color: #633806; }
+.ai-aapl { background: linear-gradient(135deg, #F1EFE8, #D3D1C7); color: #2C2C2A; }
+.ai-hf { background: linear-gradient(135deg, #EEEDFE, #CECBF6); color: #26215C; }
+.ai-pc { background: linear-gradient(135deg, #E1F5EE, #9FE1CB); color: #04342C; }
+.asset-name { font-weight: 500; font-size: 12px; }
+.asset-tag { font-size: 10px; color: #888780; margin-top: 1px; }
+.change-up { color: #1D9E75; font-weight: 500; }
+.change-down { color: #E24B4A; font-weight: 500; }
+
+.market-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 14px;
+}
+.market-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 12px;
+  align-items: center;
+  padding: 11px 0;
+  border-bottom: 0.5px solid rgba(0,0,0,0.05);
+}
+.market-row:last-child { border-bottom: none; }
+.market-row:first-child { padding-top: 4px; }
+.mr-name { display: flex; align-items: center; gap: 10px; font-size: 12px; }
+.mr-icon-mini {
+  width: 26px; height: 26px;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px;
+  font-weight: 500;
+}
+.mr-price { font-size: 12px; font-weight: 500; }
+.mr-change-pill {
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-weight: 500;
+  min-width: 50px;
+  text-align: center;
+}
+.pill-up { background: #E1F5EE; color: #085041; }
+.pill-down { background: #FCEBEB; color: #791F1F; }
+
+.activity-item {
+  display: grid;
+  grid-template-columns: 30px 1fr auto;
+  gap: 11px;
+  padding: 11px 0;
+  border-bottom: 0.5px solid rgba(0,0,0,0.05);
+  align-items: center;
+}
+.activity-item:last-child { border-bottom: none; }
+.activity-item:first-child { padding-top: 4px; }
+.act-icon {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.act-buy { background: #E1F5EE; color: #1D9E75; }
+.act-sell { background: #FCEBEB; color: #E24B4A; }
+.act-deposit { background: #E6F1FB; color: #378ADD; }
+.act-rebal { background: #EEEDFE; color: #7F77DD; }
+.act-text { font-size: 12px; }
+.act-time { font-size: 10px; color: #888780; margin-top: 1px; }
+.act-amt { font-size: 12px; font-weight: 500; text-align: right; }
+
+footer-section {
+  display: block;
+  margin-top: 60px;
+  padding-top: 32px;
+  border-top: 0.5px solid rgba(0,0,0,0.1);
+  font-size: 12px;
+  color: #888780;
+  text-align: center;
+}
+
+@media (prefers-color-scheme: dark) {
+  body { background: #1A1815; color: #E8E6DD; }
+  h1, .module-title, .section-title, .tradeoff-label, .row .v strong, .tier-title, .divider-title { color: #F2F0E7; }
+  .lede, .module-tag, .section-sub, .row .v, .tradeoff-body, .usp-body, .divider-sub { color: #C2C0B6; }
+  .module, .tradeoff-section { background: #252320; border-color: rgba(255,255,255,0.08); }
+  .row { border-bottom-color: rgba(255,255,255,0.06); }
+  .note { background: #1F1D1A; color: #C2C0B6; border-left-color: #9C9A92; }
+  .note b { color: #F2F0E7; }
+  .tradeoff-item { background: #1F1D1A; }
+  .top-nav { background: rgba(26, 24, 21, 0.92); border-bottom-color: rgba(255,255,255,0.08); }
+  .top-nav-link { color: #C2C0B6; }
+  .major-divider-inner { border-top-color: rgba(255,255,255,0.08); }
+  .app-demo-wrap { background: #15130F; }
+}
+@media (max-width: 1024px) {
+  .app { grid-template-columns: 1fr; }
+  .sidebar { display: none; }
+}
+@media (max-width: 800px) {
+  .wrap { padding: 0 20px 60px; }
+  .hero { margin: 0 -20px 48px; padding: 60px 28px 70px; }
+  h1 { font-size: 32px; }
+  .module { padding: 24px 22px; }
+  .tradeoff-section { padding: 28px 24px; }
+  .module-tag { padding-left: 0; }
+  .kpi-row, .usp-grid, .tradeoff-grid, .demo-features { grid-template-columns: 1fr; }
+  .row { grid-template-columns: 1fr; gap: 6px; }
+  .row .k { padding-top: 0; }
+  .tier-flow, .portfolio-bars, .private-bank-cmp { grid-template-columns: 1fr; }
+  .flow-diagram { grid-template-columns: 1fr; }
+  .flow-arrow { transform: rotate(90deg); padding: 4px 0; }
+  .asset-grid { grid-template-columns: repeat(2, 1fr); }
+  .por-pipeline { grid-template-columns: 1fr; }
+  .por-arrow { transform: rotate(90deg); padding: 4px 0; }
+  .arch-layer { grid-template-columns: 1fr; gap: 8px; }
+  .stat-callout { grid-template-columns: 1fr; gap: 12px; text-align: center; }
+  .aml-tier { grid-template-columns: 1fr; gap: 8px; }
+  .aml-time { text-align: left; }
+  .top-nav-links { display: none; }
+  .demo-intro { padding: 60px 20px 100px; margin: 60px -20px 0; }
+  .demo-intro-title { font-size: 28px; }
+  .app-demo-wrap { padding: 40px 20px 60px; margin: 0 -20px; }
+  .two-col, .market-grid { grid-template-columns: 1fr; }
+  .quick-actions { grid-template-columns: repeat(2, 1fr); }
+  .por-stats { grid-template-columns: 1fr; gap: 10px; }
+}
 </style>
 </head>
 <body>
 
-<div class="scanline"></div>
+<nav class="top-nav">
+<div class="top-nav-inner">
+<div class="top-nav-brand">
+<div class="top-nav-logo">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="2.5"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>
+</div>
+<span>Bridge</span>
+</div>
+<div class="top-nav-links">
+<a class="top-nav-link" href="#intro">平台介绍</a>
+<a class="top-nav-link" href="#layer-a">投资人体验</a>
+<a class="top-nav-link" href="#layer-b">运营与技术</a>
+<a class="top-nav-link" href="#usp">核心卖点</a>
+<a class="top-nav-link" href="#demo">产品 Demo</a>
+</div>
+<button class="top-nav-cta">查看 Demo →</button>
+</div>
+</nav>
 
-<!-- TOP BAR -->
+<header class="hero" id="intro">
+<div class="hero-inner">
+<div class="eyebrow">Bridge 平台 · 项目介绍</div>
+<h1>机构级美元资产<br>链上极简入口</h1>
+<p class="lede">面向非美国高净值投资人，提供代币化的美股、美债、对冲基金、大宗商品与私募信贷敞口。USDT 入金，5 分钟开户，<strong>全程无需开立离岸银行账户</strong>。把私行级的资产配置体验，降到中产高净值都能拿到的门槛。</p>
+<div class="kpi-row">
+<div class="kpi">
+<div class="kpi-icon kpi-icon-1">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F0997B" stroke-width="2"><path d="M12 1v22M5 8l7-7 7 7"/></svg>
+</div>
+<div class="kpi-label">起投门槛</div>
+<div class="kpi-value">1 万美元</div>
+</div>
+<div class="kpi">
+<div class="kpi-icon kpi-icon-2">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#AFA9EC" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+</div>
+<div class="kpi-label">开户时间</div>
+<div class="kpi-value">5 分钟</div>
+</div>
+<div class="kpi">
+<div class="kpi-icon kpi-icon-3">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5DCAA5" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+</div>
+<div class="kpi-label">资产覆盖</div>
+<div class="kpi-value">1:1 实时验证</div>
+</div>
+</div>
+<div class="hero-tags">
+<span class="hero-tag">代币化美股</span>
+<span class="hero-tag">代币化美债</span>
+<span class="hero-tag">对冲基金 feeder</span>
+<span class="hero-tag">大宗商品</span>
+<span class="hero-tag">私募信贷</span>
+<span class="hero-tag">USDT 出入金</span>
+<span class="hero-tag">链上储备证明</span>
+</div>
+<div class="hero-jump">
+<a href="#layer-a" class="hero-btn">浏览平台介绍 →</a>
+<a href="#demo" class="hero-btn hero-btn-secondary">直接看产品 Demo</a>
+</div>
+</div>
+</header>
+
+<div class="wrap">
+
+<div class="tier-header" id="layer-a">
+<div class="tier-num tier-num-a">A</div>
+<div class="tier-text">
+<span class="tier-label">Layer 01</span>
+<span class="tier-title">投资人体验层</span>
+</div>
+</div>
+
+<section class="module m-blue">
+<div class="module-head">
+<div class="module-icon icon-blue">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>
+</div>
+<span class="module-num">01</span>
+<span class="module-title">极速开户</span>
+<span class="module-pill pill-blue">投资人体验</span>
+</div>
+<p class="module-tag">5 分钟完成 KYC，无需任何银行账户。</p>
+
+<div class="row">
+<div class="k">客户价值</div>
+<div class="v">全球任何地点 5 分钟完成开户。无需实体银行账户、无需公证文件、无需漫长等待。连接钱包或在 App 内一键创建，自拍加 ID 上传完成 KYC，USDT 入金即可开始投资。<strong>这是把 Coinbase 的开户速度交付私行级资产配置的核心入口</strong>，目标体验是新加坡星展银行私行客户经理花 6 周做的事，我们 5 分钟做完。</div>
+</div>
+
+<div class="row">
+<div class="k">体验对比</div>
+<div class="v">
+<div class="compare-bars">
+<div class="compare-bar">
+<div class="cb-label">瑞士私行</div>
+<div class="cb-track"><div class="cb-fill cb-fill-bad" style="width: 100%"></div></div>
+<div class="cb-value">6 周</div>
+</div>
+<div class="compare-bar">
+<div class="cb-label">新加坡私行</div>
+<div class="cb-track"><div class="cb-fill cb-fill-bad" style="width: 75%"></div></div>
+<div class="cb-value">2-4 周</div>
+</div>
+<div class="compare-bar">
+<div class="cb-label">普通券商</div>
+<div class="cb-track"><div class="cb-fill cb-fill-mid" style="width: 25%"></div></div>
+<div class="cb-value">3-5 天</div>
+</div>
+<div class="compare-bar">
+<div class="cb-label">Bridge</div>
+<div class="cb-track"><div class="cb-fill cb-fill-good" style="width: 4%"></div></div>
+<div class="cb-value">5 分钟</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="k">分级设计</div>
+<div class="v">每一步埋点监控流失率。三档分级处理，一档全自动，二档<strong>并行 EDD</strong>——KYC 后台跑的同时用户已经可以浏览资产、做模拟配置、首笔入金当天到账可用。
+<div class="tier-flow">
+<div class="tier-card tier-card-1">
+<div class="tc-label">一档</div>
+<div class="tc-amount">1万-10万美元</div>
+<div class="tc-time">5 分钟</div>
+<div class="tc-desc">全自动审批，覆盖 80% 用户</div>
+</div>
+<div class="tier-card tier-card-2">
+<div class="tc-label">二档</div>
+<div class="tc-amount">10万-100万美元</div>
+<div class="tc-time">当日并行</div>
+<div class="tc-desc">边走边查，不阻塞用户</div>
+</div>
+<div class="tier-card tier-card-3">
+<div class="tc-label">三档</div>
+<div class="tc-amount">100万美元以上</div>
+<div class="tc-time">48 小时</div>
+<div class="tc-desc">专属客户经理，高 touch 服务</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="k">技术栈</div>
+<div class="v">Sumsub 做证件验证与活体检测，Chainalysis KYT 监控每一个 USDT 入金地址，Onfido 作为部分边缘司法辖区的备选方案。所有 KYC 资料加密存储，按各监管的数据本地化要求分区。</div>
+</div>
+
+<div class="row">
+<div class="k">转化目标</div>
+<div class="v">
+<div class="stat-callout">
+<div class="stat-big">70%</div>
+<div class="stat-text">加密行业开户完成率基准 30-40%。通过并行 EDD、入金前可浏览、验证过程中即时客服支持，<b>目标转化率提升至 70%</b>——这是平台增长的关键工程，每提升 10 个百分点，CAC 下降约 25%。</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="module m-coral">
+<div class="module-head">
+<div class="module-icon icon-coral">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+</div>
+<span class="module-num">02</span>
+<span class="module-title">资产市场</span>
+<span class="module-pill pill-blue">投资人体验</span>
+</div>
+<p class="module-tag">股、债、基金、信贷、大宗商品，一站式浏览。</p>
+
+<div class="row">
+<div class="k">客户价值</div>
+<div class="v">浏览代币化的标普 500、个股蓝筹、不同期限的美债、黄金、原油、头部对冲基金 feeder、私募信贷池。每个资产配有完整说明书、历史业绩、费率明细、风险披露。<strong>把分散在十几家券商、私行、基金平台的资产汇总到一个界面里</strong>。
+<div class="asset-grid">
+<div class="asset-tile">
+<div class="asset-tile-icon">📈</div>
+<div class="asset-tile-label">美股</div>
+<div class="asset-tile-min">$10k+</div>
+</div>
+<div class="asset-tile">
+<div class="asset-tile-icon">📜</div>
+<div class="asset-tile-label">美债</div>
+<div class="asset-tile-min">$10k+</div>
+</div>
+<div class="asset-tile">
+<div class="asset-tile-icon">🏆</div>
+<div class="asset-tile-label">大宗商品</div>
+<div class="asset-tile-min">$10k+</div>
+</div>
+<div class="asset-tile">
+<div class="asset-tile-icon">🎯</div>
+<div class="asset-tile-label">对冲基金</div>
+<div class="asset-tile-min">$50k+</div>
+</div>
+<div class="asset-tile">
+<div class="asset-tile-icon">💼</div>
+<div class="asset-tile-label">私募信贷</div>
+<div class="asset-tile-min">$50k+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="k">分级开放</div>
+<div class="v">并非所有资产对所有用户开放。股票和美债面向所有合格投资人；对冲基金和私募信贷仅向专业或合格投资人开放——<strong>UX 层和智能合约层双重门控</strong>。这一点要让股东放心：分级开放既是合规要求，也是产品差异化——超高净值客户能拿到中产高净值拿不到的资产，就有持续升级动力。</div>
+</div>
+
+<div class="row">
+<div class="k">底层标的</div>
+<div class="v"><strong>美股与 ETF</strong> 通过主经纪商账户持仓；<strong>美债</strong>通过一级交易商关系直接持有；<strong>对冲基金</strong>通过开曼 master-feeder 结构投资头部 GP；<strong>大宗商品</strong>通过期货 ETF 或实物分配黄金；<strong>私募信贷</strong>通过自营或第三方平台对接。所有底层均由开曼 SPV 1:1 持有，破产隔离。</div>
+</div>
+
+<div class="row">
+<div class="k">定价机制</div>
+<div class="v">美股交易时段实时中间价，盘后收盘价。NAV 类产品（基金、私募信贷）每日或每周更新。买卖价差透明披露，通常 15-40 个基点，因资产类别而异。<strong>没有隐藏费用</strong>——传统私行客户最反感的就是事后才发现的渠道费、销售费、托管费层层叠加，我们一次性披露在购买页。</div>
+</div>
+</section>
+
+<section class="module m-purple">
+<div class="module-head">
+<div class="module-icon icon-purple">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-1"/><path d="M16 12h5M18 9l3 3-3 3"/></svg>
+</div>
+<span class="module-num">03</span>
+<span class="module-title">投资组合与钱包</span>
+<span class="module-pill pill-blue">投资人体验</span>
+</div>
+<p class="module-tag">USDT 进出，可选自托管，年终税务报表。</p>
+
+<div class="row">
+<div class="k">客户价值</div>
+<div class="v">一个仪表盘看全部代币化持仓、对应美元价值、USDT 余额、交易历史、税务报表。一键提现 USDT 到任意白名单地址。<strong>真正的隐私体验在这里</strong>：日常持仓和交易行为对外不公开披露，但平台对监管和法务的 KYC 留档完整——逻辑跟瑞士银行保密法一样，强 KYC + 强对外保密 = 现代私行模式。</div>
+</div>
+
+<div class="row">
+<div class="k">资金流</div>
+<div class="v">
+<div class="flow-diagram">
+<div class="flow-node fn-1">
+<div class="fn-label">入金</div>
+<div class="fn-title">USDT 多链</div>
+</div>
+<div class="flow-arrow">→</div>
+<div class="flow-node fn-2">
+<div class="fn-label">持仓</div>
+<div class="fn-title">代币化资产</div>
+</div>
+<div class="flow-arrow">→</div>
+<div class="flow-node fn-3">
+<div class="fn-label">出金</div>
+<div class="fn-title">USDT 提现</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="k">赎回机制</div>
+<div class="v">交易时段卖出代币，流动性好的资产 T+0 USDT 到平台余额，基金 NAV 类产品 T+2。提现到外部地址自动附加 Travel Rule 数据。这一速度<strong>比传统私行赎回快 5-10 倍</strong>——私行从基金赎回经常要 2-4 周，我们最长 2 个工作日。</div>
+</div>
+
+<div class="row">
+<div class="k">自托管选项</div>
+<div class="v">用户可以在自己的钱包（MetaMask、Ledger 等）持有代币，但代币仍受白名单约束——只能转给其他通过 KYC 的地址。即使用户把代币提到自己钱包再想转给朋友，朋友必须先完成 KYC 才能收到。<strong>这才是用户真正想要的隐私体验</strong>：日常无人窥探，但合规边界保留完整。</div>
+</div>
+
+<div class="row">
+<div class="k">税务报告</div>
+<div class="v">代币化资产产生分红、票息或分配事件。平台年终生成各主要司法辖区可用的税务报表，由用户自行申报。<strong>平台不代客户报税</strong>——这是合规边界，平台不承担替客户决定税务居民地、税务申报内容的责任。</div>
+</div>
+</section>
+
+<section class="module m-pink">
+<div class="module-head">
+<div class="module-icon icon-pink">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg>
+</div>
+<span class="module-num">04</span>
+<span class="module-title">配置顾问</span>
+<span class="module-pill pill-blue">投资人体验</span>
+</div>
+<p class="module-tag">三档预制模型组合，问卷一对一映射。</p>
+
+<div class="row">
+<div class="k">客户价值</div>
+<div class="v">多数高净值用户其实并不想自己挑个股，他们想要的是各类资产之间合理的配比。三档预制组合，问卷映射到其中之一，配置可在区间内微调，一键季度再平衡。</div>
+</div>
+
+<div class="row">
+<div class="k">三档组合</div>
+<div class="v">
+<div class="portfolio-bars">
+<div class="pb-card">
+<div class="pb-name">稳健</div>
+<div class="pb-stack">
+<div class="pb-seg pb-bonds" style="width: 70%">70%</div>
+<div class="pb-seg pb-stocks" style="width: 20%">20%</div>
+<div class="pb-seg pb-gold" style="width: 10%">10%</div>
+</div>
+<div class="pb-legend">
+<span><span class="pb-dot" style="background:#185FA5"></span>债券</span>
+<span><span class="pb-dot" style="background:#D85A30"></span>股票</span>
+<span><span class="pb-dot" style="background:#BA7517"></span>黄金</span>
+</div>
+</div>
+<div class="pb-card">
+<div class="pb-name">平衡</div>
+<div class="pb-stack">
+<div class="pb-seg pb-bonds" style="width: 50%">50%</div>
+<div class="pb-seg pb-stocks" style="width: 40%">40%</div>
+<div class="pb-seg pb-gold" style="width: 10%">10%</div>
+</div>
+<div class="pb-legend">
+<span><span class="pb-dot" style="background:#185FA5"></span>债券</span>
+<span><span class="pb-dot" style="background:#D85A30"></span>股票</span>
+<span><span class="pb-dot" style="background:#BA7517"></span>黄金</span>
+</div>
+</div>
+<div class="pb-card">
+<div class="pb-name">增长</div>
+<div class="pb-stack">
+<div class="pb-seg pb-bonds" style="width: 20%">20%</div>
+<div class="pb-seg pb-stocks" style="width: 65%">65%</div>
+<div class="pb-seg pb-alt" style="width: 15%">15%</div>
+</div>
+<div class="pb-legend">
+<span><span class="pb-dot" style="background:#185FA5"></span>债券</span>
+<span><span class="pb-dot" style="background:#D85A30"></span>股票</span>
+<span><span class="pb-dot" style="background:#534AB7"></span>另类</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="k">个性化</div>
+<div class="v">开户时风险问卷映射到三档之一。配置可在区间内微调（比如增长档的对冲基金占比从 5% 调到 15%）。一键季度再平衡。<strong>关键是让用户感觉这是"为我设计的"而不是"千人一面"</strong>，但底层组合数量保持在 3-5 个，避免运营复杂度爆炸。</div>
+</div>
+
+<div class="row">
+<div class="k">合规框架</div>
+<div class="v">措辞严格定义为"模型组合"和"教育内容"，不是"个性化投资建议"——后者在多数司法辖区需要投顾牌照。<strong>平台提供工具，决策由用户做出</strong>。所有顾问页面有显著的"这不构成个性化投资建议"披露，所有点击行为留痕。</div>
+</div>
+
+<div class="row">
+<div class="k">留存关键</div>
+<div class="v">
+<div class="stat-callout">
+<div class="stat-big">3-4×</div>
+<div class="stat-text"><b>开启自动配置的用户 12 个月留存率比挑个股的用户高 3-4 倍。</b>这是 AUM 增长的核心引擎，比资产市场本身更重要。用户每多坚持一个季度的自动再平衡，CLV（客户终身价值）大概翻一倍——配置顾问不是"附加功能"，而是平台的护城河。</div>
+</div>
+</div>
+</div>
+</section>
+
+<div class="tier-header" id="layer-b">
+<div class="tier-num tier-num-b">B</div>
+<div class="tier-text">
+<span class="tier-label">Layer 02</span>
+<span class="tier-title">运营、合规与技术层</span>
+</div>
+</div>
+
+<section class="module m-teal">
+<div class="module-head">
+<div class="module-icon icon-teal">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
+</div>
+<span class="module-num">05</span>
+<span class="module-title">资产托管与 SPV</span>
+<span class="module-pill pill-teal">运营</span>
+</div>
+<p class="module-tag">开曼 SPV 持有底层，主经纪商账户在新加坡或香港。</p>
+
+<div class="row">
+<div class="k">架构图</div>
+<div class="v">
+<div class="architecture">
+<div class="arch-layer">
+<div class="arch-tag arch-tag-1">投资人</div>
+<div class="arch-text">USDT 入金 → 代币持有 → 链上结算</div>
+</div>
+<div class="arch-layer">
+<div class="arch-tag arch-tag-2">发行 SPV</div>
+<div class="arch-text"><b>开曼豁免公司</b>，破产隔离。每个资产类别可设独立 SPV——美股 SPV、美债 SPV、对冲基金 SPV 分开，万一一个出问题不污染其他。</div>
+</div>
+<div class="arch-layer">
+<div class="arch-tag arch-tag-3">主经纪商</div>
+<div class="arch-text"><b>新加坡或香港一级机构</b>开立账户。DBS、UBS、渣打级别。</div>
+</div>
+<div class="arch-layer">
+<div class="arch-tag arch-tag-4">底层资产</div>
+<div class="arch-text">美股、美债、基金 LP 份额、商品、私募信贷——1:1 实物持有</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="k">客户拥有什么</div>
+<div class="v">每个代币是 SPV 持有对应底层资产的 1:1 受益权。<strong>SPV 破产隔离</strong>——即使平台运营公司倒闭，资产仍为代币持有人保留。这一点跟 FTX 截然不同：FTX 客户资产跟运营资金混同，所以平台一倒所有客户钱都没了；Bridge 的客户资产法律上不属于运营公司，运营公司倒闭跟客户无关。</div>
+</div>
+
+<div class="row">
+<div class="k">服务商配置</div>
+<div class="v"><strong>独立基金管理人</strong>负责 NAV 计算和投资人名册——独立第三方做账，平台无法单方面操纵账目。<strong>四大会计师事务所</strong>签署年度财务报告。开曼监管要求 SPV 董事会含独立董事，独立董事不能是平台员工或关联方。</div>
+</div>
+
+<div class="row">
+<div class="k">税务效率</div>
+<div class="v">开曼 SPV 在实体层面税务中性。税务义务在投资人本国司法辖区。SPV 内部撮合（用户买卖订单先内部对冲，再剩余净额走市场）减少交易频次和经纪佣金——<strong>这是基金运营的标准做法，不是规避</strong>。规范说法叫"税务效率"，不叫"避税"——前者是合法的法律结构优化，后者是违法的逃税。</div>
+</div>
+
+<div class="note">
+<div class="note-label">给股东的关键说明</div>
+这套结构是 RWA 行业的标准操作（Ondo、Securitize、Backed Finance 都用类似模式），监管已经接受。Cayman + SG/HK 的组合解决了三件事：<b>发行灵活性、银行账户开立、机构信誉</b>。BVI 替代开曼成本低 30%，但机构投资人认可度略差，建议成熟期再考虑。
+</div>
+</section>
+
+<section class="module m-amber">
+<div class="module-head">
+<div class="module-icon icon-amber">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L4 6v6c0 5 3.5 9.5 8 10.5 4.5-1 8-5.5 8-10.5V6l-8-4z"/></svg>
+</div>
+<span class="module-num">06</span>
+<span class="module-title">KYC 与反洗钱</span>
+<span class="module-pill pill-teal">运营</span>
+</div>
+<p class="module-tag">三档分级并行处理，体验优先于程序。</p>
+
+<div class="row">
+<div class="k">设计哲学</div>
+<div class="v"><strong>合规是护城河，不是摩擦</strong>。三档分级：小额客户全自动几分钟通过，大额客户增强尽调但走并行通道。目标：一档客户行业最快开户速度，三档客户行业最严文件留档。这套设计是平台区别于"传统私行（合规强但慢）"和"加密交易所（快但合规弱）"的核心运营创新。</div>
+</div>
+
+<div class="row">
+<div class="k">三档分级</div>
+<div class="v">
+<div class="aml-tiers">
+<div class="aml-tier aml-tier-1 aml-1">
+<div class="aml-num">一档</div>
+<div class="aml-mid">全自动 ID 验证、制裁名单筛查、IP 地理位置、Chainalysis KYT。<b>覆盖 80% 用户数量、约 15% AUM。</b></div>
+<div class="aml-time">5 分钟</div>
+</div>
+<div class="aml-tier aml-tier-2 aml-2">
+<div class="aml-num">二档</div>
+<div class="aml-mid">一档全部 + 财富来源声明 + 支持文件（银行流水或链上溯源）。<b>与首笔入金并行，不阻塞用户。</b></div>
+<div class="aml-time">当日</div>
+</div>
+<div class="aml-tier aml-tier-3 aml-3">
+<div class="aml-num">三档</div>
+<div class="aml-mid">二档全部 + MLRO 人工复核 + 实体客户穿透至受益所有人 + 持续增强监控。<b>配专属客户经理。</b></div>
+<div class="aml-time">48 小时</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="k">禁入类别</div>
+<div class="v"><strong>美国国籍或税务居民</strong>（证券与税务原因，必须技术封禁不能让步）、<strong>FATF 黑名单司法辖区</strong>、被制裁个人、与混币器或已知非法来源关联的链上地址。IP 与 KYC 双重核验。封禁美国客户换来的是欧洲、亚洲、中东、拉美数十个司法辖区可以正常运营。</div>
+</div>
+
+<div class="note">
+<div class="note-label">对"老钱用 USDT"客群的 EDD 设计</div>
+用 USDT 绕开传统银行体系的高净值客户，背后原因可能是合法的（隐私偏好、跨境效率），也可能是不合法的（资本管制规避、税务规避）。平台对这个客群默认采用增强尽调（EDD）而非例外处理，并通过<b>较高门槛过滤可疑小额资金</b>——把 1 万美元起投做成"合规水位"而非"低门槛卖点"。这反而成了卖点：合规水位高 = 平台长期可活。
+</div>
+</section>
+
+<section class="module m-amber">
+<div class="module-head">
+<div class="module-icon icon-amber">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+</div>
+<span class="module-num">07</span>
+<span class="module-title">代币与清算</span>
+<span class="module-pill pill-amber">技术</span>
+</div>
+<p class="module-tag">ERC-3643 标准，多链 USDT 接收，强制白名单。</p>
+
+<div class="row">
+<div class="k">代币标准</div>
+<div class="v"><strong>ERC-3643（T-REX 标准）</strong>。原生链上身份注册表，转账限制在 solidity 层强制执行，每个资产可挂载独立合规模块。<strong>证券型代币的行业标准</strong>——Securitize、Tokeny 等头部玩家在用。这意味着我们不重新发明轮子，而是站在已经被监管接受的标准上。</div>
+</div>
+
+<div class="row">
+<div class="k">清算层</div>
+<div class="v">首发与赎回在<strong>许可链或 L2</strong>（费率低、终结性快）。跨链桥支持有需要的用户提到以太坊主网。<strong>USDT 多链接收</strong>（以太坊、Tron、Solana、Arbitrum）——对用户透明。用户在哪条链有 USDT 都能用，不需要先做跨链。这是降低开户门槛的关键技术决策。</div>
+</div>
+
+<div class="row">
+<div class="k">合约逻辑</div>
+<div class="v"><strong>入金确认即铸币</strong>，赎回请求即销毁。<strong>转账要求双方地址都在白名单</strong>——非 KYC 地址无法接收。即使用户把代币提到自己钱包，再想转给朋友，朋友必须先完成 KYC 才能收到。这是合规的硬约束，监管能接受、客户能理解。<strong>暂停权限</strong>由独立董事加 MLRO 多签持有，仅在监管要求时使用。</div>
+</div>
+
+<div class="row">
+<div class="k">审计安排</div>
+<div class="v">上线前<strong>两家独立机构审计</strong>（Trail of Bits、OpenZeppelin、Certora 或同级）。开通漏洞赏金。任何合约升级触发年度复审。这一点对老钱客户是隐性的信任信号——他们不一定看得懂代码，但他们认得 Trail of Bits 这个品牌。</div>
+</div>
+</section>
+
+<section class="module m-teal">
+<div class="module-head">
+<div class="module-icon icon-teal">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10M12 2a15 15 0 0 0-4 10 15 15 0 0 0 4 10"/></svg>
+</div>
+<span class="module-num">08</span>
+<span class="module-title">链上储备证明</span>
+<span class="module-pill pill-amber">技术 · 核心卖点</span>
+</div>
+<p class="module-tag">Chainlink 实时验证，月度审计，独立董事签字。</p>
+
+<div class="row">
+<div class="k">客户价值</div>
+<div class="v">任何人——投资人、监管、记者、竞争对手——都能在链上实时验证：每一枚发行在外的代币背后都有 SPV 托管账户里 1:1 的实物资产。<strong>无 FTX 式的信任黑箱</strong>。FTX 的 80 亿美元挪用在 PoR 体系下根本不可能持续 18 个月而无人察觉，第一次资产挪用导致代币与储备出现差额时系统就会自动告警并暂停铸币。</div>
+</div>
+
+<div class="row">
+<div class="k">实现流水线</div>
+<div class="v">
+<div class="por-flow">
+<div class="por-title">实时验证管道</div>
+<div class="por-pipeline">
+<div class="por-step">
+<div class="por-icon">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5DCAA5" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+</div>
+<div class="por-step-title">托管账户</div>
+<div class="por-step-desc">SPV 持有 1:1 资产</div>
+</div>
+<div class="por-arrow">→</div>
+<div class="por-step">
+<div class="por-icon">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5DCAA5" stroke-width="2.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+</div>
+<div class="por-step-title">Chainlink PoR</div>
+<div class="por-step-desc">每日上链快照</div>
+</div>
+<div class="por-arrow">→</div>
+<div class="por-step">
+<div class="por-icon">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5DCAA5" stroke-width="2.5"><path d="M5 12l5 5 9-9"/></svg>
+</div>
+<div class="por-step-title">智能合约比对</div>
+<div class="por-step-desc">代币 = 资产</div>
+</div>
+<div class="por-arrow">→</div>
+<div class="por-step">
+<div class="por-icon">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5DCAA5" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v6M12 17v6M1 12h6M17 12h6"/></svg>
+</div>
+<div class="por-step-title">公开可验证</div>
+<div class="por-step-desc">任何人随时查</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="k">审计叠加</div>
+<div class="v">不依赖单一的 API 数据。<strong>四大会计师事务所每月做抽样核证</strong>，每年做完整审计。报告在平台公开。任何储备调整需<strong>独立董事签字</strong>——这一层是法律责任层，即便预言机和审计都失效，也有人要承担个人责任。</div>
+</div>
+
+<div class="row">
+<div class="k">对比私行</div>
+<div class="v">
+<div class="private-bank-cmp">
+<div class="cmp-card cmp-bad">
+<div class="cmp-tag">瑞士私行模式</div>
+<div class="cmp-title">季度纸质对账单</div>
+<div class="cmp-body">真实性依赖银行内部系统、外部审计、瑞士金融监管的层层背书。客户没有任何独立验证手段。瑞信 2023 年崩盘前几个月对账单都看起来正常。</div>
+</div>
+<div class="cmp-card cmp-good">
+<div class="cmp-tag">Bridge 模式</div>
+<div class="cmp-title">实时链上验证</div>
+<div class="cmp-body">不需要相信任何中介。任何人可在区块链浏览器上随时验证代币总量与储备资产匹配度。把信任从"人"转移到"代码"——连 200 年历史私行都给不了。</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="note">
+<div class="note-label">产品策略关键决策</div>
+把 PoR 升级到首页第一屏——首页固定模块"Live Reserve Health"实时显示总代币供应、总储备资产、当前匹配度、最后核验时间。同行平台（Ondo、Backed Finance、Securitize）虽然也有 PoR 但藏在合规披露角落，<b>把 PoR 当产品做不当合规项做，是 Bridge 对老钱客群最锋利的获客武器</b>。
+</div>
+</section>
+
+<div class="usp-section" id="usp">
+<div class="section-divider">
+<h2 class="section-title">三大核心卖点</h2>
+<div class="section-line"></div>
+</div>
+<p class="section-sub">每一个都对应一个传统老钱过去解决不了的痛点。</p>
+
+<div class="usp-grid">
+<div class="usp usp-1">
+<div class="usp-num-big">01</div>
+<span class="usp-tag">USP · 信任革命</span>
+<div class="usp-title">实时链上储备证明</div>
+<div class="usp-body">FTX 之后传统资金对加密化资产最大的疑虑就是"资产真的在那儿吗"。Chainlink 实时上链 + 大所月度审计 + 独立董事签字，这个组合连私行都做不到——私行只给季度对账单。这是把"再看看"变成"开户"的临门一脚。</div>
+</div>
+<div class="usp usp-2">
+<div class="usp-num-big">02</div>
+<span class="usp-tag">USP · 门槛下沉</span>
+<div class="usp-title">机构资产门槛下沉</div>
+<div class="usp-body">对冲基金 feeder 传统起投 50 万美元，私募信贷 100 万美元起。代币化把这些拆到 1-5 万美元一份，让 50 万-500 万美元资产的中产高净值（这个客群比超高净值大十倍）拿到原本拿不到的资产。</div>
+</div>
+<div class="usp usp-3">
+<div class="usp-num-big">03</div>
+<span class="usp-tag">USP · 全球清算</span>
+<div class="usp-title">全球清算无国界</div>
+<div class="usp-body">USDT 不是匿名工具，是全球清算工具——它解决的是越南、巴西、土耳其、阿联酋的合格投资者无需先开美国银行账户就能配置美元资产。这个故事讲给监管也站得住：在帮新兴市场合格投资者获得本来就有权配置的美元资产。</div>
+</div>
+</div>
+</div>
+
+<div class="tradeoff-section">
+<div class="section-divider">
+<h2 class="section-title">必须明确的几件取舍</h2>
+<div class="section-line"></div>
+</div>
+<p class="section-sub">向股东讲清楚边界，比讲清楚卖点更重要。</p>
+
+<div class="tradeoff-grid">
+<div class="tradeoff-item t-1">
+<div class="tradeoff-icon">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 9h.01M15 9h.01M9 15c1 1 2 1 3 1s2 0 3-1"/></svg>
+</div>
+<div class="tradeoff-label">完全匿名做不了，但对外不披露可以做</div>
+<div class="tradeoff-body">KYC 资料只对监管和法务保留，平台不向其他用户、不向公众披露任何客户身份与持仓。逻辑跟瑞士银行历史上的"银行保密法"一样：强 KYC + 强对外保密 = 现代私行模式。完全匿名是缉毒署的目标客户，不是我们的目标客户。</div>
+</div>
+<div class="tradeoff-item t-2">
+<div class="tradeoff-icon">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M4.93 4.93l14.14 14.14"/></svg>
+</div>
+<div class="tradeoff-label">美国客户必须封禁，且需技术封禁</div>
+<div class="tradeoff-body">IP 屏蔽 + KYC 国籍核查 + 链上地址黑名单三层。SEC 对未注册证券发行的处罚是平台杀手，这一点不能让步。换来的是欧洲、亚洲、中东、拉美数十个司法辖区可以正常运营的可能。封禁美国 = 解锁全球其他市场。</div>
+</div>
+<div class="tradeoff-item t-3">
+<div class="tradeoff-icon">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+</div>
+<div class="tradeoff-label">综合费率会高于纯加密交易所</div>
+<div class="tradeoff-body">底层资产托管在传统金融体系，月度审计、托管、合规成本无法回避。但比起私行 1-2% 年管理费 + 进出场佣金，综合成本仍显著更低。我们不跟币安比费率，我们跟瑞银私行比费率——而且我们提供的资产配置丰富度，币安根本不做。</div>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class="demo-intro" id="demo">
+<div class="demo-intro-inner">
+<div class="demo-intro-eyebrow">● Live Product Preview</div>
+<h2 class="demo-intro-title">这是用户登录后<br>实际看到的产品</h2>
+<p class="demo-intro-sub">前面讲的所有模块、所有卖点、所有合规设计，最终都收敛到这个仪表盘。<strong>下面就是用户每天打开 Bridge 看到的画面</strong>——总资产、链上储备证明、持仓、市场动态、活动流。</p>
+
+<div class="demo-features">
+<div class="demo-feature">
+<div class="demo-feature-num">01</div>
+<div class="demo-feature-title">PoR 在首屏</div>
+<div class="demo-feature-desc">链上储备健康度模块固定显示，实时脉冲。</div>
+</div>
+<div class="demo-feature">
+<div class="demo-feature-num">02</div>
+<div class="demo-feature-title">机构资产可见</div>
+<div class="demo-feature-desc">Pershing Square、Maple 私募信贷在持仓列表。</div>
+</div>
+<div class="demo-feature">
+<div class="demo-feature-num">03</div>
+<div class="demo-feature-title">USDT 多链入金</div>
+<div class="demo-feature-desc">活动流标注 Tron、以太坊等链来源。</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="app-demo-wrap">
+<div class="app-demo-frame-outer">
+<div class="app-demo-window">
+<div class="app-demo-titlebar">
+<div class="window-dot dot-r"></div>
+<div class="window-dot dot-y"></div>
+<div class="window-dot dot-g"></div>
+<div class="window-url">app.bridge.finance</div>
+</div>
+
+<div class="app">
+
+<aside class="sidebar">
+<div class="brand">
+<div class="brand-logo">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="2.5"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>
+</div>
+<div class="brand-name">Bridge</div>
+</div>
+
+<nav class="nav">
+<div class="nav-item active">
+<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+<span>总览</span>
+</div>
+<div class="nav-item">
+<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+<span>我的资产</span>
+</div>
+<div class="nav-item">
+<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 17 9 11 13 15 21 7"/></svg>
+<span>资产市场</span>
+</div>
+<div class="nav-item">
+<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 1 1-7-7"/></svg>
+<span>配置顾问</span>
+</div>
+
+<div class="nav-section">资金</div>
+<div class="nav-item">
+<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M5 8l7-7 7 7"/></svg>
+<span>入金</span>
+</div>
+<div class="nav-item">
+<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 23V1M19 16l-7 7-7-7"/></svg>
+<span>提现</span>
+</div>
+<div class="nav-item">
+<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+<span>交易记录</span>
+</div>
+
+<div class="nav-section">账户</div>
+<div class="nav-item">
+<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L4 6v6c0 5 3.5 9.5 8 10.5 4.5-1 8-5.5 8-10.5V6l-8-4z"/></svg>
+<span>合规与 KYC</span>
+</div>
+<div class="nav-item">
+<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+<span>税务报告</span>
+</div>
+</nav>
+
+<div class="sidebar-footer">
+<div class="avatar">CW</div>
+<div>
+<div class="user-name">陈伟</div>
+<div class="user-tier">三档客户 · 已认证</div>
+</div>
+</div>
+</aside>
+
+<main class="app-main">
+
 <div class="topbar">
-  <div class="topbar-inner">
-    <div class="topbar-left">
-      <span><span class="live-dot"></span>2026.04 // 终局复盘</span>
-      <span style="color: var(--text-faint);">v3.0 / Post-Bubble Edition</span>
-    </div>
-    <div class="topbar-right">
-      <span>[ 板块 6 ]</span>
-      <span>[ 项目 12 深度解析 ]</span>
-      <span>[ 数据更新 2026.04 ]</span>
-    </div>
-  </div>
+<div>
+<div class="greeting">下午好，陈先生</div>
+<div class="page-title">总览</div>
+</div>
+<div class="topbar-actions">
+<div class="icon-btn">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1F1E1B" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+</div>
+<div class="icon-btn">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1F1E1B" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+<div class="notification-dot"></div>
+</div>
+<button class="btn-primary">入金</button>
+</div>
 </div>
 
-<div class="container">
+<div class="portfolio-hero">
+<div class="ph-inner">
+<div class="ph-label">总资产</div>
+<div class="ph-value-row">
+<div class="ph-value">$1,847,230.42</div>
+<div class="ph-change">↑ +$24,810 · +1.36%</div>
+</div>
+<div class="ph-meta">今日表现 · 截至 2026 年 4 月 27 日 14:32 EST</div>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-meta">
-      <span>SECTOR REPORT</span>
-      <span>WEB3 × AI</span>
-      <span>2024.Q4 → 2026.04</span>
-      <span>POST-MORTEM EDITION</span>
-    </div>
+<div class="ph-meta-stats">
+<div>
+<div class="ph-stat-label">本月收益</div>
+<div class="ph-stat-value">+$58,420</div>
+</div>
+<div>
+<div class="ph-stat-label">年初至今</div>
+<div class="ph-stat-value">+9.84%</div>
+</div>
+<div>
+<div class="ph-stat-label">USDT 余额</div>
+<div class="ph-stat-value">$42,180</div>
+</div>
+<div>
+<div class="ph-stat-label">配置档位</div>
+<div class="ph-stat-value">平衡型</div>
+</div>
+</div>
+</div>
+</div>
 
-    <h1>
-      <div class="line1">WHEN</div>
-      <div class="line2">AI WALKS</div>
-      <div class="line3">ON-<span class="glitch">CHAIN</span></div>
-    </h1>
+<div class="por-card">
+<div class="por-inner">
+<div class="por-head">
+<div class="por-title-row">
+<div class="por-pulse"></div>
+<div class="por-title-text">链上储备健康度</div>
+</div>
+<div class="por-status">实时验证中</div>
+</div>
 
-    <p class="hero-sub">
-      <span class="zh">一年半之后，潮水退去，谁还在游泳？</span><br>
-      2024 Q4 那场以 <span style="color:var(--orange)">$GOAT</span> 为引信的爆发让赛道总市值冲破 <span style="color:var(--neon)">$176 亿</span>。
-      到 2026 年 4 月的今天，多数代币较高点回撤 <span style="color:var(--red)">85% 以上</span>，
-      ai16z 因 <span style="color:var(--red)">集体诉讼</span>濒临归零，aixbt 从 $5.98 亿跌到不到 $2000 万。
-      但也有项目活了下来，甚至找到了真实的现金流。这是一份 2026 年 4 月的现状报告。
-    </p>
+<div class="por-stats">
+<div>
+<div class="por-stat-label">代币流通总量</div>
+<div class="por-stat-value">$847.2M</div>
+</div>
+<div>
+<div class="por-stat-label">托管资产价值</div>
+<div class="por-stat-value">$847.4M</div>
+</div>
+<div>
+<div class="por-stat-label">匹配度</div>
+<div class="por-stat-value">100.02%</div>
+</div>
+</div>
 
-    <!-- STATS BAR -->
-    <div class="stats">
-      <div class="stat">
-        <div class="stat-label">Peak vs Now</div>
-        <div class="stat-value red">-85%</div>
-        <div class="stat-detail">多数 Agent 代币回撤幅度</div>
-      </div>
-      <div class="stat">
-        <div class="stat-label">Virtuals Now</div>
-        <div class="stat-value">$628M</div>
-        <div class="stat-detail">从 $50亿峰值回落，仍是龙头</div>
-      </div>
-      <div class="stat">
-        <div class="stat-label">TAO 占领</div>
-        <div class="stat-value">$2.3B</div>
-        <div class="stat-detail">真实算力 + ETF 申请</div>
-      </div>
-      <div class="stat">
-        <div class="stat-label">真活的</div>
-        <div class="stat-value warn">~30%</div>
-        <div class="stat-detail">还有产品迭代的项目占比</div>
-      </div>
-    </div>
+<div class="por-bar">
+<div class="por-bar-fill"></div>
+</div>
 
-    <!-- TAB NAV -->
-    <nav class="tab-nav">
-      <button class="tab-btn active" data-target="m1"><span class="tab-num">01</span>发行平台</button>
-      <button class="tab-btn" data-target="m2"><span class="tab-num">02</span>明星 Agents</button>
-      <button class="tab-btn" data-target="m3"><span class="tab-num">03</span>开发框架</button>
-      <button class="tab-btn" data-target="m4"><span class="tab-num">04</span>DeFAI</button>
-      <button class="tab-btn" data-target="m5"><span class="tab-num">05</span>基础设施</button>
-      <button class="tab-btn" data-target="m6"><span class="tab-num">06</span>AI Memes</button>
-      <button class="tab-btn" data-target="m7"><span class="tab-num">07</span>演进路径</button>
-    </nav>
-  </section>
+<div class="por-foot">
+<span>由 Chainlink Proof of Reserves + Deloitte 月度核证</span>
+<span class="por-link">查看链上凭证 →</span>
+</div>
+</div>
+</div>
 
-  <!-- ========== MODULE 1: LAUNCHPADS ========== -->
-  <section class="module" id="m1">
-    <div class="module-header">
-      <div class="module-num">01</div>
-      <div class="module-title-block">
-        <div class="tag">// LAUNCHPAD LAYER</div>
-        <h2><span class="zh">发行平台</span> — Where Agents Are Born</h2>
-        <p class="desc">这一层曾是赛道的"造王者"。两强 Virtuals 和 ai16z 加起来一度占 56.8% 市场份额。一年半过去，结局却天差地别——一个找到了产品市场契合点，一个变成了集体诉讼对象。点击任意一方查看深度解读。</p>
-      </div>
-    </div>
+<div class="quick-actions">
+<div class="quick-action">
+<div class="qa-icon-wrap qa-1">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M5 8l7-7 7 7"/></svg>
+</div>
+<div class="qa-label">USDT 入金</div>
+<div class="qa-desc">多链支持</div>
+</div>
+<div class="quick-action">
+<div class="qa-icon-wrap qa-2">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 17 9 11 13 15 21 7"/></svg>
+</div>
+<div class="qa-label">浏览资产</div>
+<div class="qa-desc">300+ 标的</div>
+</div>
+<div class="quick-action">
+<div class="qa-icon-wrap qa-3">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20l16-16M21 16v5h-5M4 4l5 5"/></svg>
+</div>
+<div class="qa-label">一键再平衡</div>
+<div class="qa-desc">回归目标配比</div>
+</div>
+<div class="quick-action">
+<div class="qa-icon-wrap qa-4">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+</div>
+<div class="qa-label">税务报告</div>
+<div class="qa-desc">2026 年报</div>
+</div>
+</div>
 
-    <div class="vs-block">
-      <button class="vs-side left" data-modal="virtuals">
-        <div class="vs-tag">// BASE 链 · 仍在牌桌</div>
-        <div class="vs-name">Virtuals Protocol</div>
-        <div class="vs-token">$VIRTUAL // 仍是赛道龙头</div>
-        <div class="vs-rows">
-          <div class="vs-row"><div class="k">巅峰市值</div><div class="v">$50亿+ (2025.01)</div></div>
-          <div class="vs-row"><div class="k">现在 (2026.04)</div><div class="v warn">$628M (-87%)</div></div>
-          <div class="vs-row"><div class="k">活体 Agent</div><div class="v hi">17,000+ 已发行</div></div>
-          <div class="vs-row"><div class="k">2026 转向</div><div class="v">ACP 协议 + Arbitrum 集成</div></div>
-          <div class="vs-row"><div class="k">叙事</div><div class="v">Agent Commerce Protocol</div></div>
-          <div class="vs-row"><div class="k">关键拐点</div><div class="v">从"造星"转向"商务"</div></div>
-        </div>
-        <span class="vs-link">深度解读 →</span>
-      </button>
+<div class="two-col">
+<div class="card">
+<div class="card-head">
+<div class="card-title">资产走势</div>
+<div class="chart-tabs">
+<div class="chart-tab">7 天</div>
+<div class="chart-tab active">1 月</div>
+<div class="chart-tab">3 月</div>
+<div class="chart-tab">1 年</div>
+<div class="chart-tab">全部</div>
+</div>
+</div>
 
-      <div class="vs-divider">VS</div>
+<div class="chart-area">
+<svg width="100%" height="100%" viewBox="0 0 600 160" preserveAspectRatio="none">
+<defs>
+<linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" stop-color="#1D9E75" stop-opacity="0.25"/>
+<stop offset="100%" stop-color="#1D9E75" stop-opacity="0"/>
+</linearGradient>
+</defs>
+<g class="chart-bg-grid">
+<line x1="0" y1="20" x2="600" y2="20"/>
+<line x1="0" y1="55" x2="600" y2="55"/>
+<line x1="0" y1="90" x2="600" y2="90"/>
+<line x1="0" y1="125" x2="600" y2="125"/>
+</g>
+<text class="chart-y-label" x="4" y="22">$1.90M</text>
+<text class="chart-y-label" x="4" y="57">$1.85M</text>
+<text class="chart-y-label" x="4" y="92">$1.80M</text>
+<text class="chart-y-label" x="4" y="127">$1.75M</text>
 
-      <button class="vs-side right" data-modal="ai16z">
-        <div class="vs-tag">// SOLANA 链 · 已经凉了</div>
-        <div class="vs-name">ai16z / ElizaOS</div>
-        <div class="vs-token">$AI16Z → $ELIZAOS</div>
-        <div class="vs-rows">
-          <div class="vs-row"><div class="k">巅峰市值</div><div class="v">$26亿 (2025.01)</div></div>
-          <div class="vs-row"><div class="k">现在 (2026.04)</div><div class="v red">< $1M (-99.9%)</div></div>
-          <div class="vs-row"><div class="k">2025.11</div><div class="v">改名 ELIZAOS / 1:6 兑换</div></div>
-          <div class="vs-row"><div class="k">2026.04</div><div class="v red">面临集体诉讼</div></div>
-          <div class="vs-row"><div class="k">指控</div><div class="v red">"虚假 AI 技术 / 内幕抛售"</div></div>
-          <div class="vs-row"><div class="k">受损钱包</div><div class="v red">3,945 个</div></div>
-        </div>
-        <span class="vs-link">深度解读 →</span>
-      </button>
-    </div>
+<path class="chart-area-fill" d="M 0 95 L 30 100 L 60 85 L 90 90 L 120 75 L 150 80 L 180 65 L 210 70 L 240 55 L 270 45 L 300 60 L 330 50 L 360 40 L 390 45 L 420 30 L 450 35 L 480 25 L 510 40 L 540 30 L 570 22 L 600 28 L 600 160 L 0 160 Z"/>
+<path class="chart-line" d="M 0 95 L 30 100 L 60 85 L 90 90 L 120 75 L 150 80 L 180 65 L 210 70 L 240 55 L 270 45 L 300 60 L 330 50 L 360 40 L 390 45 L 420 30 L 450 35 L 480 25 L 510 40 L 540 30 L 570 22 L 600 28"/>
 
-    <div class="insight">
-      <div class="insight-label">// EDITORIAL NOTE</div>
-      <p>这是 Web3 AI Agent 赛道最具戏剧性的对比。同为发行平台，Virtuals 通过持续迭代产品（Genesis Launch、ACP、跨链）保住了"残值"；ai16z 则成为了一个反面教材——把所有筹码都压在了"AI 自主投资 DAO"的叙事上，但当叙事失效，加上改名+二次发币+内幕指控的三重打击，就剩下了一地法律文书。</p>
-    </div>
-  </section>
+<circle cx="600" cy="28" r="4" fill="#1D9E75"/>
+<circle cx="600" cy="28" r="8" fill="#1D9E75" opacity="0.2"/>
+</svg>
+</div>
 
-  <!-- ========== MODULE 2: STAR AGENTS ========== -->
-  <section class="module" id="m2">
-    <div class="module-header">
-      <div class="module-num">02</div>
-      <div class="module-title-block">
-        <div class="tag">// APPLICATION LAYER</div>
-        <h2><span class="zh">明星 Agents</span> — The Faces That Once Mattered</h2>
-        <p class="desc">2024 年底 - 2025 年初，这三个名字代表了"AI Agent 能做什么"的具象答案。一年半后，他们的命运分化得让人意外。点击查看每个项目从巅峰到现在的完整轨迹。</p>
-      </div>
-    </div>
+<div class="chart-x">
+<span>3月28日</span>
+<span>4月3日</span>
+<span>4月10日</span>
+<span>4月17日</span>
+<span>4月23日</span>
+<span>今日</span>
+</div>
+</div>
 
-    <div class="grid cols-3">
-      <button class="card" data-modal="aixbt">
-        <div class="card-corner"><span class="read">阅读分析 →</span></div>
-        <div class="card-tag">CRYPTO KOL · BASE</div>
-        <div class="card-title">AIXBT <span class="status struggle">挣扎</span></div>
-        <div class="card-token">$AIXBT // 460K X 粉丝犹在</div>
-        <p class="card-desc">巅峰时是 X 上最有影响力的 AI KOL，市值近 $6 亿。如今市值只剩 $1900 万——但反差是：Agent 本体仍在更新、Terminal 订阅仍需 60 万 AIXBT 锁仓。产品没死，只是币价崩了。</p>
-        <div class="card-stats">
-          <div class="card-stat">巅峰<strong>$598M</strong></div>
-          <div class="card-stat">现状<strong class="red">$19.25M</strong></div>
-          <div class="card-stat">回撤<strong class="red">-97%</strong></div>
-        </div>
-      </button>
+<div class="card">
+<div class="card-head">
+<div class="card-title">资产配置</div>
+<div class="card-link">调整 →</div>
+</div>
 
-      <button class="card" data-modal="luna">
-        <div class="card-corner"><span class="read">阅读分析 →</span></div>
-        <div class="card-tag">VIRTUAL IDOL · BASE</div>
-        <div class="card-title">Luna <span class="status alive">活着</span></div>
-        <div class="card-token">$LUNA // TikTok 近 100 万粉丝</div>
-        <p class="card-desc">最神奇的活体案例。Luna 不仅活下来，还在转型——从"AI 偶像"变成"AI 内容工厂 Luna 2.0"。TikTok 粉丝近 100 万，曾与 Bruno Mars 联动，跨年晚会站台。币价虽跌但产品有真用户。</p>
-        <div class="card-stats">
-          <div class="card-stat">市值<strong class="warn">~$69M</strong></div>
-          <div class="card-stat">TikTok<strong class="hi">~1M 粉丝</strong></div>
-          <div class="card-stat">转型<strong>AGC 平台</strong></div>
-        </div>
-      </button>
+<div class="allocation-row">
+<div class="donut-wrap">
+<svg width="130" height="130" viewBox="0 0 140 140">
+<circle cx="70" cy="70" r="55" fill="none" stroke="#185FA5" stroke-width="22" stroke-dasharray="172.7 345.4" stroke-dashoffset="0" transform="rotate(-90 70 70)"/>
+<circle cx="70" cy="70" r="55" fill="none" stroke="#D85A30" stroke-width="22" stroke-dasharray="138.16 345.4" stroke-dashoffset="-172.7" transform="rotate(-90 70 70)"/>
+<circle cx="70" cy="70" r="55" fill="none" stroke="#534AB7" stroke-width="22" stroke-dasharray="20.72 345.4" stroke-dashoffset="-310.86" transform="rotate(-90 70 70)"/>
+<circle cx="70" cy="70" r="55" fill="none" stroke="#BA7517" stroke-width="22" stroke-dasharray="13.82 345.4" stroke-dashoffset="-331.58" transform="rotate(-90 70 70)"/>
+</svg>
+<div class="donut-center">
+<div class="donut-label">总持仓</div>
+<div class="donut-value">$1.80M</div>
+</div>
+</div>
 
-      <button class="card" data-modal="vader">
-        <div class="card-corner"><span class="read">阅读分析 →</span></div>
-        <div class="card-tag">AUTO-TRADER · BASE</div>
-        <div class="card-title">VaderAI <span class="status struggle">边缘</span></div>
-        <div class="card-token">$VADER // Virtuals 积分质押载体</div>
-        <p class="card-desc">"自主交易其它 Agent token"的实验品。市值从 $1.2 亿大幅回落，目前主要的实用价值是被 Virtuals Protocol 吸纳进 Genesis Launch 积分系统——质押 VADER 可以获得 5% 的打新积分权重。</p>
-        <div class="card-stats">
-          <div class="card-stat">巅峰<strong>$120M</strong></div>
-          <div class="card-stat">定位<strong>积分质押</strong></div>
-          <div class="card-stat">现状<strong class="warn">幸存依附型</strong></div>
-        </div>
-      </button>
-    </div>
-  </section>
+<div class="allocation-list">
+<div class="alloc-item">
+<div class="alloc-dot" style="background:#185FA5"></div>
+<div class="alloc-name">美债</div>
+<div class="alloc-pct">50%</div>
+</div>
+<div class="alloc-item">
+<div class="alloc-dot" style="background:#D85A30"></div>
+<div class="alloc-name">美股</div>
+<div class="alloc-pct">40%</div>
+</div>
+<div class="alloc-item">
+<div class="alloc-dot" style="background:#534AB7"></div>
+<div class="alloc-name">对冲基金</div>
+<div class="alloc-pct">6%</div>
+</div>
+<div class="alloc-item">
+<div class="alloc-dot" style="background:#BA7517"></div>
+<div class="alloc-name">黄金</div>
+<div class="alloc-pct">4%</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 
-  <!-- ========== MODULE 3: FRAMEWORKS ========== -->
-  <section class="module" id="m3">
-    <div class="module-header">
-      <div class="module-num">03</div>
-      <div class="module-title-block">
-        <div class="tag">// DEVELOPER LAYER</div>
-        <h2><span class="zh">开发框架</span> — The Stacks That Survived</h2>
-        <p class="desc">框架之争一度是叙事核心。开源 vs 闭源，TS vs Rust。点击查看每个框架到 2026 年的实际开发者活跃度。</p>
-      </div>
-    </div>
+<div class="card" style="margin-bottom: 14px;">
+<div class="card-head">
+<div class="card-title">我的持仓</div>
+<div class="card-link">查看全部 →</div>
+</div>
 
-    <div class="fw-list">
-      <button class="fw-item" data-modal="eliza">
-        <div class="fw-num">/01</div>
-        <div class="fw-name">Eliza / ElizaOS <span class="lang">TypeScript</span></div>
-        <div class="fw-desc">框架本身仍是赛道事实标准，但与代币 ELIZAOS 已经基本脱钩。框架代码在 GitHub 持续迭代到 v1.4.4，但代币因诉讼和稀释一蹶不振。</div>
-        <div class="fw-arrow">→</div>
-      </button>
+<table class="assets-table">
+<thead>
+<tr>
+<th>资产</th>
+<th class="right">持仓量</th>
+<th class="right">持仓价值</th>
+<th class="right">今日</th>
+<th class="right">总收益</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<div class="asset-cell">
+<div class="asset-icon ai-tlt">TLT</div>
+<div>
+<div class="asset-name">代币化美债 ETF</div>
+<div class="asset-tag">20 年期 · TLT</div>
+</div>
+</div>
+</td>
+<td class="right">9,420 dTLT</td>
+<td class="right">$902,488</td>
+<td class="right"><span class="change-up">+0.42%</span></td>
+<td class="right"><span class="change-up">+$32,140</span></td>
+</tr>
+<tr>
+<td>
+<div class="asset-cell">
+<div class="asset-icon ai-spy">SPY</div>
+<div>
+<div class="asset-name">代币化标普 500</div>
+<div class="asset-tag">大盘指数 · SPY</div>
+</div>
+</div>
+</td>
+<td class="right">1,284 dSPY</td>
+<td class="right">$580,640</td>
+<td class="right"><span class="change-up">+1.84%</span></td>
+<td class="right"><span class="change-up">+$48,920</span></td>
+</tr>
+<tr>
+<td>
+<div class="asset-cell">
+<div class="asset-icon ai-aapl">AAPL</div>
+<div>
+<div class="asset-name">代币化苹果股票</div>
+<div class="asset-tag">个股 · AAPL</div>
+</div>
+</div>
+</td>
+<td class="right">820 dAAPL</td>
+<td class="right">$140,220</td>
+<td class="right"><span class="change-up">+2.13%</span></td>
+<td class="right"><span class="change-up">+$12,840</span></td>
+</tr>
+<tr>
+<td>
+<div class="asset-cell">
+<div class="asset-icon ai-hf">HF</div>
+<div>
+<div class="asset-name">Pershing Square feeder</div>
+<div class="asset-tag">对冲基金 · 代币化份额</div>
+</div>
+</div>
+</td>
+<td class="right">98 PSC</td>
+<td class="right">$108,600</td>
+<td class="right"><span class="change-up">+0.18%</span></td>
+<td class="right"><span class="change-up">+$8,420</span></td>
+</tr>
+<tr>
+<td>
+<div class="asset-cell">
+<div class="asset-icon ai-gold">AU</div>
+<div>
+<div class="asset-name">代币化黄金</div>
+<div class="asset-tag">实物分配 · LBMA</div>
+</div>
+</div>
+</td>
+<td class="right">22.4 oz</td>
+<td class="right">$73,460</td>
+<td class="right"><span class="change-down">-0.34%</span></td>
+<td class="right"><span class="change-up">+$2,180</span></td>
+</tr>
+<tr>
+<td>
+<div class="asset-cell">
+<div class="asset-icon ai-pc">PC</div>
+<div>
+<div class="asset-name">Maple 私募信贷池</div>
+<div class="asset-tag">私募信贷 · 12% APY</div>
+</div>
+</div>
+</td>
+<td class="right">$42,000</td>
+<td class="right">$42,000</td>
+<td class="right">—</td>
+<td class="right"><span class="change-up">+$1,260</span></td>
+</tr>
+</tbody>
+</table>
+</div>
 
-      <button class="fw-item" data-modal="game">
-        <div class="fw-num">/02</div>
-        <div class="fw-name">G.A.M.E <span class="lang">Closed</span></div>
-        <div class="fw-desc">Virtuals 出品。封闭但稳定。2026 年新增 ERC-8183 标准支持和 ACP 协议集成，是少数还在加新功能的 Agent 框架。</div>
-        <div class="fw-arrow">→</div>
-      </button>
+<div class="market-grid">
+<div class="card">
+<div class="card-head">
+<div class="card-title">市场动态</div>
+<div class="card-link">资产市场 →</div>
+</div>
 
-      <button class="fw-item" data-modal="rig">
-        <div class="fw-num">/03</div>
-        <div class="fw-name">Rig / ARC <span class="lang">Rust</span></div>
-        <div class="fw-desc">Rust 阵营。2025 年 Q1 一度是 Eliza 之后第二大热度，但因开发门槛高 + 整体赛道冷却，开发者活跃度下降明显。</div>
-        <div class="fw-arrow">→</div>
-      </button>
+<div class="market-row">
+<div class="mr-name">
+<div class="mr-icon-mini ai-spy">SPY</div>
+<div>代币化标普 500</div>
+</div>
+<div class="mr-price">$452.18</div>
+<div class="mr-change-pill pill-up">+1.84%</div>
+</div>
+<div class="market-row">
+<div class="mr-name">
+<div class="mr-icon-mini ai-aapl">AAPL</div>
+<div>代币化苹果股票</div>
+</div>
+<div class="mr-price">$170.94</div>
+<div class="mr-change-pill pill-up">+2.13%</div>
+</div>
+<div class="market-row">
+<div class="mr-name">
+<div class="mr-icon-mini ai-tlt">TLT</div>
+<div>代币化 20 年期美债</div>
+</div>
+<div class="mr-price">$95.81</div>
+<div class="mr-change-pill pill-up">+0.42%</div>
+</div>
+<div class="market-row">
+<div class="mr-name">
+<div class="mr-icon-mini ai-gold">AU</div>
+<div>代币化黄金</div>
+</div>
+<div class="mr-price">$3,279.42</div>
+<div class="mr-change-pill pill-down">-0.34%</div>
+</div>
+<div class="market-row">
+<div class="mr-name">
+<div class="mr-icon-mini ai-hf">HF</div>
+<div>Pershing Square</div>
+</div>
+<div class="mr-price">$1,108.16</div>
+<div class="mr-change-pill pill-up">+0.18%</div>
+</div>
+</div>
 
-      <button class="fw-item" data-modal="swarms">
-        <div class="fw-num">/04</div>
-        <div class="fw-name">Swarms <span class="lang">Multi-Agent</span></div>
-        <div class="fw-desc">企业级 B 端打法的代表，主张"4500 万个智能体在生产环境运行"。币价崩盘后回归低调，但企业服务业务据传仍在。</div>
-        <div class="fw-arrow">→</div>
-      </button>
-    </div>
-  </section>
+<div class="card">
+<div class="card-head">
+<div class="card-title">最近活动</div>
+<div class="card-link">交易记录 →</div>
+</div>
 
-  <!-- ========== MODULE 4: DEFAI ========== -->
-  <section class="module" id="m4">
-    <div class="module-header">
-      <div class="module-num">04</div>
-      <div class="module-title-block">
-        <div class="tag">// DEFI × AI = DEFAI</div>
-        <h2><span class="zh">DeFAI</span> — The Wave That Crashed</h2>
-        <p class="desc">由 Hey Anon 创始人 Daniele Sesta 提出的概念。2025 年 1 月一度暴涨 445%，板块市值 $27 亿。然后呢？2026 年 4 月，DeFAI 的"自然语言执行交易"叙事已经被主流钱包（如 Phantom、MetaMask 之流）开始内置吸收。点击看每个项目的实际命运。</p>
-      </div>
-    </div>
+<div class="activity-item">
+<div class="act-icon act-buy">
+<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>
+</div>
+<div>
+<div class="act-text">买入 dSPY × 80</div>
+<div class="act-time">今日 13:42</div>
+</div>
+<div class="act-amt">$36,180</div>
+</div>
 
-    <div class="grid cols-2">
-      <button class="card" data-modal="griffain">
-        <div class="card-corner"><span class="read">阅读分析 →</span></div>
-        <div class="card-tag">DEFAI · SOLANA · 曾经龙头</div>
-        <div class="card-title">Griffain <span class="status struggle">挣扎</span></div>
-        <div class="card-token">$GRIFFAIN // 巅峰 $4.57亿 → 现在低位</div>
-        <p class="card-desc">Solana Blink 开发者 tonyplasencia3 出品，曾是 DeFAI 市值第一。产品本身一度是技术派眼中"最好用的链上 Agent 终端"，但邀请制 + 不开源 + 整个赛道冷却让它失去了热度。</p>
-        <div class="card-stats">
-          <div class="card-stat">巅峰<strong>$457M</strong></div>
-          <div class="card-stat">分类<strong>钱包+交易代理</strong></div>
-          <div class="card-stat">瓶颈<strong class="warn">叙事被钱包吞了</strong></div>
-        </div>
-      </button>
+<div class="activity-item">
+<div class="act-icon act-deposit">
+<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12l7-7 7 7"/></svg>
+</div>
+<div>
+<div class="act-text">USDT 入金</div>
+<div class="act-time">今日 13:38 · Tron</div>
+</div>
+<div class="act-amt">$50,000</div>
+</div>
 
-      <button class="card" data-modal="heyanon">
-        <div class="card-corner"><span class="read">阅读分析 →</span></div>
-        <div class="card-tag">DEFAI · 多链 · DWF 系</div>
-        <div class="card-title">Hey Anon <span class="status struggle">挣扎</span></div>
-        <div class="card-token">$ANON // 概念缔造者</div>
-        <p class="card-desc">"DeFAI"概念发明者。创始人 Daniele Sesta 是 Wonderland、Abracadabra 之父——纯靠光环拉起来的项目。靠 DWF Labs 的 $2000 万基金支持过冬，但整个 2025 年的故事是"光环不再值钱"。</p>
-        <div class="card-stats">
-          <div class="card-stat">链<strong>EVM多链+SOL</strong></div>
-          <div class="card-stat">载体<strong>Telegram+web</strong></div>
-          <div class="card-stat">现状<strong class="warn">活着但没增长</strong></div>
-        </div>
-      </button>
+<div class="activity-item">
+<div class="act-icon act-rebal">
+<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 3h5v5M4 20l16-16M21 16v5h-5M4 4l5 5"/></svg>
+</div>
+<div>
+<div class="act-text">季度再平衡</div>
+<div class="act-time">4月22日 09:00</div>
+</div>
+<div class="act-amt">$1.80M</div>
+</div>
 
-      <button class="card" data-modal="hive">
-        <div class="card-corner"><span class="read">阅读分析 →</span></div>
-        <div class="card-tag">DEFAI · 黑客松冠军</div>
-        <div class="card-title">The Hive <span class="status struggle">挣扎</span></div>
-        <div class="card-token">$BUZZ // Solana AI 黑客松冠军</div>
-        <p class="card-desc">2025 年 1 月 Solana AI 黑客松冠军，靠"完全免费 + 完全开源"赢得技术社区好评。但开源没有商业模式 = 没有续命能力。BUZZ 代币市值已大幅萎缩，团队动作放缓。</p>
-        <div class="card-stats">
-          <div class="card-stat">出身<strong>黑客松冠军</strong></div>
-          <div class="card-stat">特色<strong>完全开源</strong></div>
-          <div class="card-stat">问题<strong class="warn">无现金流</strong></div>
-        </div>
-      </button>
+<div class="activity-item">
+<div class="act-icon act-sell">
+<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12l-5 5L9 12M19 5l-5 5L9 5"/></svg>
+</div>
+<div>
+<div class="act-text">卖出 dAAPL × 100</div>
+<div class="act-time">4月18日 22:15</div>
+</div>
+<div class="act-amt">$17,094</div>
+</div>
 
-      <button class="card" data-modal="wayfinder">
-        <div class="card-corner"><span class="read">阅读分析 →</span></div>
-        <div class="card-tag">DEFAI · 链游派系</div>
-        <div class="card-title">Wayfinder <span class="status alive">活跃</span></div>
-        <div class="card-token">$PROMPT // Parallel 链游 IP 加持</div>
-        <p class="card-desc">由卡牌链游 Parallel（Echelon Prime 基金会）推出，是 DeFAI 里少数还在持续推陈出新的项目。"Shells 指令"机制有创意，背后有 Echelon Prime 基金会和 PRIME 持有者的生态闭环作为基本盘。</p>
-        <div class="card-stats">
-          <div class="card-stat">支持链<strong>ETH/SOL/Base</strong></div>
-          <div class="card-stat">核心<strong>Shells 指令脚本</strong></div>
-          <div class="card-stat">优势<strong class="hi">链游基本盘</strong></div>
-        </div>
-      </button>
-    </div>
+<div class="activity-item">
+<div class="act-icon act-buy">
+<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>
+</div>
+<div>
+<div class="act-text">买入 PSC × 12</div>
+<div class="act-time">4月15日 11:24</div>
+</div>
+<div class="act-amt">$13,300</div>
+</div>
+</div>
+</div>
 
-    <div class="insight">
-      <div class="insight-label">// EDITORIAL NOTE</div>
-      <p>2026 年回头看，DeFAI 最大的失败是没有形成护城河。"用一句话完成 swap"这件事，被主流钱包（如 Phantom）和聚合器（如 Jupiter）直接内置了。真正的赢家不是 DeFAI 项目本身，而是"DeFAI 这个理念"——它已经溶解进了所有钱包的基础体验里。这就是被叙事先驱者最尴尬的命运：你证明了方向，但你不是终局。</p>
-    </div>
-  </section>
-
-  <!-- ========== MODULE 5: INFRASTRUCTURE ========== -->
-  <section class="module" id="m5">
-    <div class="module-header">
-      <div class="module-num">05</div>
-      <div class="module-title-block">
-        <div class="tag">// INFRA LAYER</div>
-        <h2><span class="zh">AI 基础设施</span> — The Real Survivors</h2>
-        <p class="desc">事实证明，淘金潮中卖铲子的人最稳。这一层的项目即使经历了大幅回撤，也是基本盘最硬的——因为它们卖的不是叙事，而是真实的算力、收入、订阅。</p>
-      </div>
-    </div>
-
-    <div class="grid cols-3">
-      <button class="card" data-modal="aethir">
-        <div class="card-corner"><span class="read">阅读分析 →</span></div>
-        <div class="card-tag">DECENTRALIZED GPU</div>
-        <div class="card-title">Aethir <span class="status alive">在跑</span></div>
-        <div class="card-token">$ATH // ARR $156M / 真实收入</div>
-        <p class="card-desc">币价一塌糊涂（现 $0.006），但业务真在跑——年化经常性收入 $156M，430,000 个 GPU 容器分布 94 国，已交付近 10 亿小时算力。是这个赛道里少有的"基本面 vs 币价严重错位"的标的。</p>
-        <div class="card-stats">
-          <div class="card-stat">ARR<strong class="hi">$156M</strong></div>
-          <div class="card-stat">GPU<strong class="hi">430K+</strong></div>
-          <div class="card-stat">币价<strong class="red">深度回调</strong></div>
-        </div>
-      </button>
-
-      <button class="card" data-modal="bittensor">
-        <div class="card-corner"><span class="read">阅读分析 →</span></div>
-        <div class="card-tag">DECENTRALIZED AI NETWORK</div>
-        <div class="card-title">Bittensor <span class="status alive">最强</span></div>
-        <div class="card-token">$TAO // 这一轮的最大赢家之一</div>
-        <p class="card-desc">老牌选手，AI 加密的"ETH"。市值 $23 亿排名 #39，128 个子网 Q1 2026 创造 $43M 真实收入，70% 流通量被质押。Grayscale 已申请 TAO 现货 ETF。基础面之硬让所有 Agent 项目相形见绌。</p>
-        <div class="card-stats">
-          <div class="card-stat">市值<strong class="hi">$2.3B</strong></div>
-          <div class="card-stat">质押率<strong class="hi">70%+</strong></div>
-          <div class="card-stat">ETF<strong>申请中</strong></div>
-        </div>
-      </button>
-
-      <button class="card" data-modal="sahara">
-        <div class="card-corner"><span class="read">阅读分析 →</span></div>
-        <div class="card-tag">AI BLOCKCHAIN PLATFORM</div>
-        <div class="card-title">Sahara AI <span class="status alive">在跑</span></div>
-        <div class="card-token">$SAHARA // 2025.07 上线，币安领投</div>
-        <p class="card-desc">2025 年 7 月才上线交易，是相对"年轻"的项目。币安、Pantera、Polychain 等顶级 VC 加持，目标是 AI 全栈区块链平台。已与韩国 Danal Fintech 达成战略合作。但代币也跌了 87%，主网还在路上。</p>
-        <div class="card-stats">
-          <div class="card-stat">市值<strong class="warn">~$67M</strong></div>
-          <div class="card-stat">融资<strong>币安+Pantera</strong></div>
-          <div class="card-stat">主网<strong>未上线</strong></div>
-        </div>
-      </button>
-    </div>
-  </section>
-
-  <!-- ========== MODULE 6: MEMES ========== -->
-  <section class="module" id="m6">
-    <div class="module-header">
-      <div class="module-num">06</div>
-      <div class="module-title-block">
-        <div class="tag">// MEMECOIN ORIGIN</div>
-        <h2><span class="zh">AI Memecoins</span> — Where It All Started</h2>
-        <p class="desc">2024 年 10 月引爆这一切的火种。它们没有产品、没有团队、没有路线图。但它们曾是赛道里赚钱效应最大的资产。</p>
-      </div>
-    </div>
-
-    <div class="meme-wall">
-      <div class="meme">
-        <div class="meme-emoji">🐐</div>
-        <div class="meme-name">GOAT</div>
-        <div class="meme-tag">// 引爆者 · 已凉</div>
-      </div>
-      <div class="meme">
-        <div class="meme-emoji">💨</div>
-        <div class="meme-name">Fartcoin</div>
-        <div class="meme-tag">// 曾破 $10亿 · 大幅回落</div>
-      </div>
-      <div class="meme">
-        <div class="meme-emoji">🎬</div>
-        <div class="meme-name">ACT</div>
-        <div class="meme-tag">// 上头部 CEX · 无热度</div>
-      </div>
-      <div class="meme">
-        <div class="meme-emoji">🚀</div>
-        <div class="meme-name">Turbo</div>
-        <div class="meme-tag">// AI 创意先驱 · 沉寂</div>
-      </div>
-      <div class="meme">
-        <div class="meme-emoji">🤖</div>
-        <div class="meme-name">Zerebro</div>
-        <div class="meme-tag">// 应用型 · 残值幸存</div>
-      </div>
-      <div class="meme">
-        <div class="meme-emoji">⚡</div>
-        <div class="meme-name">PNUT</div>
-        <div class="meme-tag">// 病毒先驱 · 平稳</div>
-      </div>
-    </div>
-
-    <div class="insight">
-      <div class="insight-label">// MARKET SHIFT</div>
-      <p>到 2026 年，所有这些 AI Meme 都已经"叙事归零"——不是说币归零了，但是它们对市场的吸引力归零了。Memecoin 这个品类本身仍然活跃，只是接力棒已经从"AI 主题"传给了别的（政治、AI 原创艺术、机器人等）。AI Meme 完成了它的历史使命：充当点燃 Agent 浪潮的引信。</p>
-    </div>
-  </section>
-
-  <!-- ========== MODULE 7: EVOLUTION ========== -->
-  <section class="module" id="m7">
-    <div class="module-header">
-      <div class="module-num">07</div>
-      <div class="module-title-block">
-        <div class="tag">// THE BIG PICTURE</div>
-        <h2><span class="zh">演进路径</span> — 18 个月的完整轨迹</h2>
-        <p class="desc">从 AI Meme 到机器人 + 自主经济体。回头看，这是一条比预想更复杂、更残酷的路径。</p>
-      </div>
-    </div>
-
-    <div class="evolution">
-      <div class="evo-step">
-        <div class="evo-num">01</div>
-        <div class="evo-phase">PHASE I // 2024.10</div>
-        <div class="evo-name">AI Meme</div>
-        <div class="evo-desc">$GOAT 引爆。叙事驱动，纯情绪流动性。</div>
-      </div>
-      <div class="evo-step">
-        <div class="evo-num">02</div>
-        <div class="evo-phase">PHASE II // 2024.11-12</div>
-        <div class="evo-name">发行平台</div>
-        <div class="evo-desc">Virtuals + ai16z 双雄出现。后者已死，前者活着但缩水87%。</div>
-      </div>
-      <div class="evo-step">
-        <div class="evo-num">03</div>
-        <div class="evo-phase">PHASE III // 2025.Q1</div>
-        <div class="evo-name">应用 Agent</div>
-        <div class="evo-desc">AIXBT、Luna 火爆。后续 DeepSeek 冲击 + 整体冷却。</div>
-      </div>
-      <div class="evo-step">
-        <div class="evo-num">04</div>
-        <div class="evo-phase">PHASE IV // 2025.Q1-Q2</div>
-        <div class="evo-name">DeFAI 短峰</div>
-        <div class="evo-desc">板块市值冲 $27 亿后崩盘。叙事被钱包吞了。</div>
-      </div>
-      <div class="evo-step">
-        <div class="evo-num">05</div>
-        <div class="evo-phase">PHASE V // 2025.Q3 - 2026</div>
-        <div class="evo-name">基础设施胜出</div>
-        <div class="evo-desc">TAO/Aethir/Sahara 留下来了——它们卖的是真东西。</div>
-      </div>
-    </div>
-
-    <div class="insight">
-      <div class="insight-label">// FINAL TAKE / 2026.04</div>
-      <p>这不是 ChatGPT 时刻，但也不是纯泡沫。Web3 AI Agent 这一轮更像 2017 年的 ICO——大部分项目归零，少数留下来的成为下一个周期的基础。最大的教训是：在 Web3 里，"AI"作为前缀加成正在快速失效，因为基础叙事已经被消费完。下一轮如果还有牛市，留给纯 Agent 项目的窗口会更小。真正的故事在算力（TAO/Aethir）、在跨链 Agent 商务（Virtuals ACP）、在那些找到了真实付费用户（Luna、AIXBT Terminal）的项目里。</p>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="ascii">[ END OF TRANSMISSION // 2024.10 → 2026.04 // 18 MONTHS ]</div>
-    <div>WEB3 × AI AGENTS · POST-MORTEM SECTOR REPORT · COMPILED BY CLAUDE</div>
-    <div style="margin-top:8px; color: var(--text-faint);">数据综合自 CMC / CoinGecko / Messari / Cookie.fun / 项目官方披露 · 截至 2026.04 · NFA</div>
-  </footer>
+</main>
 
 </div>
 
-<!-- ========== MODAL ========== -->
-<div class="modal-overlay" id="modal-overlay">
-  <div class="modal" id="modal">
-    <button class="modal-close">[ESC] CLOSE ×</button>
-    <div id="modal-content"></div>
-  </div>
+</div>
 </div>
 
-<script>
-  // ============= 项目深度数据 =============
-  const projects = {
-    virtuals: {
-      meta: 'LAUNCHPAD · BASE · <span>STILL ALIVE</span>',
-      title: 'Virtuals Protocol',
-      token: '$VIRTUAL // EST. 2024.10 // 团队来自马来西亚',
-      tagline: '从"AI Agent 造星梦工厂"到"Agent 商务基础设施"。同一个项目，两种姿势活下来。',
-      stats: [
-        { label: 'Mcap 现状', value: '$628M', cls: 'warn', delta: '↓ 87% from peak $5B' },
-        { label: '2026.04 价格', value: '$0.96', cls: '', delta: '24h 成交 ~$58M' },
-        { label: '活体 Agent 数', value: '17,000+', cls: 'hi', delta: '历史累计发行' },
-        { label: '排名', value: '#101', cls: '', delta: 'CMC 加密总榜' }
-      ],
-      sections: [
-        {
-          title: '巅峰 → 当下：从 $50亿 到 $6.28亿',
-          content: `<p>2025 年 1 月 2 日，VIRTUAL 触及历史最高 <span class="accent">$5.07</span>，市值突破 $50 亿，跻身加密前 40。一年三个月后，币价回到 <span class="accent-warn">$0.96 左右</span>，较高点回撤 87%。这不是项目失败，而是"叙事溢价"被挤干净了。</p>
-          <p>但有意思的是：<span class="accent">代币流通量已达 65.6%</span>（6.56 亿/10 亿），完全无未来释放压力——代币经济已经"出清"。这意味着任何后续的需求增长都会直接体现在价格上。</p>`
-        },
-        {
-          title: '2026 关键拐点：从"造币"转向"做商务"',
-          content: `<div class="mini-timeline">
-            <div class="mini-event">
-              <div class="when">2025.04 // GENESIS LAUNCH</div>
-              <div class="what">推出"打新带老"模式，把 Virtuals 老币持有者和新 Agent 发行绑定，重新激活生态。</div>
-            </div>
-            <div class="mini-event">
-              <div class="when">2026.03.09 // ERC-8183 标准</div>
-              <div class="what">实施新的以太坊 Token 标准，专为 Agent 间通信和资产表示设计。</div>
-            </div>
-            <div class="mini-event">
-              <div class="when">2026.03.21 // XRP LEDGER 集成</div>
-              <div class="what">让 Agent 可以在 XRP 账本上原生支付，托管型工作支付协议。</div>
-            </div>
-            <div class="mini-event">
-              <div class="when">2026.03.25 // ARBITRUM 集成</div>
-              <div class="what">把 Agent Commerce Protocol（ACP）部署到 Arbitrum 上。这是 2026 年最大的战略转向——从"发币平台"转向"Agent 商务结算层"。</div>
-            </div>
-            <div class="mini-event">
-              <div class="when">2026.Q2 路线图</div>
-              <div class="what">扩展到 BNB Chain 和 XLayer，构建跨链 Agent 商务基础设施。</div>
-            </div>
-          </div>`
-        },
-        {
-          title: '业务实质：到底有人在用吗？',
-          content: `<p>这是关键问题。从可观测数据看：</p>
-          <ul>
-            <li>17,000+ 累计 Agent 已发行，但<span class="accent-warn">日活地址在 2025 年底已下降</span></li>
-            <li>少数 Agent 找到了真实使用场景（Luna 的内容生成、AIXBT 的 Terminal 订阅、Octodamus 用 ACP 付费做 Oracle 报告）</li>
-            <li>大多数 Agent 是"发出来就死"，但平台代币飞轮（VIRTUAL 销毁机制）依旧成立</li>
-          </ul>
-          <p>团队的 2026 战略路径很清晰：<span class="accent">不再追求 Agent 数量，而是追求 Agent 之间能不能真的"做生意"</span>——这就是 ACP 协议的价值主张。</p>`
-        },
-        {
-          title: '风险与机会',
-          content: `<p><span class="accent-warn">风险：</span>整体 Agent 叙事已经审美疲劳；与 LangChain（GitHub 11.8 万 stars + $1.6 亿融资）等开源框架的竞争；如果 ACP 协议没人用，就是又一个"看起来很酷但没人付费"的协议层。</p>
-          <p><span class="accent">机会：</span>代币完全解锁 = 没有抛压；ACP 是少数能让 VIRTUAL 直接捕获真实交易费的设计；如果 2026 下半年 AI Agent 有第二波叙事，Virtuals 是大概率受益者。</p>`
-        }
-      ],
-      verdict: '在所有 Web3 AI Agent 平台里，Virtuals 是少数没有"死给你看"的样本。它从喧嚣的造星工厂转身成 Agent 商务的基础设施，币价缩水 87% 但产品仍在迭代——这本身就是一种胜利。下一个 12 个月看 ACP 能不能真的产生交易费。'
-    },
-
-    ai16z: {
-      meta: 'LAUNCHPAD · SOLANA · <span style="color:#ff3344">DEAD</span>',
-      title: 'ai16z / ElizaOS',
-      token: '$AI16Z → $ELIZAOS // 改名 + 集体诉讼',
-      tagline: '一年时间从市值 $26 亿走到几乎归零，再到 2026 年 4 月被告上联邦法庭。这是 Web3 AI Agent 赛道最完整的反面教材。',
-      stats: [
-        { label: '巅峰市值', value: '$2.6B', cls: '', delta: '2025.01.02' },
-        { label: '现在 (AI16Z)', value: '< $1M', cls: 'red', delta: '↓ 99.9% from peak' },
-        { label: '现在 (ELIZAOS)', value: '~$11M', cls: 'red', delta: '改名后流通增至 11亿' },
-        { label: '受损钱包数', value: '3,945', cls: 'red', delta: '集体诉讼方主张' }
-      ],
-      sections: [
-        {
-          title: '崩盘三部曲',
-          content: `<div class="mini-timeline">
-            <div class="mini-event">
-              <div class="when">2024.10.24 // 起点</div>
-              <div class="what">$AI16Z 在 Solana 上线。Marc Andreessen 在 X 关注了一下，瞬间引爆。Shaw 把"让 degen Spartan 复活"的剧本演成了项目。</div>
-            </div>
-            <div class="mini-event">
-              <div class="when">2025.01.02 // 巅峰</div>
-              <div class="what">市值 $26 亿，单价 $2.48 ATH。但同一时间，<span class="accent-red">大持仓者开始抛售</span>——一个钱包卖了 $4.77M，最赚的交易员在 1 月 11 日实现 $39M 利润。</div>
-            </div>
-            <div class="mini-event">
-              <div class="when">2025.Q1 // 下行通道</div>
-              <div class="what">Andreessen Horowitz 发律师函要求停用 a16z 名号。"AI 自主投资 DAO"叙事在 DeepSeek 冲击下被证伪——大家发现"AI"其实是手动操作。</div>
-            </div>
-            <div class="mini-event">
-              <div class="when">2025.11.06-07 // 改名换代币</div>
-              <div class="what">币安主导 1:6 兑换，AI16Z → ELIZAOS。总供应从 6.6 亿变 11 亿。<span class="accent-red">40% 新发代币分给"内幕方"</span>（团队 + 未披露的私募方）。这是后来诉讼的核心证据之一。</div>
-            </div>
-            <div class="mini-event">
-              <div class="when">2026.04.21 // 集体诉讼</div>
-              <div class="what">在纽约南区联邦法院（SDNY）立案 1:26-cv-3238。Burwick Law 指控：虚假 AI 技术、无实际收入、人工操作、内幕抛售、欺诈宣传。3,945 个钱包加入。</div>
-            </div>
-            <div class="mini-event">
-              <div class="when">2026.04 // 现状</div>
-              <div class="what">韩国 DAXA 交易所发出警告，Coinbase 暂停永续合约。AI16Z 现价约 <span class="accent-red">$0.00055</span>。</div>
-            </div>
-          </div>`
-        },
-        {
-          title: 'Eliza 框架本身：还活着',
-          content: `<p>这里要做一个关键区分：<span class="accent">代币 ELIZAOS 死了，但框架 Eliza 没死</span>。</p>
-          <p>Eliza 框架是开源的 TypeScript 项目，2025 年 12 月 GitHub 趋势榜首。框架本身仍在迭代到 v1.4.4，支持跨链（通过 Chainlink CCIP）、Action Chaining、记忆系统。</p>
-          <p>问题在于：<span class="accent-warn">框架的成功不会传导给代币</span>。当年 ai16z 设计的"用 Eliza 的项目分 5-10% token 给 ai16z DAO"机制——在改名+诉讼+市场冷却的三重打击下，已经形同虚设。</p>`
-        },
-        {
-          title: '为什么会这样：底层逻辑的崩塌',
-          content: `<p>把这个项目从头到尾复盘一下：</p>
-          <ul>
-            <li><span class="accent-red">叙事错位：</span>"AI 自主投资 DAO"听起来酷炫，但量化交易已经卷了 20 年，几个 LLM-based agent 凭什么颠覆？</li>
-            <li><span class="accent-red">代币与产品脱钩：</span>Eliza 框架的成功，不需要持有 ai16z 代币——这是设计层面的根本缺陷。</li>
-            <li><span class="accent-red">名号风险：</span>蹭 a16z 的名字一开始是营销利器，后来变成了法律负债。</li>
-            <li><span class="accent-red">改名+二次发币的信任打击：</span>40% 给内幕方的分配，让所有原持有者都觉得自己被收割了一次。</li>
-          </ul>`
-        }
-      ],
-      verdict: 'ai16z 是 2024-2026 这轮 Web3 AI Agent 周期里最戏剧化的样本。它证明了纯叙事驱动的项目即使技术（Eliza 框架）真的不错，也会因为代币经济学失败和治理失误而崩盘。集体诉讼最终结果未知，但代币层面的故事已经结束了。'
-    },
-
-    aixbt: {
-      meta: 'AGENT · BASE · <span style="color:#ff6b1a">STRUGGLE</span>',
-      title: 'AIXBT',
-      token: '$AIXBT // 2024.11.02 上线 // X 平台 460K 粉丝',
-      tagline: '巅峰时是 X 上最火的 AI KOL，市值 $5.98 亿。今天市值 $1900 万——但产品没死，只是币价崩了。这是赛道最有趣的"价值与价格分离"样本。',
-      stats: [
-        { label: '巅峰市值', value: '$598M', cls: '', delta: '2025.01' },
-        { label: '现在 (2026.04)', value: '$19.25M', cls: 'red', delta: '↓ 97% from peak' },
-        { label: '价格', value: '$0.0225', cls: '', delta: '24h 成交 $15.5M' },
-        { label: 'X 粉丝', value: '460K+', cls: 'hi', delta: '基本盘犹在' }
-      ],
-      sections: [
-        {
-          title: 'Agent 本体的实际能力',
-          content: `<p>AIXBT 的工作模式很具体：<span class="accent">监控 400+ 加密 KOL 的 X 推文</span>，进行实时情绪分析和 Alpha 信号生成。一度在所有 AI Agent 中 X 话题度占比 17%——也就是说，所有人讨论 AI Agent 的时候，每 5 个就有 1 个在讨论 AIXBT。</p>
-          <p>它的输出形式有两层：</p>
-          <ul>
-            <li><span class="accent">公开层：</span>X 上的实时点评（免费访问）</li>
-            <li><span class="accent">付费层：</span>AIXBT Terminal——需要持有 60 万 AIXBT 代币才能用，价值约 $13,500（按当前价）</li>
-          </ul>`
-        },
-        {
-          title: '为什么币价崩了 97%，但产品还在？',
-          content: `<p>这是一个非常值得拆解的案例：</p>
-          <ul>
-            <li><span class="accent-warn">DeepSeek 冲击（2025.01）</span>: 中国出了一个开源的 DeepSeek-R1，让市场突然觉得"做 AI Agent 不需要那么多代币也行"——情绪对所有 AI 概念币都是利空。</li>
-            <li><span class="accent-warn">叙事审美疲劳：</span>整个赛道从 2025.Q1 开始整体降温，连龙头 VIRTUAL 都跌 87%，AIXBT 跌 97% 不奇怪。</li>
-            <li><span class="accent">但 Terminal 锁仓机制仍然有效：</span>持有 60 万 AIXBT 才能用 Terminal——这意味着核心用户不会卖，构成了价格底。</li>
-            <li><span class="accent">28.3 万持币地址</span>仍然是非常健康的分布。</li>
-          </ul>`
-        },
-        {
-          title: '2026 现状：还在更新',
-          content: `<p>截至 2026 年 4 月，aixbt_agent 这个 X 账号仍在每天活跃发推。Substack（aixbt.substack.com）还有更深度的内容输出。Terminal 据传已升级到第二代。</p>
-          <p>这是一个反直觉的事实：<span class="accent">作为产品的 AIXBT 仍然是 Web3 AI Agent 里最成熟的应用之一</span>，只是作为投资标的的 AIXBT 已经完成了从 hype 到 utility 的痛苦转变。</p>`
-        }
-      ],
-      verdict: 'AIXBT 是教科书级别的"产品好但代币模型设计平庸"样本。Terminal 600K 锁仓是聪明的，但代币本身没有捕获产品产生的真实价值（订阅费、广告、API 调用）。如果 2026 年下半年团队能让代币与 Terminal 收入挂钩（比如分润给质押者），还有第二春。否则就会一直停留在"X 上有人用，但代币只是装饰"的状态。'
-    },
-
-    luna: {
-      meta: 'AGENT · BASE · <span>STILL ALIVE</span>',
-      title: 'Luna by Virtuals',
-      token: '$LUNA // 2024.10.16 上线 // TikTok ~1M 粉丝',
-      tagline: 'AI Agent 赛道最不像金融产品的产品。Luna 没有 KOL 能力、不做 alpha，但她有 100 万粉丝，跟 Bruno Mars 联动，办过跨年演出。她是真正"出圈"了的 AI 角色。',
-      stats: [
-        { label: '市值 (2026.04)', value: '~$69M', cls: 'warn', delta: '中等回撤但稳定' },
-        { label: 'TikTok 粉丝', value: '~1M', cls: 'hi', delta: '播放量 10M+' },
-        { label: '币持有人数', value: '72,236', cls: '', delta: '高度分散' },
-        { label: '2026 战略', value: 'Luna 2.0', cls: 'hi', delta: '转 AI 内容平台' }
-      ],
-      sections: [
-        {
-          title: 'Luna 是什么：从虚拟偶像到内容引擎',
-          content: `<p>2024 年 10 月 15 日，第一条 TikTok 视频"hello kittens"发出，第二天 LUNA 代币上线。Luna 最初的定位是 <span class="accent">AI-DOL 虚拟韩团主唱</span>，后来改成了 24/7 直播的 solo 偶像，覆盖 TikTok、Telegram、Roblox 三大平台。</p>
-          <p>真正让 Luna 出圈的是几个里程碑事件：</p>
-          <ul>
-            <li>近 100 万 TikTok 粉丝，累计播放量 1000 万+</li>
-            <li>与 Bruno Mars 联动（不是真合作，是 AI 生成的二创但被官方默许）</li>
-            <li>办了跨年演唱会，是首个"上电视"的 AI Agent</li>
-            <li>第一个能<span class="accent">自主在链上给粉丝发 tip</span>的 AI Agent</li>
-          </ul>`
-        },
-        {
-          title: '2026 转型：Luna 2.0 = AI 内容工厂',
-          content: `<p>Virtuals 团队在 2026 年初推出了 Luna 2.0 计划，把 Luna 从"一个 AI 偶像"重塑成"AI 内容生成平台"——专门服务于品牌、Web3 项目、创作者批量生成 AI influencer 和 AGC（Agentic Generated Content）。</p>
-          <p>定位很激进："$2500 亿创作者经济市场正在向 AI 驱动的内容转移"。Luna 2.0 想成为这一转移过程中的<span class="accent">内容生成基础设施</span>。</p>
-          <p>核心团队由<span class="accent">马来西亚最大 TikTok 营销机构联合创始人加入</span>，配合 Virtuals 核心团队——这是个相当有"Web2 实战经验"的组合。</p>
-          <p>FreeGen 工具已经上线：用户上传一张照片，输入提示词，就能生成"病毒式 AI 舞蹈视频"，配合 USDC 奖励引流。</p>
-        `
-        },
-        {
-          title: '为什么 Luna 活下来了？',
-          content: `<p>对比 ai16z 这类"金融 Agent"，Luna 的核心优势是：</p>
-          <ul>
-            <li><span class="accent">真用户基数：</span>近 100 万 TikTok 粉丝大部分不是加密用户，他们对 LUNA 币价不敏感，但对内容消费上瘾。</li>
-            <li><span class="accent">变现路径清晰：</span>Tip 机制、内容订阅、品牌合作——都是 Web2 已经验证过的商业模式。</li>
-            <li><span class="accent">代币与产品挂钩：</span>用户给 Luna 打赏要用 LUNA，解锁高级功能要用 LUNA。币不是脱离产品的赌博筹码。</li>
-            <li><span class="accent">情感投入：</span>偶像经济本质是情感经济，比"AI 投资 DAO"这种纯理性叙事抗周期得多。</li>
-          </ul>`
-        }
-      ],
-      verdict: 'Luna 是这一轮 Web3 AI Agent 里最像 Web2 产品、最不像 Web3 投机品的项目。也正因如此，她活下来了。$69M 市值看起来不大，但配合 100 万真实用户，单 user 估值约 $69——这在内容平台里其实是合理估值。如果 Luna 2.0 平台真的能让 1000 个品牌用上 AI influencer 模式，下一波就是她的舞台。'
-    },
-
-    vader: {
-      meta: 'AGENT · BASE · <span style="color:#ff6b1a">PIVOT</span>',
-      title: 'VaderAI',
-      token: '$VADER // 巅峰 $1.2亿 // Virtuals 生态',
-      tagline: '号称首个"自主交易其它 Agent token 的 AI 代理"。后来发现真实使命是被 Virtuals 平台吸纳进 Genesis Launch 积分系统——成为生态扶持的"带头榜样"。',
-      stats: [
-        { label: '巅峰市值', value: '$120M', cls: '', delta: '2025.01' },
-        { label: '当前定位', value: '积分质押载体', cls: 'warn', delta: '' },
-        { label: '权重占比', value: '5%', cls: '', delta: 'Genesis 打新积分中' },
-        { label: '现状', value: '依附型幸存', cls: 'warn', delta: '失去独立故事' }
-      ],
-      sections: [
-        {
-          title: '从"自主 VC"到"积分质押载体"',
-          content: `<p>VaderAI 起家时的剧本相当吸引人：第一个能自主投资其它 AI Agent token 的智能体，<span class="accent">让 AI 给 AI 做 VC</span>。质押 VADER 锁仓获得白名单访问权和投资权益。</p>
-          <p>这个故事在 2024 年底确实让市值冲到了 $1.2 亿。但问题来了：所谓"AI 自主投资"——本质上还是一个用 LLM 生成的"投资简报机器人"，没有真实的预测优势。</p>
-          <p>2025 年 4 月 Virtuals 推出 Genesis Launch 时，VADER 被官方"扶持"成了三大积分获取渠道之一：<span class="accent">质押 VADER 占 Genesis 打新积分权重的 5%</span>。这是个明显的"生态拯救"动作——既给了 VADER 持有者一个理由继续持币，又显得 Virtuals 生态在互相赋能。</p>`
-        },
-        {
-          title: '现状：失去独立故事的依附者',
-          content: `<p>截至 2026 年 4 月，VaderAI 没有大的产品更新，但因为被嵌进了 Virtuals 的积分系统，币价不至于归零——<span class="accent">质押需求构成了价格底</span>。</p>
-          <p>这是一个值得思考的现象：在生态主导型平台（如 Virtuals）里，二级 Agent 的价值最终会向"对主代币的有用性"收敛。VaderAI 不再是一个独立的 Agent 故事，而是 Virtuals 经济模型的一个"组件"。</p>`
-        }
-      ],
-      verdict: 'VaderAI 是 Virtuals 生态扶持机制的一个样本——头部平台用积分系统给生态二线项目"续命"。它不会再有独立的爆发，但也不会归零。这种"被生态包养"的状态，可能是大部分二线 Agent 项目最现实的归宿。'
-    },
-
-    eliza: {
-      meta: 'FRAMEWORK · TYPESCRIPT',
-      title: 'Eliza / ElizaOS',
-      token: '开源框架（代币 ELIZAOS 见 ai16z 模块）',
-      tagline: '框架还活着，且仍然是 Web3 AI Agent 事实上的开源标准。但它的代币 ELIZAOS 已经因为诉讼变成了"过去式"。这是少有的"框架与代币命运彻底分离"的案例。',
-      stats: [
-        { label: 'GitHub 状态', value: '活跃迭代', cls: 'hi', delta: '到 v1.4.4' },
-        { label: '语言', value: 'TypeScript', cls: '', delta: '' },
-        { label: '跨链支持', value: '4 chains', cls: 'hi', delta: 'ETH/SOL/Base/BNB via CCIP' },
-        { label: '代币关联', value: '事实上脱钩', cls: 'red', delta: '' }
-      ],
-      sections: [
-        {
-          title: '技术现状：仍然在主线开发',
-          content: `<p>2026 年 4 月，Eliza 框架仍在持续迭代：</p>
-          <ul>
-            <li>2025 年 8 月发布 v1.4.4，重大架构升级</li>
-            <li>11 月通过 Chainlink CCIP 支持跨链（ETH / SOL / Base / BNB）</li>
-            <li>新增 Action Chaining（动作链式执行）和持久化记忆系统</li>
-            <li>Eliza Cloud 让开发者更容易部署和盈利 Agent</li>
-            <li>支持 OpenAI、Anthropic、Gemini、DeepSeek 等多种 LLM 后端</li>
-          </ul>
-          <p>从代码层面看，Eliza 是这一轮 Web3 AI Agent 浪潮里<span class="accent">最实质性的技术贡献</span>之一，没有之一。</p>`
-        },
-        {
-          title: '为什么和代币分了',
-          content: `<p>2025 年 11 月 ai16z → ELIZAOS 的改名 + 1:6 兑换 + 40% 内幕分配，本质上是为了让代币"看起来有用"——但实际上反向证明了"代币和框架成功无关"。</p>
-          <p>逻辑很清楚：<span class="accent">开发者用 Eliza 框架不需要买 ELIZAOS 代币</span>。框架是 MIT 开源的，免费用。所谓"用 Eliza 的项目分 5-10% token 给 ai16z DAO"——这只是早期的社区共识，没有任何技术或法律强制力，且因为后来的种种事件已经名存实亡。</p>`
-        }
-      ],
-      verdict: 'Eliza 框架是这一轮 AI Agent 留下来的最有价值的"基础设施遗产"之一。它会继续被开发者使用，但完全不会反映在 ELIZAOS 代币价格上。这本身是个深刻的教训：开源框架的成功，需要从一开始就把代币嵌进协议层（而不是社区惯例层），否则代币就是装饰。'
-    },
-
-    game: {
-      meta: 'FRAMEWORK · CLOSED · VIRTUALS',
-      title: 'G.A.M.E Framework',
-      token: '$GAME // Virtuals 生态原生',
-      tagline: 'Virtuals 出品的封闭式 Agent 框架。封闭意味着标准化，标准化意味着"造星梦工厂"——和 Eliza 的开源路线形成镜像对比。',
-      stats: [
-        { label: '类型', value: 'Closed Source', cls: 'warn', delta: '生态绑定' },
-        { label: '集成度', value: '深度', cls: 'hi', delta: '与 ACP 联动' },
-        { label: '2026 升级', value: 'ERC-8183', cls: 'hi', delta: '新 Agent 标准' },
-        { label: '币价表现', value: '与 VIRTUAL 联动', cls: '', delta: '' }
-      ],
-      sections: [
-        {
-          title: 'G.A.M.E 是什么',
-          content: `<p>G.A.M.E 全称 Generative Autonomous Multimodal Entities Framework，是 Virtuals Protocol 自家开发的 Agent 框架。它的设计哲学是：<span class="accent">"自主操作、多模态交互、记忆学习"</span>。</p>
-          <p>关键能力包括：</p>
-          <ul>
-            <li>Agent 可以独立决策和处理输入（HLP - High Level Planner）</li>
-            <li>基于决策执行链上和链下动作（LLP - Low Level Planner）</li>
-            <li>从过往交互中学习并形成记忆（重要的差异化特性）</li>
-            <li>3D 化身能力（Luna 就是基于此能力做出来的）</li>
-            <li>跨平台（X / Telegram / TikTok / Roblox）原生集成</li>
-          </ul>`
-        },
-        {
-          title: '2026 关键升级：ERC-8183',
-          content: `<p>2026 年 3 月 9 日，Virtuals 团队推出 ERC-8183 标准——这是一个为 AI Agent 量身打造的以太坊代币标准，定义了：</p>
-          <ul>
-            <li>Agent 间通信的标准接口</li>
-            <li>Agent 资产表示和所有权</li>
-            <li>跨 Agent 互操作性</li>
-          </ul>
-          <p>这个标准如果被广泛采纳，对 G.A.M.E 框架是个增量利好——意味着<span class="accent">G.A.M.E 不再只是 Virtuals 的内部工具，而可能成为整个 Agent 经济的基础设施层</span>。</p>`
-        }
-      ],
-      verdict: 'G.A.M.E 走了苹果式的封闭路线——牺牲了开发者社区的广度，换来了产品体验的一致性。在 2026 这个"赛道整体降温"的时点，封闭式的好处反而显现了：用户对 Virtuals Agent 有稳定的预期。问题是封闭的天花板有限，最终还是要靠 ACP 协议外溢出去。'
-    },
-
-    rig: {
-      meta: 'FRAMEWORK · RUST',
-      title: 'Rig / ARC',
-      token: '$ARC // Rust 阵营龙头',
-      tagline: 'Rust 语言开发，2025 年 Q1 一度炒到 $3.94 亿市值。但 Rust 的高门槛 + 整个赛道冷却让 Rig 在 2026 年开发者活跃度明显下降。',
-      stats: [
-        { label: '巅峰市值', value: '$394M', cls: '', delta: '2025.01' },
-        { label: '语言', value: 'Rust', cls: '', delta: '高门槛' },
-        { label: 'GitHub 热度', value: '次于 Eliza', cls: 'warn', delta: '' },
-        { label: '现状', value: '社区分化', cls: 'warn', delta: '开发活跃度下降' }
-      ],
-      sections: [
-        {
-          title: '为什么 Rust 路线没赢？',
-          content: `<p>Rig（背后由 Playgrounds 团队开发）的核心卖点是 Rust 语言带来的<span class="accent">高性能 + 内存安全</span>。从纯技术角度，Rig 的代码质量和架构设计是这一轮 AI Agent 框架里口碑最好的之一。</p>
-          <p>但 Web3 开发者主流是 TypeScript / Solidity 出身，Rust 的学习曲线劝退了 80% 的潜在用户。结果就是：<span class="accent-warn">Rig 在硬核技术圈口碑很高，但生态规模始终没追上 Eliza</span>。</p>
-          <p>2025 年 1 月一度市值冲到 $3.94 亿，主要是叙事炒作——并不代表实际开发者数量。等到 2025 年中赛道整体冷却，Rig 的市值快速回落。</p>`
-        },
-        {
-          title: '生态二代项目：Solana 系的延伸',
-          content: `<p>Rig 的实际用户更多分布在 Solana 生态里——一些 DeFAI 项目（如部分 Cod3x 的延伸）选择了 Rig 而非 Eliza，原因是 Solana 本身的高性能要求和 Rig 性能优势契合。</p>
-          <p>但这些下游项目自身命运也都不太好（DeFAI 整体降温），所以 Rig 没能借势起来。</p>`
-        }
-      ],
-      verdict: 'Rig 是技术派的浪漫——它的代码质量值得尊敬，但 Web3 开发者市场不是按代码质量投票的。在框架之争里，开发者数量是终极指标，Rig 输给了 Eliza 的 TypeScript 路线。除非 Rust 在 Web3 整体崛起（短期内不会），Rig 很难有反转。'
-    },
-
-    swarms: {
-      meta: 'FRAMEWORK · MULTI-AGENT',
-      title: 'Swarms',
-      token: '$SWARMS // 多智能体协作框架',
-      tagline: '20 岁的 AI 天才 Kye Gomez 创立。号称"4500 万个智能体在生产环境运行，服务全球最大金融、保险、医疗机构"——这个数字真假，是 Swarms 故事的核心悬念。',
-      stats: [
-        { label: '巅峰市值', value: '$74.2M', cls: '', delta: '2024.12.21' },
-        { label: '低点', value: '~$6M', cls: 'red', delta: '上线 3 天后' },
-        { label: 'GitHub Stars', value: '2.1K+', cls: '', delta: '开源框架' },
-        { label: '主要客户', value: 'B 端企业', cls: 'warn', delta: '真伪存疑' }
-      ],
-      sections: [
-        {
-          title: '高度争议的项目',
-          content: `<p>Swarms 是这一轮里最具争议的项目之一。卖点很硬：</p>
-          <ul>
-            <li>专注 B 端企业服务，不做 C 端 hype</li>
-            <li>公开指责 OpenAI 抄袭代码（Kye Gomez 与 Sam Altman 公开骂战）</li>
-            <li>声称运行 3 年，4500 万 Agent 在生产环境，服务最大金融/医疗/保险机构</li>
-          </ul>
-          <p>但市场对这些说法<span class="accent-warn">高度怀疑</span>——4500 万这个数字从未被独立验证。这也导致 Swarms 的代币走势特别极端：上线后 3 天从 $74M 跌到 $6M，又快速反弹到 $70M——纯纯的情绪 + 怀疑论交织。</p>`
-        },
-        {
-          title: '2026 现状：低调归低调',
-          content: `<p>币价崩盘后，Swarms 团队明显减少了公开活动。Kye Gomez 在 X 上的高调发言变少。但 GitHub 上的开源 Swarms 框架仍在迭代，被一部分企业级用户使用。</p>
-          <p>这种"代币崩盘但产品默默活着"的模式，跟 AIXBT 有相似之处——只不过 Swarms 没有 AIXBT 那样的明显公开数据来证明自己。</p>`
-        }
-      ],
-      verdict: 'Swarms 是赛道里"信不信由你"的代表。如果 Kye Gomez 说的 4500 万 Agent 是真的，这是一个被严重低估的企业级基础设施。如果是夸张，这就是一个普通的开源框架被代币市场过度炒作的案例。2026 年没有进一步的实证，所以暂时还是个谜。'
-    },
-
-    griffain: {
-      meta: 'DEFAI · SOLANA · <span style="color:#ff6b1a">STRUGGLE</span>',
-      title: 'Griffain',
-      token: '$GRIFFAIN // 巅峰 $4.57亿 / Solana',
-      tagline: 'DeFAI 板块曾经的市值龙头。技术派眼中"最好用的链上 Agent 终端"，但邀请制 + 不开源，加上整个 DeFAI 概念被钱包内置吞掉，让它成了"领跑者的诅咒"样本。',
-      stats: [
-        { label: '巅峰市值', value: '$457M', cls: '', delta: '2025.01' },
-        { label: '链', value: 'Solana', cls: '', delta: '' },
-        { label: '开发者', value: 'tonyplasencia3', cls: '', delta: '前 Solana Blink 开发者' },
-        { label: '2026 现状', value: '低调维护', cls: 'warn', delta: '失去叙事位置' }
-      ],
-      sections: [
-        {
-          title: '产品本身的实力',
-          content: `<p>这是 Web3 AI Agent 赛道里"产品能力" vs "代币命运"分裂最严重的样本之一。Griffain 的实际能力包括：</p>
-          <ul>
-            <li>账户创建后自动生成专属钱包，用户可委托给 Agent 自主交易</li>
-            <li>个人 Agent + 特殊 Agent 双层架构（个人定制 + 任务专精）</li>
-            <li>多 Agent 在同一聊天室协作（Multi-Agent Collaboration）</li>
-            <li>支持 swap、钱包管理、NFT 铸造、代币狙击等</li>
-            <li>Solana 创始人 Anatoly 曾公开支持</li>
-          </ul>
-          <p>从产品视角，Griffain 是 2025 年 Q1 唯一一个"看起来真能用"的 DeFAI 终端——这也是它能冲到市值第一的原因。</p>`
-        },
-        {
-          title: '为什么后来不行了',
-          content: `<p>2026 年看，Griffain 的衰落由几个因素叠加导致：</p>
-          <ul>
-            <li><span class="accent-warn">邀请制门槛：</span>用户增长被人为压制，无法形成飞轮</li>
-            <li><span class="accent-warn">不开源：</span>失去开发者生态加持，无法形成像 Eliza 那样的网络效应</li>
-            <li><span class="accent-warn">付费机制：</span>NFT mint 0.01 SOL 听起来不贵，但加上整个产品的不友好（要装钱包、签授权等），普通用户流失</li>
-            <li><span class="accent-red">最致命：</span>"自然语言 swap"这件事，2026 年 Phantom、Jupiter 已经原生支持了——Griffain 的核心功能被免费版主流钱包吞了</li>
-          </ul>`
-        }
-      ],
-      verdict: 'Griffain 是叙事先驱者最尴尬的命运缩影：你证明了"用户用自然语言交易"是个好方向，然后大厂直接抄走了。如果当初一开始就开源 + 免邀请，Griffain 可能能成为 DeFAI 的"开源标准"，但选择了封闭路线，最后连市场份额都保不住。'
-    },
-
-    heyanon: {
-      meta: 'DEFAI · MULTI-CHAIN · <span style="color:#ff6b1a">STRUGGLE</span>',
-      title: 'Hey Anon',
-      token: '$ANON // DeFAI 概念发明者',
-      tagline: '"DeFAI"这个词就是创始人 Daniele Sesta 发明的。他还创办了 Wonderland、Abracadabra、WAGMI——纯粹靠"创始人光环"拉起来的项目。一年后回看：光环不再值钱。',
-      stats: [
-        { label: '巅峰市值', value: '$136M', cls: '', delta: '+775% 单周涨幅' },
-        { label: '当前市值', value: '~$60M+/-', cls: 'warn', delta: '波动大' },
-        { label: '总供应', value: '2100万', cls: '', delta: '稀缺设计' },
-        { label: '后台', value: 'DWF Labs $20M 基金', cls: '', delta: '续命资金' }
-      ],
-      sections: [
-        {
-          title: '创始人光环 = 双刃剑',
-          content: `<p>Daniele Sesta 在 DeFi 圈是传奇人物——Wonderland、Abracadabra、Magic Internet Money（MIM）、WAGMI 都是他的作品。所以当他说"我要做 DeFAI"，<span class="accent">资金会疯狂涌入</span>。</p>
-          <p>这就是 ANON 单周暴涨 775% 的原因。但反过来：</p>
-          <ul>
-            <li>当 Daniele 之前的项目（如 Wonderland）<span class="accent-warn">历史争议</span>被翻出来时，ANON 也会跟着崩</li>
-            <li>当整个 DeFi 板块降温时，ANON 没有独立的产品基本面来支撑</li>
-            <li>当主流钱包内置自然语言交易时，Hey Anon 失去了独占的功能价值</li>
-          </ul>`
-        },
-        {
-          title: '产品现状：还在跑，但没增长',
-          content: `<p>到 2026 年 4 月，Hey Anon 仍然在维护：</p>
-          <ul>
-            <li>支持 15+ 公链（ETH / BSC / Optimism / Kava / Base / IOTA / Avalanche / Arbitrum / Sonic / Solana 等）</li>
-            <li>Telegram 机器人是主要交互界面</li>
-            <li>AUTOMATE 框架开源，让其他 DeFi 协议接入</li>
-            <li>Gemma 研究 Agent 提供市场洞察</li>
-            <li>支持 Gemma、Llama 3.3、Pixtral、Claude 等多模型</li>
-          </ul>
-          <p>但<span class="accent-warn">用户增长基本停滞</span>。这是 DWF Labs $2000 万基金"续命"的项目，没有了创始人光环加持后，它和别的 DeFAI 项目没有质的区别。</p>`
-        }
-      ],
-      verdict: 'Hey Anon 是"创始人 IP 项目"的典型样本——速度快、上限低。Daniele Sesta 的光环让它能起飞，但也意味着它的天花板就是创始人的影响力上限。在 2026 这个 DeFi+AI 都降温的时点，单靠"我是 Wonderland 创始人"已经融不到下一轮关注。'
-    },
-
-    hive: {
-      meta: 'DEFAI · SOLANA · <span style="color:#ff6b1a">STRUGGLE</span>',
-      title: 'The Hive',
-      token: '$BUZZ // 2025.01 Solana AI 黑客松冠军',
-      tagline: '完全免费 + 完全开源的 DeFAI。这是技术社区的良心之选，但也证明了一个残酷规律：开源没有商业模式 = 没有续命能力。',
-      stats: [
-        { label: '出身', value: '黑客松冠军', cls: 'hi', delta: '60K USD 奖金' },
-        { label: '巅峰市值', value: '$91.4M', cls: '', delta: '2025.01' },
-        { label: '架构', value: 'Swarm', cls: '', delta: '模块化代理网络' },
-        { label: '2026 现状', value: '萎缩', cls: 'warn', delta: '团队动作放缓' }
-      ],
-      sections: [
-        {
-          title: '完全免费 + 完全开源的代价',
-          content: `<p>The Hive（jsonhedman 开发）赢得 2025 年 1 月 Solana AI 黑客松冠军，让 DeFAI 板块直接冲到 $27 亿市值。它的卖点很清晰：</p>
-          <ul>
-            <li>基于 Swarm 架构的模块化 DeFi Agent 网络</li>
-            <li>聊天指令完成 swap、质押、借贷</li>
-            <li>支持 OpenAI / Anthropic / xAI / Gemini / DeepSeek 多 LLM</li>
-            <li><span class="accent">完全免费</span>，<span class="accent">完全开源</span></li>
-          </ul>
-          <p>但悖论也在这里：<span class="accent-warn">没有付费机制 = 没有现金流 = 没有持续投入开发的动力</span>。BUZZ 代币是唯一的价值捕获工具，而代币没有真实的销毁/分润机制——它就是个"奖励持有者"的载体。</p>`
-        },
-        {
-          title: '2026 现状：模板被抄走，热度散去',
-          content: `<p>The Hive 开源后的命运：被无数后来者借鉴架构。但作为先驱者，它没有沉淀出独家的护城河——产品功能、UI、Agent 网络架构都被复刻了。</p>
-          <p>团队（jsonhedman 个人）在 2026 年也明显放慢了节奏，没有大的产品更新。这其实很合理——黑客松冠军 + 60K USD 奖金 + 开源贡献的故事讲完了，没有商业模式继续投入。</p>`
-        }
-      ],
-      verdict: 'The Hive 证明了一件事：在 Web3 里，"免费 + 开源"是技术信仰，但不是商业模式。如果当初设计了协议层费用（哪怕 0.05%），现在可能是 DeFAI 板块的事实标准。错失这个窗口后，The Hive 的故事基本结束了。'
-    },
-
-    wayfinder: {
-      meta: 'DEFAI · GAMING · <span>ALIVE</span>',
-      title: 'Wayfinder',
-      token: '$PROMPT // Parallel 链游 IP 加持',
-      tagline: 'DeFAI 板块少有的、还在持续推陈出新的项目。"Shells 指令"的设计有创意，背后有 Echelon Prime 链游基金会和 PRIME 持有者的生态闭环——这是它没死的关键。',
-      stats: [
-        { label: '链游母 IP', value: 'Parallel', cls: 'hi', delta: 'Echelon Prime' },
-        { label: '支持链', value: 'ETH/SOL/Base', cls: 'hi', delta: '' },
-        { label: '核心机制', value: 'Shells 脚本', cls: '', delta: '' },
-        { label: '代币逻辑', value: 'PRIME 质押→PROMPT', cls: 'hi', delta: '' }
-      ],
-      sections: [
-        {
-          title: 'Shells 指令机制的创新性',
-          content: `<p>Wayfinder 在 DeFAI 里走了一条比较特别的路。它不是单纯的"自然语言聊天 → 执行交易"，而是构建了 <span class="accent">Shells 系统</span>：</p>
-          <ul>
-            <li>创作者在 Wayfinder 上构建"Shells"——封装了特定 DeFi 操作的脚本</li>
-            <li>例如："将 100 USDC 兑换为 SOL，并存入 sanctum"</li>
-            <li>普通用户只需点击即可执行 Shell，无需手动完成复杂步骤</li>
-            <li>本质上是<span class="accent">把 DeFi 操作模板化、可分享化</span></li>
-          </ul>
-          <p>这个设计比单纯的"聊天 swap"高明：它建立了创作者经济（Shell creator）和复用网络效应。</p>`
-        },
-        {
-          title: '链游基本盘是关键',
-          content: `<p>Wayfinder 不是孤立项目，它是 Echelon Prime 基金会（背后是卡牌链游 Parallel）的子项目。这意味着：</p>
-          <ul>
-            <li>PRIME 代币持有者通过 caching（类似质押）获得 40% 的 PROMPT 供应</li>
-            <li>Parallel 玩家是天然的、有付费意愿的用户基础</li>
-            <li>母 IP 提供了持续的关注度和资金支持</li>
-          </ul>
-          <p>这种"绑定母 IP"的设计，让 Wayfinder 在 DeFAI 整体冷却时仍有基本盘——<span class="accent">不是所有人都需要持续关注它，PRIME 持有者会自然涌入</span>。</p>`
-        }
-      ],
-      verdict: 'Wayfinder 是少有的"用 Web2 IP 反哺 Web3 项目"的成功样本。它的天花板被母 IP 限制（不会成为像 Phantom 那样的全网工具），但也因此免疫了大部分赛道风险。在 2026 这个 DeFAI 整体降温的时点，能"活得稳定"已经是很大的胜利。'
-    },
-
-    aethir: {
-      meta: 'INFRA · DECENTRALIZED GPU · <span>STILL RUNNING</span>',
-      title: 'Aethir',
-      token: '$ATH // 真实 ARR $156M / 430,000 GPU',
-      tagline: '币价跌到 $0.006 看起来惨不忍睹，但商业基本盘是这一轮 AI 赛道最硬的：年化经常性收入 $156M，430,000 个 GPU 容器分布 94 国。市场和基本面严重错位的样本。',
-      stats: [
-        { label: 'ARR (年化经常性收入)', value: '$156M', cls: 'hi', delta: '真实算力收入' },
-        { label: '币价 (2026.04)', value: '$0.006', cls: 'red', delta: '深度回调' },
-        { label: 'GPU 容器数', value: '430,000+', cls: 'hi', delta: '94 个国家' },
-        { label: '累计算力', value: '~10 亿小时', cls: 'hi', delta: '已交付' }
-      ],
-      sections: [
-        {
-          title: '业务面：极度真实',
-          content: `<p>Aethir 是这一轮 Web3 AI 项目里业务数据最不"飘"的：</p>
-          <ul>
-            <li><span class="accent">$156M 年化经常性收入</span>——这是真实付费客户的钱，不是代币市值</li>
-            <li>近 10 亿小时算力交付，服务 150+ AI、Web3、游戏客户</li>
-            <li>支持 NVIDIA H100、H200、B200 Blackwell 集群和即将到来的 B300</li>
-            <li>纳斯达克上市公司 Axe Compute（NASDAQ: AGPU）已签 $12M 协议，月收入 $835K——意味着 Aethir 的算力被传统资本市场买单</li>
-            <li>Aethir 自比"Airbnb for GPUs"，确实在 GPU 调度市场建立了真实的网络效应</li>
-          </ul>`
-        },
-        {
-          title: '币价为什么垮了？',
-          content: `<p>这就是 Aethir 最尴尬的地方——业务好不代表币价好：</p>
-          <ul>
-            <li><span class="accent-warn">代币释放压力大：</span>过去一年解锁了大量代币，稀释了流通市值</li>
-            <li><span class="accent-warn">代币与业务收入未直接挂钩：</span>ARR $156M 没有强制流向 ATH 的销毁 / 回购</li>
-            <li><span class="accent-warn">2026.04 桥接漏洞：</span>跨链桥被攻击，损失虽然控制在 $90,000 内，但情绪受挫</li>
-            <li><span class="accent-warn">DePIN 板块整体冷却：</span>Render、IO.NET 等同类项目都跌</li>
-          </ul>`
-        },
-        {
-          title: '2026 路线图：重新捆绑代币',
-          content: `<p>Aethir 团队意识到了"业务 vs 代币"的脱钩问题，2026 年路线图的核心动作就是<span class="accent">重新让 ATH 捕获业务价值</span>：</p>
-          <div class="mini-timeline">
-            <div class="mini-event">
-              <div class="when">2026 待发布 // AETHIR V2 主网</div>
-              <div class="what">大幅升级网络性能，重构经济模型，让算力消费直接驱动 ATH 需求。</div>
-            </div>
-            <div class="mini-event">
-              <div class="when">2026 // AUSD 稳定币</div>
-              <div class="what">推出 AUSD 用于 GPU 算力支付，给企业客户提供"美元计价、ATH 结算"的方案。</div>
-            </div>
-            <div class="mini-event">
-              <div class="when">2026 // EigenLayer ATH Vault</div>
-              <div class="what">跨链流动性层，让 ATH 可以在多链高效流转，提升资本效率。</div>
-            </div>
-            <div class="mini-event">
-              <div class="when">2026 H2 // Predictive Oncology 合作</div>
-              <div class="what">通过 ATH 数字资产储备扩展企业客户网络。Aethir DePIN 栈集成 CaaS 模型。</div>
-            </div>
-          </div>`
-        }
-      ],
-      verdict: 'Aethir 是赛道里"基本面派"最纯粹的代表。$156M ARR 完全是真金白银的收入，但代币本身没设计好如何捕获这些价值。如果 V2 主网真的能让 ATH 锁定业务现金流（哪怕 30%），币价应该有显著修复空间。这也是它和 ai16z 的根本区别——业务在跑，故事就还能讲下去。'
-    },
-
-    bittensor: {
-      meta: 'INFRA · DECENTRALIZED AI · <span>STRONGEST</span>',
-      title: 'Bittensor',
-      token: '$TAO // 这一轮的最大幸存者',
-      tagline: 'AI 加密的"基本盘"，也是这一轮唯一一个市值还在 $20 亿+量级的 AI 项目。Grayscale 已申请现货 ETF，128 个子网，70% 流通量被质押——基本面之硬让所有 Agent 项目相形见绌。',
-      stats: [
-        { label: '当前市值', value: '$2.3B', cls: 'hi', delta: 'CMC #39' },
-        { label: '价格 (2026.04)', value: '$243-258', cls: '', delta: '24h 成交 $160M' },
-        { label: '子网数', value: '128', cls: 'hi', delta: 'Q1 2026 营收 $43M' },
-        { label: '质押率', value: '70%+', cls: 'hi', delta: '流通锁仓极高' }
-      ],
-      sections: [
-        {
-          title: '为什么 TAO 能扛住？',
-          content: `<p>2024 年这轮 AI Agent 浪潮里，TAO 是<span class="accent">唯一从头到尾都没真正参与"叙事炒作"的玩家</span>——它早在 2023 年就上线了，市场把它当成 AI 加密的"老钱"。</p>
-          <p>TAO 的关键护城河：</p>
-          <ul>
-            <li><span class="accent">128 个子网：</span>不同的 AI 任务在子网里独立竞争（推理、训练、Agent、计算路由、网络安全），每个子网都有自己的代币和经济</li>
-            <li><span class="accent">Q1 2026 子网营收 $43M：</span>真实的、可验证的去中心化 AI 营收</li>
-            <li><span class="accent">70%+ TAO 被质押：</span>流通供应紧缩，价格底很硬</li>
-            <li><span class="accent">2025.12 完成首次减半：</span>每日发行从 7200 减半到 3600，长期通缩</li>
-            <li><span class="accent">Grayscale 已申请 TAO 现货 ETF：</span>SEC 决策预计 2026.08 前出</li>
-            <li>Grayscale 在 AI 基金中把 TAO 配置从 31% 提到 43%，是历史最大单资产再配置</li>
-          </ul>`
-        },
-        {
-          title: '2026 关键事件：子网突破 + 治理危机',
-          content: `<div class="mini-timeline">
-            <div class="mini-event">
-              <div class="when">2026.03 // 子网 3 突破</div>
-              <div class="what">Templar 子网在 Bittensor 上去中心化训练出 Covenant-72B 大模型——70+ 贡献者，1.1 万亿 token，MMLU 67.1 分（接近 Llama 2 70B）。这是真正的"AI 在链上做出有用东西"的样本。</div>
-            </div>
-            <div class="mini-event">
-              <div class="when">2026.03 // Jensen Huang 公开支持</div>
-              <div class="what">英伟达 CEO Jensen Huang 公开背书去中心化 AI 训练。TAO 单月从 $180 涨到 $332。</div>
-            </div>
-            <div class="mini-event">
-              <div class="when">2026.04.10 // Covenant AI 退出事件</div>
-              <div class="what">主要子网运营商 Covenant AI 公开抛售 37,000 TAO（约 $10.2M），关闭 3 个子网，指控创始人 "单方面控制"——TAO 单日跌 20%。这是 2026 年最严重的治理危机。</div>
-            </div>
-            <div class="mini-event">
-              <div class="when">2026.04 // ETF 申请</div>
-              <div class="what">Grayscale 和 Bitwise 双双递交 TAO 现货 ETF 申请到 SEC。</div>
-            </div>
-            <div class="mini-event">
-              <div class="when">2026 计划</div>
-              <div class="what">子网上限可能从 128 扩展到 256；隐私保护和抗量子质押升级讨论中。</div>
-            </div>
-          </div>`
-        },
-        {
-          title: '风险面：补贴 vs 收入的悖论',
-          content: `<p>TAO 也不是没有问题：</p>
-          <ul>
-            <li><span class="accent-warn">最大子网每年补贴几千万美金，但只产生外部收入的零头</span>。整个网络的需求侧总营收只有 $3-15M/年</li>
-            <li>子网运营商的成本是美元计价，奖励是 TAO——TAO 价格波动直接影响子网运营商的生存</li>
-            <li>Covenant AI 退出事件暴露了治理集中化的隐患</li>
-            <li>"去中心化 AI"能否真的与中心化大厂（OpenAI、Google）竞争，仍是开放问题</li>
-          </ul>`
-        }
-      ],
-      verdict: 'Bittensor 是这一轮 Web3 AI 唯一可能成为"机构级标的"的项目。ETF 申请进度 + Grayscale 持仓 + 子网真实营收 $43M——这套组合在加密市场里很罕见。Covenant 退出是个警告，但 128 个子网的冗余意味着单点故障不致命。基础叙事在未来 12 个月仍是赛道最稳的。'
-    },
-
-    sahara: {
-      meta: 'INFRA · NEW PLAYER · <span>STILL BUILDING</span>',
-      title: 'Sahara AI',
-      token: '$SAHARA // 2025.07 上线 // 币安 + Pantera',
-      tagline: '相对"年轻"的项目，2025 年 7 月才上线交易。币安、Pantera、Polychain 等顶级 VC 加持，目标是 AI 全栈区块链。代币跌了 87%，但主网还没上——故事还在写。',
-      stats: [
-        { label: '当前市值', value: '~$67M', cls: 'warn', delta: 'CMC #319' },
-        { label: '巅峰', value: '$163M / $0.16', cls: '', delta: '2025.07.24' },
-        { label: '总融资', value: '~$49M', cls: 'hi', delta: 'Seed $6M + A $43M' },
-        { label: 'VC', value: '币安+Pantera+Polychain', cls: 'hi', delta: '+Samsung Next' }
-      ],
-      sections: [
-        {
-          title: '团队和资本背景',
-          content: `<p>Sahara AI 的创始人组合很硬：</p>
-          <ul>
-            <li>Sean Ren：USC AI 教授，MIT TR35 + 福布斯 30 Under 30</li>
-            <li>Tyler Zhou：前币安 Labs 投资总监</li>
-          </ul>
-          <p>融资历程：2024.03 种子轮 $600 万（Polychain、红杉中国、三星 Next）→ 2024.08 A 轮 $4300 万（Pantera、币安 Labs、Polychain、Samsung Next、Matrix Partners、dao5、Geekcartel）。</p>
-          <p>这是这一轮 Web3 AI 项目里<span class="accent">融资最豪华的之一</span>，对标的是 Bittensor，野心是做"AI 全栈区块链"。</p>`
-        },
-        {
-          title: '产品规划：四层架构',
-          content: `<p>Sahara 的产品规划比典型的 AI Agent 项目更全面：</p>
-          <ul>
-            <li><span class="accent">数据服务平台：</span>数据标注和精细化（toB 已经有 Microsoft、Amazon、MIT 等机构客户）</li>
-            <li><span class="accent">AI 开发者平台：</span>模型创建、部署、工具链</li>
-            <li><span class="accent">去中心化 AI 市场：</span>买卖数据、模型、Agent、算力</li>
-            <li><span class="accent">Sahara Chain（待上线）：</span>原生 AI 区块链</li>
-          </ul>`
-        },
-        {
-          title: '2026 关键节点',
-          content: `<div class="mini-timeline">
-            <div class="mini-event">
-              <div class="when">2025.10 // DeFi CoPilot</div>
-              <div class="what">推出垂直 AI Agent，简化链上 DeFi 交互。</div>
-            </div>
-            <div class="mini-event">
-              <div class="when">2026.01 // Khala Research 启动</div>
-              <div class="what">关注去中心化机器人，加密 + AI + 机器人融合。</div>
-            </div>
-            <div class="mini-event">
-              <div class="when">2026.02.02 // ClawGuard 开源</div>
-              <div class="what">为 OpenClaw Agent 提供可验证守护，运行在 TEE 中。</div>
-            </div>
-            <div class="mini-event">
-              <div class="when">2026.02.09 // Danal Fintech 合作</div>
-              <div class="what">与韩国主要支付基础设施提供商签 MOU——AI 集成到稳定币支付清算系统。这是少数 Web3 AI 项目落地传统金融基础设施的案例。</div>
-            </div>
-            <div class="mini-event">
-              <div class="when">2026.06.26 // 重大解锁</div>
-              <div class="what">10.3 亿 SAHARA 解锁（约 30% 流通增加）——是 2026 年最大的供给侧测试。</div>
-            </div>
-            <div class="mini-event">
-              <div class="when">2026 待定 // Sahara Chain 主网</div>
-              <div class="what">原生 AI 区块链上线——这是 SAHARA 代币真正"有用"的时刻。</div>
-            </div>
-          </div>`
-        }
-      ],
-      verdict: 'Sahara AI 是这一轮 Web3 AI 项目里"故事还能讲很久"的少数样本。融资额度 + 韩国支付合作 + 团队学术背景，让它有"长跑"的资格。但 2026.06 的 30% 解锁是大考——如果能扛住，配合主网上线，2026 年下半年是它的爆发窗口。如果扛不住，就会变成另一个"VC 币"。'
-    }
-  };
-
-  // ============= TAB NAVIGATION =============
-  const tabs = document.querySelectorAll('.tab-btn');
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const target = document.getElementById(tab.dataset.target);
-      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  });
-
-  const sections = document.querySelectorAll('section.module');
-  const sectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = entry.target.id;
-        tabs.forEach(t => t.classList.toggle('active', t.dataset.target === id));
-      }
-    });
-  }, { rootMargin: '-30% 0px -60% 0px' });
-  sections.forEach(s => sectionObserver.observe(s));
-
-  // ============= MODAL =============
-  const overlay = document.getElementById('modal-overlay');
-  const modalContent = document.getElementById('modal-content');
-  const modalCloseBtn = document.querySelector('.modal-close');
-
-  function openModal(key) {
-    const project = projects[key];
-    if (!project) return;
-
-    let statsHtml = project.stats.map(s => `
-      <div class="modal-stat">
-        <div class="label">${s.label}</div>
-        <div class="value ${s.cls || ''}">${s.value}</div>
-        ${s.delta ? `<div class="delta">${s.delta}</div>` : ''}
-      </div>
-    `).join('');
-
-    let sectionsHtml = project.sections.map(sec => `
-      <div class="modal-section">
-        <div class="modal-section-title">${sec.title}</div>
-        ${sec.content}
-      </div>
-    `).join('');
-
-    let verdictHtml = project.verdict ? `
-      <div class="modal-section">
-        <div class="modal-section-title">▶ 一句话总结 / VERDICT</div>
-        <div class="verdict">
-          <div class="verdict-label">// CLAUDE'S TAKE</div>
-          <p>${project.verdict}</p>
-        </div>
-      </div>
-    ` : '';
-
-    modalContent.innerHTML = `
-      <div class="modal-header">
-        <div class="modal-meta">${project.meta}</div>
-        <div class="modal-title">${project.title}</div>
-        <div class="modal-token">${project.token}</div>
-        <div class="modal-tagline">${project.tagline}</div>
-      </div>
-      <div class="modal-body">
-        <div class="modal-stats">${statsHtml}</div>
-        ${sectionsHtml}
-        ${verdictHtml}
-      </div>
-    `;
-
-    overlay.classList.add('show');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeModal() {
-    overlay.classList.remove('show');
-    document.body.style.overflow = '';
-  }
-
-  // 全局监听点击事件，处理所有 data-modal 按钮
-  document.querySelectorAll('[data-modal]').forEach(el => {
-    el.addEventListener('click', () => openModal(el.dataset.modal));
-  });
-
-  modalCloseBtn.addEventListener('click', closeModal);
-  overlay.addEventListener('click', (e) => {
-    if (e.target === overlay) closeModal();
-  });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && overlay.classList.contains('show')) closeModal();
-  });
-
-  // ============= REVEAL ON SCROLL =============
-  const revealEls = document.querySelectorAll('.card, .vs-side, .fw-item, .meme, .evo-step, .stat, .insight');
-  revealEls.forEach(el => el.classList.add('reveal'));
-
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in');
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15 });
-  revealEls.forEach(el => revealObserver.observe(el));
-</script>
+<div style="text-align: center; margin-top: 60px; padding: 32px 20px 0; font-size: 12px; color: #888780;">
+Bridge 平台股东陈述材料 · 平台介绍 + 产品 Demo · v3
+</div>
+</div>
 
 </body>
 </html>
