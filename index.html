@@ -177,6 +177,7 @@ h1 { font-size: 48px; font-weight: 500; line-height: 1.2; margin-bottom: 24px; l
 .tier-num-a { background: #185FA5; }
 .tier-num-b { background: #0F6E56; }
 .tier-num-c { background: #993C1D; }
+.tier-num-d { background: linear-gradient(135deg, #534AB7, #1F1E1B); }
 .tier-text { display: flex; flex-direction: column; gap: 2px; }
 .tier-label { font-size: 12px; color: #888780; letter-spacing: 2px; text-transform: uppercase; }
 .tier-title { font-size: 20px; font-weight: 500; }
@@ -423,7 +424,207 @@ h1 { font-size: 48px; font-weight: 500; line-height: 1.2; margin-bottom: 24px; l
 .cb-cell-mid { color: #BA7517; }
 .cb-feature { font-weight: 500; color: #2C2C2A; }
 
-/* ========== CREDIT CARD VISUAL ========== */
+/* ========== AGENT NATIVE VISUALS ========== */
+.agent-future-banner {
+  background: linear-gradient(135deg, #1F1E1B 0%, #26215C 50%, #0C0033 100%);
+  color: #FAF9F5;
+  border-radius: 16px;
+  padding: 28px 32px;
+  margin: 8px 0 18px;
+  position: relative;
+  overflow: hidden;
+}
+.agent-future-banner::before {
+  content: "";
+  position: absolute;
+  top: -100px; right: -100px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(127, 119, 221, 0.3), transparent 70%);
+}
+.agent-future-banner::after {
+  content: "";
+  position: absolute;
+  bottom: -80px; left: -50px;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(93, 202, 165, 0.15), transparent 70%);
+}
+.afb-inner { position: relative; z-index: 2; }
+.afb-tag {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #AFA9EC;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+.afb-title { font-size: 24px; font-weight: 500; line-height: 1.4; margin-bottom: 12px; color: #FAF9F5; letter-spacing: -0.3px; }
+.afb-body { font-size: 14px; color: #C2C0B6; line-height: 1.7; }
+.afb-body strong { color: #FAF9F5; font-weight: 500; }
+
+.code-block {
+  background: #0C0A06;
+  border-radius: 10px;
+  padding: 18px 20px;
+  font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+  font-size: 12px;
+  color: #C2C0B6;
+  line-height: 1.7;
+  margin-top: 14px;
+  overflow-x: auto;
+  border: 0.5px solid rgba(255,255,255,0.1);
+}
+.code-block .ck { color: #7F77DD; }
+.code-block .cs { color: #5DCAA5; }
+.code-block .cn { color: #EF9F27; }
+.code-block .cm { color: #5F5E5A; font-style: italic; }
+.code-block .cf { color: #F5C4B3; }
+
+.agent-flow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-top: 16px;
+}
+.agent-step {
+  background: #FFF;
+  border: 0.5px solid rgba(0,0,0,0.08);
+  border-left: 3px solid #534AB7;
+  border-radius: 8px;
+  padding: 14px 18px;
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 14px;
+  align-items: flex-start;
+}
+.agent-step-num {
+  background: #EEEDFE;
+  color: #534AB7;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 500;
+}
+.agent-step-actor { font-size: 11px; color: #534AB7; letter-spacing: 0.3px; margin-bottom: 4px; }
+.agent-step-text { font-size: 13px; color: #2C2C2A; line-height: 1.6; }
+.agent-step-text code { background: #F1EFE8; padding: 1px 6px; border-radius: 4px; font-size: 12px; font-family: monospace; color: #1F1E1B; }
+
+.permission-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 16px;
+}
+.perm-card {
+  background: #F1EFE8;
+  border-radius: 10px;
+  padding: 16px 18px;
+}
+.perm-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.perm-icon-mini {
+  width: 28px; height: 28px;
+  border-radius: 7px;
+  background: #EEEDFE;
+  color: #534AB7;
+  display: flex; align-items: center; justify-content: center;
+}
+.perm-name { font-size: 12px; font-weight: 500; }
+.perm-desc { font-size: 11px; color: #5F5E5A; line-height: 1.6; }
+.perm-list { font-size: 11px; line-height: 1.8; color: #444441; margin-top: 6px; }
+.perm-list .ok { color: #1D9E75; font-weight: 500; }
+.perm-list .no { color: #E24B4A; }
+
+.intent-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 16px;
+}
+.ic-card {
+  border-radius: 10px;
+  padding: 18px 20px;
+}
+.ic-old { background: #FCEBEB; border-left: 3px solid #E24B4A; }
+.ic-new { background: #EEEDFE; border-left: 3px solid #534AB7; }
+.ic-tag { font-size: 11px; letter-spacing: 0.5px; margin-bottom: 8px; }
+.ic-old .ic-tag { color: #791F1F; }
+.ic-new .ic-tag { color: #3C3489; }
+.ic-title { font-size: 13px; font-weight: 500; margin-bottom: 8px; }
+.ic-old .ic-title { color: #501313; }
+.ic-new .ic-title { color: #26215C; }
+.ic-code {
+  font-family: monospace;
+  font-size: 11px;
+  background: rgba(255,255,255,0.6);
+  padding: 8px 10px;
+  border-radius: 6px;
+  line-height: 1.6;
+  color: #2C2C2A;
+}
+
+.tas-features {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 16px;
+}
+.tas-card {
+  background: #F1EFE8;
+  border-radius: 10px;
+  padding: 14px 14px;
+  text-align: left;
+}
+.tas-icon {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  background: #EEEDFE;
+  color: #534AB7;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 10px;
+}
+.tas-title { font-size: 12px; font-weight: 500; margin-bottom: 4px; }
+.tas-desc { font-size: 10.5px; color: #5F5E5A; line-height: 1.55; }
+
+/* ========== DEMO AGENT BANNER ========== */
+.demo-agent-card {
+  background: linear-gradient(135deg, #1F1E1B 0%, #26215C 100%);
+  color: #FAF9F5;
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin-bottom: 14px;
+  position: relative;
+  overflow: hidden;
+}
+.demo-agent-card::before {
+  content: "";
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(127, 119, 221, 0.25), transparent 70%);
+}
+.dac-inner { position: relative; z-index: 2; display: grid; grid-template-columns: auto 1fr auto; gap: 16px; align-items: center; }
+.dac-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: rgba(127, 119, 221, 0.25);
+  display: flex; align-items: center; justify-content: center;
+}
+.dac-text-1 { font-size: 11px; color: #AFA9EC; letter-spacing: 0.5px; margin-bottom: 3px; }
+.dac-text-2 { font-size: 13px; color: #FAF9F5; line-height: 1.5; }
+.dac-text-2 b { color: #5DCAA5; font-weight: 500; }
+.dac-status {
+  font-size: 10px;
+  padding: 4px 10px;
+  background: rgba(93, 202, 165, 0.2);
+  color: #5DCAA5;
+  border-radius: 10px;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 800px) {
+  .permission-grid, .intent-compare, .tas-features { grid-template-columns: 1fr; }
+  .dac-inner { grid-template-columns: 1fr; gap: 8px; }
+}
+
+/* ========== USP SECTION ========== */
 .credit-card-mock {
   background: linear-gradient(135deg, #1F1E1B 0%, #2C2C2A 50%, #04342C 100%);
   border-radius: 14px;
@@ -1061,6 +1262,7 @@ h1 { font-size: 48px; font-weight: 500; line-height: 1.2; margin-bottom: 24px; l
 .act-deposit { background: #E6F1FB; color: #378ADD; }
 .act-rebal { background: #EEEDFE; color: #7F77DD; }
 .act-card { background: #FAEEDA; color: #BA7517; }
+.act-agent { background: #EEEDFE; color: #534AB7; }
 .act-text { font-size: 12px; }
 .act-time { font-size: 10px; color: #888780; margin-top: 1px; }
 .act-amt { font-size: 12px; font-weight: 500; text-align: right; }
@@ -1142,6 +1344,7 @@ footer-section {
 <a class="top-nav-link" href="#layer-a">投资人体验</a>
 <a class="top-nav-link" href="#layer-b">运营与技术</a>
 <a class="top-nav-link" href="#layer-c">支付与消费</a>
+<a class="top-nav-link" href="#layer-d">Agent Native</a>
 <a class="top-nav-link" href="#usp">核心卖点</a>
 <a class="top-nav-link" href="#demo">产品 Demo</a>
 </div>
@@ -1187,6 +1390,7 @@ footer-section {
 <span class="hero-tag">链上储备证明</span>
 <span class="hero-tag">资产质押消费</span>
 <span class="hero-tag">Visa 卡支付</span>
+<span class="hero-tag">Agent Native API</span>
 </div>
 <div class="hero-jump">
 <a href="#layer-a" class="hero-btn">浏览平台介绍 →</a>
@@ -1989,6 +2193,252 @@ Oria
 </div>
 </section>
 
+<div class="tier-header" id="layer-d">
+<div class="tier-num tier-num-d">D</div>
+<div class="tier-text">
+<span class="tier-label">Layer 04 · 未来方向 · 12-24 月</span>
+<span class="tier-title">Agent Native 层</span>
+</div>
+</div>
+
+<div class="agent-future-banner">
+<div class="afb-inner">
+<div class="afb-tag">● Strategic Bet</div>
+<h2 class="afb-title">下一个金融客户不是人——是 Agent</h2>
+<p class="afb-body">2026 年起，"AI 原生公司"开始大量出现——不是"用了 AI 的公司"，而是<strong>按 AI 能力重新设计的公司</strong>：30 人的 SaaS 团队，财务部门只有一个 CFO + 几个 agent；家族办公室聘请 AI 资管 agent 7×24 监控全球持仓、自动再平衡；DAO treasury 完全由智能合约 + agent 管理。<br><br>到那个时候，<strong>谁来登录 Oria App？没人</strong>。登录的是 agent，不是人。<br><br><strong>Oria 的战略下注</strong>：不只是给人用的私行 App，更是 AI 原生公司的金融操作系统。把所有功能（持仓、交易、质押、支付）通过标准化的 API 和 MCP 协议暴露——让 agent 可以直接调用，不需要任何人类干预。今天为人服务的体验细节，明天平移给 agent。这是一次估值倍数的重置。</p>
+</div>
+</div>
+
+<section class="module m-purple">
+<div class="module-head">
+<div class="module-icon icon-purple">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+</div>
+<span class="module-num">11</span>
+<span class="module-title">MCP Server 与开放 API</span>
+<span class="module-pill pill-amber">Agent Native</span>
+</div>
+<p class="module-tag">让任何 LLM 和 agent 框架都能直接调用 Oria——零定制开发。</p>
+
+<div class="row">
+<div class="k">为什么需要</div>
+<div class="v">2024 年底 Anthropic 发布的 <strong>MCP（Model Context Protocol）</strong>已经成为 LLM 与外部系统连接的事实标准——Claude、ChatGPT、Gemini 都在支持。这意味着任何接入 MCP 的 agent 都能"看到"所有暴露 MCP 接口的服务。<br><br><strong>Oria 在 2026 年早期把全部业务能力包装成 MCP Server</strong>，把整个平台变成一个 agent 可调用的金融工具——不需要任何 agent 厂商专门为我们做集成，他们的用户开箱即用就能让 agent 操作 Oria。</div>
+</div>
+
+<div class="row">
+<div class="k">能力清单</div>
+<div class="v">所有人类能用 App 做的事，agent 都能通过 API 做：<strong>查询持仓与净值、提交买卖订单、申请质押额度、发起 USDT 出入金、Visa 卡消费授权、配置自动再平衡规则、获取税务报表与交易历史</strong>。<br><br>所有 API 都遵循 OpenAPI 3.0 标准，附带完整文档和 SDK（Python、TypeScript、Go）。MCP Server 部署在 Oria 自有基础设施，所有调用经过 KYC + agent 身份双重验证。</div>
+</div>
+
+<div class="row">
+<div class="k">代码示例</div>
+<div class="v">一个 agent 用自然语言指令调用 Oria 的样子：
+<div class="code-block">
+<span class="cm"># Agent 通过 MCP 协议调用 Oria，自然语言意图自动映射到 API</span><br>
+<span class="ck">await</span> agent.<span class="cf">execute</span>(<br>
+&nbsp;&nbsp;<span class="cs">"把这个月公司账户里闲置的 50 万 USDT </span><br>
+&nbsp;&nbsp;&nbsp;<span class="cs">配置进 3 个月期美债，月底前完成"</span><br>
+)<br>
+<br>
+<span class="cm"># Oria MCP Server 自动解析为以下调用：</span><br>
+<span class="ck">→</span> oria.<span class="cf">portfolio</span>.getBalance(<span class="cs">"USDT"</span>)<br>
+<span class="ck">→</span> oria.<span class="cf">market</span>.search(asset=<span class="cs">"US_TREASURY"</span>, maturity=<span class="cn">90</span>)<br>
+<span class="ck">→</span> oria.<span class="cf">order</span>.placeBuy(asset=<span class="cs">"dT-Bill-3M"</span>, amount=<span class="cn">500000</span>)<br>
+<span class="ck">→</span> oria.<span class="cf">notification</span>.sendReceipt(to=cfo_email)
+</div>
+</div>
+</div>
+</section>
+
+<section class="module m-purple">
+<div class="module-head">
+<div class="module-icon icon-purple">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L4 6v6c0 5 3.5 9.5 8 10.5 4.5-1 8-5.5 8-10.5V6l-8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+</div>
+<span class="module-num">12</span>
+<span class="module-title">Agent 身份与权限</span>
+<span class="module-pill pill-amber">Agent Native</span>
+</div>
+<p class="module-tag">把 agent 当独立法律主体来管理，而不是人类的延伸账号。</p>
+
+<div class="row">
+<div class="k">核心问题</div>
+<div class="v">让 agent 用人类的账号登录是错误的。<strong>agent 会犯错、会被劫持、会执行幻觉指令</strong>——如果它登录的是人类主账户，一次失误可能清空全部资产。<br><br>正确的做法：<strong>每个 agent 是独立身份，绑定到人类主账户下，权限严格分级</strong>。这是借鉴企业 IAM（身份与访问管理）的成熟模式——CFO 不会让公司每个员工都用 root 账号，agent 也不应该。</div>
+</div>
+
+<div class="row">
+<div class="k">权限模型</div>
+<div class="v">
+<div class="permission-grid">
+<div class="perm-card">
+<div class="perm-head">
+<div class="perm-icon-mini">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12h18M12 3v18"/></svg>
+</div>
+<div class="perm-name">只读 Agent</div>
+</div>
+<div class="perm-list">
+<span class="ok">✓</span> 查询持仓与净值<br>
+<span class="ok">✓</span> 读取交易历史<br>
+<span class="no">✗</span> 任何写入操作<br>
+<span class="perm-desc" style="margin-top: 6px; display: block;">用于报表生成、市场分析、税务咨询。</span>
+</div>
+</div>
+<div class="perm-card">
+<div class="perm-head">
+<div class="perm-icon-mini">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="3 17 9 11 13 15 21 7"/></svg>
+</div>
+<div class="perm-name">交易 Agent</div>
+</div>
+<div class="perm-list">
+<span class="ok">✓</span> 在白名单资产间调配<br>
+<span class="ok">✓</span> 单日额度上限可设<br>
+<span class="no">✗</span> 不能赎回到外部钱包<br>
+<span class="perm-desc" style="margin-top: 6px; display: block;">用于自动再平衡、套利、组合调整。</span>
+</div>
+</div>
+<div class="perm-card">
+<div class="perm-head">
+<div class="perm-icon-mini">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+</div>
+<div class="perm-name">支付 Agent</div>
+</div>
+<div class="perm-list">
+<span class="ok">✓</span> Visa 卡授权消费<br>
+<span class="ok">✓</span> 限定商户类别（MCC）<br>
+<span class="no">✗</span> 不能修改卡设置<br>
+<span class="perm-desc" style="margin-top: 6px; display: block;">用于供应商付款、订阅管理、运营支出。</span>
+</div>
+</div>
+<div class="perm-card">
+<div class="perm-head">
+<div class="perm-icon-mini">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L4 6v6c0 5 3.5 9.5 8 10.5 4.5-1 8-5.5 8-10.5V6l-8-4z"/></svg>
+</div>
+<div class="perm-name">Treasury Agent</div>
+</div>
+<div class="perm-list">
+<span class="ok">✓</span> 自主配置全部资产<br>
+<span class="ok">✓</span> 质押授信调用<br>
+<span class="no">✗</span> 提现需人类二次签名<br>
+<span class="perm-desc" style="margin-top: 6px; display: block;">用于 AI 原生公司的整体国库管理。</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="k">紧急控制</div>
+<div class="v"><strong>人类主账户随时可一键吊销 agent</strong>——不需要联系客服、不需要等待。所有 agent 操作实时推送到人类主账户的告警通道（邮件 + Telegram + iOS push），异常行为可手动 rollback。<br><br>合规层面，每个 agent 有独立的链上身份（DID），所有操作上链留痕，监管和审计可追溯到具体 agent 而不只是主账户。出问题时责任划分清晰：<strong>是人类授权过度、还是 agent 越权——链上证据自动判定</strong>。</div>
+</div>
+</section>
+
+<section class="module m-purple">
+<div class="module-head">
+<div class="module-icon icon-purple">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 1 1-7-7"/></svg>
+</div>
+<span class="module-num">13</span>
+<span class="module-title">意图驱动的执行引擎</span>
+<span class="module-pill pill-amber">Agent Native</span>
+</div>
+<p class="module-tag">从"做什么"到"达成什么"——把意图翻译成最优执行路径。</p>
+
+<div class="row">
+<div class="k">范式转变</div>
+<div class="v">
+<div class="intent-compare">
+<div class="ic-card ic-old">
+<div class="ic-tag">传统 API · 命令式</div>
+<div class="ic-title">告诉系统具体怎么做</div>
+<div class="ic-code">POST /order<br>{ asset: "dSPY",<br>&nbsp;&nbsp;side: "buy",<br>&nbsp;&nbsp;amount: 100 }</div>
+</div>
+<div class="ic-card ic-new">
+<div class="ic-tag">Oria Intent API · 意图式</div>
+<div class="ic-title">告诉系统要达成什么</div>
+<div class="ic-code">POST /intent<br>{ goal: "保持 50/40/10 配置,<br>&nbsp;&nbsp;把月度结余配置进去",<br>&nbsp;&nbsp;constraints: {...} }</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="k">为什么 agent 时代必须这么做</div>
+<div class="v">命令式 API 要求调用方知道每一步该怎么做——这对 agent 来说意味着<strong>每次都要 LLM 推理出完整执行路径</strong>，慢、贵、容易出错。意图式 API 让 agent 只表达"我要什么"，<strong>具体路径优化由 Oria 内置规则引擎处理</strong>：成本最低的资产路径、最优的税务时点、滑点保护、价格区间限制——这些是 Oria 比 agent 更专业的领域。<br><br>这是一种<strong>责任划分</strong>：agent 负责理解客户意图，Oria 负责把意图翻译成最优金融执行。两边各做自己最擅长的，整个系统才稳定。</div>
+</div>
+
+<div class="row">
+<div class="k">典型意图</div>
+<div class="v">"<strong>每月发薪日预留 50 万 USDT，剩余配置进美债生息</strong>"——周期性任务，agent 设置一次后自动执行。<br><br>"<strong>当组合美股仓位超过 45% 时，把超出部分换成黄金</strong>"——条件触发任务，市场波动时自动响应。<br><br>"<strong>用 30% 美债持仓做抵押，付清下个月所有 SaaS 订阅</strong>"——一次性任务，包含质押+支付两个步骤的组合执行。<br><br>"<strong>在保持税务效率的前提下做组合再平衡</strong>"——多目标优化任务，引擎自动选择不会触发短期资本利得的资产。</div>
+</div>
+</section>
+
+<section class="module m-purple">
+<div class="module-head">
+<div class="module-icon icon-purple">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
+</div>
+<span class="module-num">14</span>
+<span class="module-title">Treasury-as-a-Service</span>
+<span class="module-pill pill-amber">Agent Native</span>
+</div>
+<p class="module-tag">面向 AI 原生公司的金库即服务——CFO 只看月报，agent 全权打理。</p>
+
+<div class="row">
+<div class="k">目标客户画像</div>
+<div class="v"><strong>AI 原生公司</strong>——不是用了 AI 的传统公司，是按 AI 能力重新设计组织架构的公司。典型画像：30 人以下，估值 1000 万-10 亿美元，主要收入来自全球客户的 USDT 或美元订阅，没有传统 CFO 团队，财务运营依赖少数几个 agent。<br><br>这类公司的痛点：<strong>没有银行愿意给他们开企业账户</strong>（业务模型太新，反洗钱风险评分高），同时<strong>资金又是全球流入流出的</strong>，传统私行的 corporate banking 服务慢得没法用。Oria 是为这个客群量身定做的。</div>
+</div>
+
+<div class="row">
+<div class="k">服务包含</div>
+<div class="v">
+<div class="tas-features">
+<div class="tas-card">
+<div class="tas-icon">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+</div>
+<div class="tas-title">流动性管理</div>
+<div class="tas-desc">收到的客户付款自动配置进短期美债生息，到期续作或赎回。</div>
+</div>
+<div class="tas-card">
+<div class="tas-icon">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+</div>
+<div class="tas-title">薪酬执行</div>
+<div class="tas-desc">每月发薪日 agent 自动从美债赎回足额 USDT，按员工地址批量支付。</div>
+</div>
+<div class="tas-card">
+<div class="tas-icon">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+</div>
+<div class="tas-title">运营支付</div>
+<div class="tas-desc">SaaS 订阅、广告投放、办公支出由 agent 经 Visa 卡或 USDT 直付。</div>
+</div>
+<div class="tas-card">
+<div class="tas-icon">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+</div>
+<div class="tas-title">月度合规报告</div>
+<div class="tas-desc">自动生成 GAAP / IFRS 兼容的财务报表，CFO 一键交给会计师。</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="k">收入模型</div>
+<div class="v">不再按 AUM 收单一管理费——按"agent 调用次数"和"代客托管资产"双轨收费。<strong>API 调用 0.1-1 美元每次（按复杂度），托管资产 50bps 年费</strong>。一家 ARR $10M 的 AI 原生公司，年贡献费用约 $50K-$80K，毛利率 70%+。Oria 把<strong>客户从"高净值个人"扩展到"AI 原生公司"——客单价高、留存极强（财务系统切换成本巨大）、长尾巨大</strong>。</div>
+</div>
+
+<div class="note">
+<div class="note-label">给股东的关键说明</div>
+这一层是 Oria 的<b>第二增长曲线</b>。AUM 模式（私行客户）的天花板是几十亿到几百亿美元，但 AI 原生公司 treasury 的市场规模随着 AI 渗透率指数级扩张——三年后可能比私行客户业务大一个数量级。把 Oria 早期就定位为"agent 友好的金融基础设施"，等 2028-2030 年 AI 原生公司爆发时，<b>我们是默认的金融操作系统</b>，不是后来才追赶的玩家。这是一次估值倍数的重置——市场不再按 fintech 估值（10-15x revenue），而按 infrastructure 估值（30-50x revenue）。
+</div>
+</section>
+
 <div class="usp-section" id="usp">
 <div class="section-divider">
 <h2 class="section-title">三大核心卖点</h2>
@@ -2056,7 +2506,7 @@ Oria
 <div class="demo-intro-inner">
 <div class="demo-intro-eyebrow">● Live Product Preview</div>
 <h2 class="demo-intro-title">这是用户登录后<br>实际看到的产品</h2>
-<p class="demo-intro-sub">前面讲的所有模块、所有卖点、所有合规设计，最终都收敛到这个仪表盘。<strong>下面就是用户每天打开 Oria 看到的画面</strong>——总资产、链上储备证明、Visa 卡 + 质押额度、持仓、市场动态、活动流。</p>
+<p class="demo-intro-sub">前面讲的所有模块、所有卖点、所有合规设计，最终都收敛到这个仪表盘。<strong>下面就是用户每天打开 Oria 看到的画面</strong>——总资产、链上储备证明、Visa 卡 + 质押额度、Agent 状态条、持仓、市场动态、活动流。</p>
 
 <div class="demo-features" style="grid-template-columns: repeat(4, 1fr);">
 <div class="demo-feature">
@@ -2071,13 +2521,13 @@ Oria
 </div>
 <div class="demo-feature">
 <div class="demo-feature-num">03</div>
-<div class="demo-feature-title">机构资产可见</div>
-<div class="demo-feature-desc">Pershing Square、Maple 私募信贷。</div>
+<div class="demo-feature-title">Agent 在工作</div>
+<div class="demo-feature-desc">Treasury Agent 后台 7×24 自主执行。</div>
 </div>
 <div class="demo-feature">
 <div class="demo-feature-num">04</div>
-<div class="demo-feature-title">USDT 多链</div>
-<div class="demo-feature-desc">Tron、以太坊等链入金灵活。</div>
+<div class="demo-feature-title">机构资产可见</div>
+<div class="demo-feature-desc">Pershing Square、Maple 私募信贷。</div>
 </div>
 </div>
 </div>
@@ -2141,6 +2591,10 @@ Oria
 
 <div class="nav-section">账户</div>
 <div class="nav-item">
+<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 1 1-7-7"/></svg>
+<span>我的 Agents</span>
+</div>
+<div class="nav-item">
 <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L4 6v6c0 5 3.5 9.5 8 10.5 4.5-1 8-5.5 8-10.5V6l-8-4z"/></svg>
 <span>合规与 KYC</span>
 </div>
@@ -2175,6 +2629,19 @@ Oria
 <div class="notification-dot"></div>
 </div>
 <button class="btn-primary">入金</button>
+</div>
+</div>
+
+<div class="demo-agent-card">
+<div class="dac-inner">
+<div class="dac-icon">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#AFA9EC" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 1 1-7-7"/></svg>
+</div>
+<div>
+<div class="dac-text-1">TREASURY AGENT · 在线</div>
+<div class="dac-text-2">今日已自动执行 <b>3 笔再平衡</b>、监控持仓 24 小时、按你设定的规则将 $50K USDT 配置进 dT-Bill-3M。下次报告 <b>明日 09:00</b>。</div>
+</div>
+<div class="dac-status">● 运行中</div>
 </div>
 </div>
 
@@ -2590,6 +3057,17 @@ Oria
 </div>
 
 <div class="activity-item">
+<div class="act-icon act-agent">
+<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 1 1-7-7"/></svg>
+</div>
+<div>
+<div class="act-text">Agent 自动配置 dT-Bill-3M</div>
+<div class="act-time">今日 14:32 · Treasury Agent</div>
+</div>
+<div class="act-amt">$50,000</div>
+</div>
+
+<div class="activity-item">
 <div class="act-icon act-card">
 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
 </div>
@@ -2676,7 +3154,7 @@ Oria
 </div>
 
 <div style="text-align: center; margin-top: 60px; padding: 32px 20px 0; font-size: 12px; color: #888780;">
-Oria 平台股东陈述材料 · 平台介绍 + 产品 Demo · v4 · 含支付与消费层
+Oria 平台股东陈述材料 · 平台介绍 + 产品 Demo · v5 · 含 Agent Native 战略层
 </div>
 </div>
 
