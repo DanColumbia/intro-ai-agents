@@ -624,6 +624,446 @@ h1 { font-size: 48px; font-weight: 500; line-height: 1.2; margin-bottom: 24px; l
   .dac-inner { grid-template-columns: 1fr; gap: 8px; }
 }
 
+/* ========== FLYWHEEL SECTION ========== */
+.flywheel-section {
+  margin: 100px -32px 0;
+  padding: 80px 32px 100px;
+  background: linear-gradient(180deg, #FAF9F5 0%, #F1EFE8 100%);
+  position: relative;
+}
+.flywheel-inner { max-width: 1040px; margin: 0 auto; }
+.fw-eyebrow { font-size: 12px; color: #888780; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 16px; text-align: center; }
+.fw-eyebrow::before { content: "●"; color: #534AB7; margin-right: 10px; font-size: 10px; }
+.fw-title { font-size: 36px; font-weight: 500; line-height: 1.3; letter-spacing: -0.5px; text-align: center; margin-bottom: 14px; }
+.fw-sub { font-size: 16px; color: #5F5E5A; line-height: 1.7; max-width: 720px; margin: 0 auto 48px; text-align: center; }
+.fw-sub strong { color: #1F1E1B; font-weight: 500; }
+
+.fw-diagram-wrap {
+  background: #FFFFFF;
+  border-radius: 18px;
+  padding: 48px 32px;
+  margin-bottom: 40px;
+  border: 0.5px solid rgba(0,0,0,0.06);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.04);
+}
+.fw-svg-wrap { display: flex; justify-content: center; }
+
+.fw-three-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 40px;
+}
+.fw-card {
+  background: #FFFFFF;
+  border-radius: 14px;
+  padding: 28px 26px;
+  border: 0.5px solid rgba(0,0,0,0.08);
+  position: relative;
+  overflow: hidden;
+}
+.fw-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+}
+.fw-card-1::before { background: linear-gradient(90deg, #1D9E75, #5DCAA5); }
+.fw-card-2::before { background: linear-gradient(90deg, #BA7517, #EF9F27); }
+.fw-card-3::before { background: linear-gradient(90deg, #534AB7, #7F77DD); }
+.fw-card-tag { font-size: 11px; letter-spacing: 1px; margin-bottom: 6px; text-transform: uppercase; }
+.fw-card-1 .fw-card-tag { color: #0F6E56; }
+.fw-card-2 .fw-card-tag { color: #854F0B; }
+.fw-card-3 .fw-card-tag { color: #534AB7; }
+.fw-card-name { font-size: 18px; font-weight: 500; margin-bottom: 8px; }
+.fw-card-desc { font-size: 12px; color: #888780; margin-bottom: 16px; line-height: 1.6; }
+.fw-card-loop { background: #FAF9F5; border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; }
+.fw-card-1 .fw-card-loop { background: #E1F5EE; }
+.fw-card-2 .fw-card-loop { background: #FAEEDA; }
+.fw-card-3 .fw-card-loop { background: #EEEDFE; }
+.fw-loop-step { font-size: 12px; line-height: 1.7; padding: 3px 0; }
+.fw-card-1 .fw-loop-step { color: #04342C; }
+.fw-card-2 .fw-loop-step { color: #412402; }
+.fw-card-3 .fw-loop-step { color: #26215C; }
+.fw-arrow-down { color: #888780; font-size: 14px; margin: 2px 0 2px 6px; }
+.fw-card-meta { font-size: 11px; color: #5F5E5A; line-height: 1.7; margin-top: 4px; padding-top: 12px; border-top: 0.5px solid rgba(0,0,0,0.06); }
+.fw-card-meta b { color: #1F1E1B; font-weight: 500; }
+
+.fw-pitfalls {
+  background: #FFFFFF;
+  border-radius: 14px;
+  padding: 32px 36px;
+  border: 0.5px solid rgba(0,0,0,0.08);
+  margin-bottom: 40px;
+}
+.fw-pf-head { font-size: 18px; font-weight: 500; margin-bottom: 8px; }
+.fw-pf-sub { font-size: 13px; color: #5F5E5A; margin-bottom: 22px; }
+.fw-pf-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.fw-pf-item { padding: 14px 0; border-top: 0.5px solid rgba(0,0,0,0.06); }
+.fw-pf-item:first-child, .fw-pf-item:nth-child(2) { border-top: none; padding-top: 0; }
+.fw-pf-label {
+  display: inline-block;
+  background: #FCEBEB;
+  color: #791F1F;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  letter-spacing: 0.3px;
+}
+.fw-pf-name { font-size: 13px; font-weight: 500; margin-bottom: 4px; }
+.fw-pf-text { font-size: 12px; color: #5F5E5A; line-height: 1.65; }
+
+.fw-metrics {
+  background: linear-gradient(135deg, #1F1E1B 0%, #26215C 100%);
+  color: #FAF9F5;
+  border-radius: 14px;
+  padding: 36px 40px;
+  position: relative;
+  overflow: hidden;
+}
+.fw-metrics::before {
+  content: "";
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 280px; height: 280px;
+  background: radial-gradient(circle, rgba(127, 119, 221, 0.25), transparent 70%);
+}
+.fw-metrics-inner { position: relative; z-index: 2; }
+.fw-metrics-title { font-size: 18px; font-weight: 500; color: #FAF9F5; margin-bottom: 8px; }
+.fw-metrics-sub { font-size: 13px; color: #C2C0B6; margin-bottom: 24px; }
+.fw-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.fw-metric {
+  background: rgba(255,255,255,0.06);
+  border: 0.5px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 18px 20px;
+}
+.fw-metric-tag { font-size: 10px; color: #AFA9EC; letter-spacing: 1px; margin-bottom: 8px; }
+.fw-metric-name { font-size: 14px; font-weight: 500; color: #FAF9F5; margin-bottom: 4px; }
+.fw-metric-target { font-size: 12px; color: #5DCAA5; }
+.fw-metric-desc { font-size: 11px; color: #9C9A92; line-height: 1.6; margin-top: 8px; }
+
+@media (max-width: 800px) {
+  .flywheel-section { padding: 60px 20px 80px; margin: 60px -20px 0; }
+  .fw-title { font-size: 26px; }
+  .fw-three-cards, .fw-pf-grid, .fw-metrics-grid { grid-template-columns: 1fr; }
+  .fw-diagram-wrap { padding: 28px 16px; }
+  .fw-pitfalls, .fw-metrics { padding: 26px 22px; }
+}
+
+/* ========== FLYWHEEL SIMULATOR ========== */
+.sim-section {
+  margin-top: 40px;
+  background: #FFFFFF;
+  border-radius: 16px;
+  border: 0.5px solid rgba(0,0,0,0.08);
+  padding: 36px 36px 28px;
+  position: relative;
+  overflow: hidden;
+}
+.sim-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.sim-header-left { flex: 1; min-width: 280px; }
+.sim-eyebrow {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #534AB7;
+  margin-bottom: 8px;
+}
+.sim-eyebrow::before { content: "▶"; margin-right: 8px; font-size: 9px; }
+.sim-title {
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.3px;
+  margin-bottom: 8px;
+}
+.sim-subtitle {
+  font-size: 13px;
+  color: #5F5E5A;
+  line-height: 1.7;
+  max-width: 600px;
+}
+.sim-subtitle strong { color: #1F1E1B; font-weight: 500; }
+
+.sim-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.sim-controls {
+  background: #FAF9F5;
+  border-radius: 12px;
+  padding: 18px 18px 14px;
+  border: 0.5px solid rgba(0,0,0,0.05);
+}
+.sim-ctrl-section { padding: 12px 0 14px; border-bottom: 0.5px solid rgba(0,0,0,0.06); }
+.sim-ctrl-section:last-of-type { border-bottom: none; }
+.sim-ctrl-section:first-of-type { padding-top: 0; }
+.sim-ctrl-tag {
+  font-size: 9px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+.sim-tag-1 { background: #E1F5EE; color: #0F6E56; }
+.sim-tag-2 { background: #FAEEDA; color: #854F0B; }
+.sim-tag-3 { background: #EEEDFE; color: #534AB7; }
+.sim-tag-base { background: #F1EFE8; color: #5F5E5A; }
+
+.sim-slider-row { margin-bottom: 12px; }
+.sim-slider-row:last-child { margin-bottom: 4px; }
+.sim-slider-label-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+.sim-slider-name { font-size: 11px; color: #444441; }
+.sim-slider-value { font-size: 12px; color: #1F1E1B; font-weight: 500; font-variant-numeric: tabular-nums; }
+.sim-slider {
+  width: 100%;
+  height: 4px;
+  background: #E8E6DD;
+  border-radius: 4px;
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+  cursor: pointer;
+}
+.sim-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px; height: 14px;
+  background: #1F1E1B;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #FFF;
+  box-shadow: 0 0 0 0.5px rgba(0,0,0,0.15);
+}
+.sim-slider::-moz-range-thumb {
+  width: 14px; height: 14px;
+  background: #1F1E1B;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #FFF;
+}
+.sim-slider.sim-s-green::-webkit-slider-thumb { background: #1D9E75; }
+.sim-slider.sim-s-amber::-webkit-slider-thumb { background: #BA7517; }
+.sim-slider.sim-s-purple::-webkit-slider-thumb { background: #534AB7; }
+.sim-slider-hint { font-size: 10px; color: #888780; margin-top: 3px; line-height: 1.5; }
+
+.sim-btn-row { display: flex; gap: 6px; margin-top: 8px; }
+.sim-btn {
+  flex: 1;
+  padding: 9px 12px;
+  border-radius: 7px;
+  border: none;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+}
+.sim-btn-primary { background: #1F1E1B; color: #FAF9F5; }
+.sim-btn-primary:hover { background: #2C2C2A; }
+.sim-btn-secondary { background: #F1EFE8; color: #2C2C2A; }
+.sim-btn-secondary:hover { background: #E8E6DD; }
+.sim-preset-row { display: flex; gap: 5px; margin-top: 7px; flex-wrap: wrap; }
+.sim-preset {
+  font-size: 10px;
+  padding: 4px 9px;
+  background: #F1EFE8;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #5F5E5A;
+  font-family: inherit;
+}
+.sim-preset:hover { background: #E8E6DD; color: #1F1E1B; }
+
+.sim-results { display: flex; flex-direction: column; gap: 12px; }
+
+.sim-month-bar {
+  background: #FAF9F5;
+  border-radius: 10px;
+  padding: 14px 18px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 16px;
+  align-items: center;
+  border: 0.5px solid rgba(0,0,0,0.05);
+}
+.sim-month-display { display: flex; align-items: baseline; gap: 6px; }
+.sim-month-label { font-size: 10px; color: #888780; letter-spacing: 0.5px; }
+.sim-month-num { font-size: 24px; font-weight: 500; font-variant-numeric: tabular-nums; line-height: 1; }
+.sim-month-of { font-size: 11px; color: #888780; }
+.sim-month-progress { height: 5px; background: #E8E6DD; border-radius: 3px; overflow: hidden; }
+.sim-month-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #1D9E75, #BA7517 50%, #534AB7);
+  border-radius: 3px;
+  transition: width 0.1s linear;
+}
+.sim-play-btn {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: #1F1E1B;
+  color: #FAF9F5;
+  border: none;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-family: inherit;
+  font-size: 13px;
+  transition: transform 0.1s;
+}
+.sim-play-btn:hover { transform: scale(1.05); }
+
+.sim-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.sim-metric-card {
+  background: #FAF9F5;
+  border: 0.5px solid rgba(0,0,0,0.05);
+  border-radius: 10px;
+  padding: 14px 16px;
+  position: relative;
+  overflow: hidden;
+}
+.sim-metric-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+.sim-mc-1::before { background: linear-gradient(90deg, #1D9E75, #5DCAA5); }
+.sim-mc-2::before { background: linear-gradient(90deg, #BA7517, #EF9F27); }
+.sim-mc-3::before { background: linear-gradient(90deg, #534AB7, #7F77DD); }
+.sim-mc-tag { font-size: 9px; letter-spacing: 0.8px; margin-bottom: 4px; }
+.sim-mc-1 .sim-mc-tag { color: #0F6E56; }
+.sim-mc-2 .sim-mc-tag { color: #854F0B; }
+.sim-mc-3 .sim-mc-tag { color: #534AB7; }
+.sim-mc-name { font-size: 11px; color: #5F5E5A; margin-bottom: 8px; }
+.sim-mc-value { font-size: 18px; font-weight: 500; font-variant-numeric: tabular-nums; line-height: 1.1; margin-bottom: 3px; }
+.sim-mc-delta { font-size: 10px; }
+.sim-mc-delta-up { color: #1D9E75; }
+.sim-mc-delta-down { color: #E24B4A; }
+.sim-mc-bar { height: 3px; background: #E8E6DD; border-radius: 2px; margin-top: 9px; overflow: hidden; }
+.sim-mc-bar-fill { height: 100%; border-radius: 2px; transition: width 0.3s ease-out; }
+.sim-mc-1 .sim-mc-bar-fill { background: linear-gradient(90deg, #1D9E75, #5DCAA5); }
+.sim-mc-2 .sim-mc-bar-fill { background: linear-gradient(90deg, #BA7517, #EF9F27); }
+.sim-mc-3 .sim-mc-bar-fill { background: linear-gradient(90deg, #534AB7, #7F77DD); }
+
+.sim-chart-card {
+  background: #FAF9F5;
+  border: 0.5px solid rgba(0,0,0,0.05);
+  border-radius: 10px;
+  padding: 16px 18px 14px;
+}
+.sim-chart-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.sim-chart-title { font-size: 12px; font-weight: 500; }
+.sim-chart-legend { display: flex; gap: 12px; font-size: 10px; }
+.sim-legend-item { display: flex; align-items: center; gap: 4px; color: #5F5E5A; }
+.sim-legend-dot { width: 8px; height: 8px; border-radius: 2px; }
+
+.sim-fw-state {
+  background: #FAF9F5;
+  border: 0.5px solid rgba(0,0,0,0.05);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+.sim-fws-head {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 10px;
+}
+.sim-fws-title { font-size: 12px; font-weight: 500; }
+.sim-fws-help { font-size: 10px; color: #888780; }
+.sim-fws-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.sim-fws-card {
+  background: #FFFFFF;
+  border-radius: 8px;
+  padding: 12px 14px;
+  border: 0.5px solid rgba(0,0,0,0.04);
+}
+.sim-fws-card-tag { font-size: 9px; letter-spacing: 0.5px; margin-bottom: 4px; }
+.sim-fws-1 .sim-fws-card-tag { color: #0F6E56; }
+.sim-fws-2 .sim-fws-card-tag { color: #854F0B; }
+.sim-fws-3 .sim-fws-card-tag { color: #534AB7; }
+.sim-fws-card-name { font-size: 11px; font-weight: 500; margin-bottom: 8px; }
+.sim-fws-rpm-row { display: flex; align-items: baseline; gap: 5px; margin-bottom: 6px; }
+.sim-fws-rpm-num { font-size: 18px; font-weight: 500; font-variant-numeric: tabular-nums; line-height: 1; }
+.sim-fws-rpm-label { font-size: 10px; color: #888780; }
+.sim-fws-status {
+  font-size: 9px;
+  padding: 2px 7px;
+  border-radius: 4px;
+  display: inline-block;
+}
+.sim-status-cold { background: #F1EFE8; color: #888780; }
+.sim-status-warm { background: #FAEEDA; color: #854F0B; }
+.sim-status-spinning { background: #E1F5EE; color: #0F6E56; }
+.sim-status-flying { background: #EEEDFE; color: #534AB7; }
+
+.sim-insights {
+  background: #1F1E1B;
+  color: #C2C0B6;
+  border-radius: 10px;
+  padding: 16px 20px;
+}
+.sim-in-tag { font-size: 10px; color: #5DCAA5; letter-spacing: 1.2px; margin-bottom: 6px; }
+.sim-in-text { font-size: 12px; line-height: 1.7; }
+.sim-in-text b { color: #FAF9F5; font-weight: 500; }
+
+.sim-cta-bar {
+  background: linear-gradient(135deg, #EEEDFE 0%, #FAF9F5 100%);
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin-bottom: 22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border: 0.5px solid rgba(83, 74, 183, 0.15);
+}
+.sim-cta-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: rgba(83, 74, 183, 0.15);
+  color: #534AB7;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.sim-cta-text { font-size: 13px; color: #2C2C2A; line-height: 1.6; }
+.sim-cta-text b { color: #1F1E1B; font-weight: 500; }
+
+@media (max-width: 900px) {
+  .sim-layout { grid-template-columns: 1fr; }
+  .sim-metrics-grid, .sim-fws-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .sim-section { padding: 26px 22px 20px; }
+  .sim-month-bar { grid-template-columns: 1fr; gap: 10px; text-align: center; }
+  .sim-cta-bar { flex-direction: column; text-align: center; }
+}
+
 /* ========== USP SECTION ========== */
 .credit-card-mock {
   background: linear-gradient(135deg, #1F1E1B 0%, #2C2C2A 50%, #04342C 100%);
@@ -1345,6 +1785,7 @@ footer-section {
 <a class="top-nav-link" href="#layer-b">运营与技术</a>
 <a class="top-nav-link" href="#layer-c">支付与消费</a>
 <a class="top-nav-link" href="#layer-d">Agent Native</a>
+<a class="top-nav-link" href="#flywheel">飞轮 + 模拟器</a>
 <a class="top-nav-link" href="#usp">核心卖点</a>
 <a class="top-nav-link" href="#demo">产品 Demo</a>
 </div>
@@ -2439,6 +2880,531 @@ Oria
 </div>
 </section>
 
+</div>
+
+<div class="flywheel-section" id="flywheel">
+<div class="flywheel-inner">
+<div class="fw-eyebrow">Strategic Flywheel</div>
+<h2 class="fw-title">三轮嵌套增长飞轮</h2>
+<p class="fw-sub">Oria 不押注单一飞轮——内圈每天转动，中圈每月推进，外圈三五年成型。<strong>三轮互相输入、互相加速</strong>，避免单点失败。</p>
+
+<div class="fw-diagram-wrap">
+<div class="fw-svg-wrap">
+<svg width="100%" viewBox="0 0 720 480" style="max-width: 720px;">
+<defs>
+<marker id="arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+<path d="M0 0 L10 5 L0 10 z" fill="#1D9E75"/>
+</marker>
+<marker id="arrow-amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+<path d="M0 0 L10 5 L0 10 z" fill="#BA7517"/>
+</marker>
+<marker id="arrow-purple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+<path d="M0 0 L10 5 L0 10 z" fill="#534AB7"/>
+</marker>
+<radialGradient id="centerGrad" cx="50%" cy="50%" r="50%">
+<stop offset="0%" stop-color="#FAF9F5"/>
+<stop offset="100%" stop-color="#F1EFE8"/>
+</radialGradient>
+</defs>
+
+<!-- Outer ring: Agent Intelligence (slowest, biggest) -->
+<circle cx="360" cy="240" r="220" fill="none" stroke="#EEEDFE" stroke-width="2" stroke-dasharray="6 4"/>
+<!-- Middle ring: Asset Reach -->
+<circle cx="360" cy="240" r="155" fill="none" stroke="#FAEEDA" stroke-width="2" stroke-dasharray="6 4"/>
+<!-- Inner ring: Liquidity (fastest) -->
+<circle cx="360" cy="240" r="90" fill="url(#centerGrad)" stroke="#E1F5EE" stroke-width="2"/>
+
+<!-- Center label -->
+<text x="360" y="232" text-anchor="middle" font-size="11" fill="#888780" font-weight="500" letter-spacing="1.5">ORIA</text>
+<text x="360" y="252" text-anchor="middle" font-size="14" fill="#1F1E1B" font-weight="500">三轮嵌套</text>
+
+<!-- INNER RING - Liquidity Flywheel (Green) -->
+<g>
+<!-- Node 1: 客户多 -->
+<circle cx="360" cy="150" r="36" fill="#E1F5EE" stroke="#1D9E75" stroke-width="1.5"/>
+<text x="360" y="148" text-anchor="middle" font-size="11" fill="#04342C" font-weight="500">客户多</text>
+<text x="360" y="162" text-anchor="middle" font-size="9" fill="#0F6E56">交易频次↑</text>
+
+<!-- Node 2: 流动性深 -->
+<circle cx="437" cy="240" r="36" fill="#E1F5EE" stroke="#1D9E75" stroke-width="1.5"/>
+<text x="437" y="238" text-anchor="middle" font-size="11" fill="#04342C" font-weight="500">流动性</text>
+<text x="437" y="252" text-anchor="middle" font-size="9" fill="#0F6E56">价差↓ 深度↑</text>
+
+<!-- Node 3: 体验好 -->
+<circle cx="283" cy="240" r="36" fill="#E1F5EE" stroke="#1D9E75" stroke-width="1.5"/>
+<text x="283" y="238" text-anchor="middle" font-size="11" fill="#04342C" font-weight="500">体验好</text>
+<text x="283" y="252" text-anchor="middle" font-size="9" fill="#0F6E56">成本低</text>
+
+<!-- Inner arrows (clockwise) -->
+<path d="M 396 168 Q 430 195 425 208" fill="none" stroke="#1D9E75" stroke-width="2" marker-end="url(#arrow-green)"/>
+<path d="M 415 268 Q 380 295 320 270" fill="none" stroke="#1D9E75" stroke-width="2" marker-end="url(#arrow-green)"/>
+<path d="M 295 208 Q 320 175 324 168" fill="none" stroke="#1D9E75" stroke-width="2" marker-end="url(#arrow-green)"/>
+</g>
+
+<!-- MIDDLE RING - Asset Reach Flywheel (Amber) -->
+<g>
+<!-- Node 1: AUM 大 -->
+<circle cx="360" cy="80" r="38" fill="#FAEEDA" stroke="#BA7517" stroke-width="1.5"/>
+<text x="360" y="78" text-anchor="middle" font-size="11" fill="#412402" font-weight="500">AUM 大</text>
+<text x="360" y="92" text-anchor="middle" font-size="9" fill="#854F0B">规模有吸引力</text>
+
+<!-- Node 2: 上架资产多 -->
+<circle cx="535" cy="320" r="42" fill="#FAEEDA" stroke="#BA7517" stroke-width="1.5"/>
+<text x="535" y="316" text-anchor="middle" font-size="11" fill="#412402" font-weight="500">资产稀缺度</text>
+<text x="535" y="330" text-anchor="middle" font-size="9" fill="#854F0B">头部 GP 上架</text>
+
+<!-- Node 3: 客户冲此而来 -->
+<circle cx="185" cy="320" r="42" fill="#FAEEDA" stroke="#BA7517" stroke-width="1.5"/>
+<text x="185" y="316" text-anchor="middle" font-size="11" fill="#412402" font-weight="500">差异化</text>
+<text x="185" y="330" text-anchor="middle" font-size="9" fill="#854F0B">为稀缺资产而来</text>
+
+<!-- Middle arrows -->
+<path d="M 398 102 Q 480 175 510 290" fill="none" stroke="#BA7517" stroke-width="2" marker-end="url(#arrow-amber)"/>
+<path d="M 495 350 Q 360 410 225 350" fill="none" stroke="#BA7517" stroke-width="2" marker-end="url(#arrow-amber)"/>
+<path d="M 210 290 Q 240 175 322 102" fill="none" stroke="#BA7517" stroke-width="2" marker-end="url(#arrow-amber)"/>
+</g>
+
+<!-- OUTER RING - Agent Intelligence Flywheel (Purple) -->
+<g>
+<!-- Node 1: Agent 调用多 -->
+<circle cx="600" cy="100" r="44" fill="#EEEDFE" stroke="#534AB7" stroke-width="1.5"/>
+<text x="600" y="96" text-anchor="middle" font-size="11" fill="#26215C" font-weight="500">Agent 调用多</text>
+<text x="600" y="110" text-anchor="middle" font-size="9" fill="#534AB7">意图样本累积</text>
+
+<!-- Node 2: Intent Engine 智能 -->
+<circle cx="600" cy="400" r="46" fill="#EEEDFE" stroke="#534AB7" stroke-width="1.5"/>
+<text x="600" y="394" text-anchor="middle" font-size="11" fill="#26215C" font-weight="500">Intent Engine</text>
+<text x="600" y="408" text-anchor="middle" font-size="9" fill="#534AB7">执行更精准更快</text>
+
+<!-- Node 3: Agent 体验更好 -->
+<circle cx="120" cy="400" r="46" fill="#EEEDFE" stroke="#534AB7" stroke-width="1.5"/>
+<text x="120" y="394" text-anchor="middle" font-size="11" fill="#26215C" font-weight="500">Agent 体验</text>
+<text x="120" y="408" text-anchor="middle" font-size="9" fill="#534AB7">默认选 Oria</text>
+
+<!-- Node 4: 更多 AI 原生公司接入 -->
+<circle cx="120" cy="100" r="46" fill="#EEEDFE" stroke="#534AB7" stroke-width="1.5"/>
+<text x="120" y="96" text-anchor="middle" font-size="11" fill="#26215C" font-weight="500">AI 原生公司</text>
+<text x="120" y="110" text-anchor="middle" font-size="9" fill="#534AB7">接入数↑</text>
+
+<!-- Outer arrows (clockwise around the outside) -->
+<path d="M 605 144 Q 700 240 605 356" fill="none" stroke="#534AB7" stroke-width="2" marker-end="url(#arrow-purple)"/>
+<path d="M 555 415 Q 360 470 165 415" fill="none" stroke="#534AB7" stroke-width="2" marker-end="url(#arrow-purple)"/>
+<path d="M 115 356 Q 20 240 115 144" fill="none" stroke="#534AB7" stroke-width="2" marker-end="url(#arrow-purple)"/>
+<path d="M 165 85 Q 360 30 555 85" fill="none" stroke="#534AB7" stroke-width="2" marker-end="url(#arrow-purple)"/>
+</g>
+
+<!-- Cross-flywheel feed lines (showing they reinforce each other) -->
+<g opacity="0.35" stroke-dasharray="3 4">
+<line x1="360" y1="118" x2="360" y2="114" stroke="#888780" stroke-width="1"/>
+<line x1="535" y1="278" x2="565" y2="370" stroke="#888780" stroke-width="1"/>
+<line x1="185" y1="278" x2="155" y2="370" stroke="#888780" stroke-width="1"/>
+</g>
+
+<!-- Legend -->
+<g transform="translate(0, 0)">
+<rect x="20" y="450" width="12" height="3" fill="#1D9E75"/>
+<text x="38" y="455" font-size="10" fill="#5F5E5A">内圈 · 流动性</text>
+<rect x="130" y="450" width="12" height="3" fill="#BA7517"/>
+<text x="148" y="455" font-size="10" fill="#5F5E5A">中圈 · 资产可达</text>
+<rect x="250" y="450" width="12" height="3" fill="#534AB7"/>
+<text x="268" y="455" font-size="10" fill="#5F5E5A">外圈 · Agent 智能</text>
+<line x1="370" y1="451" x2="395" y2="451" stroke="#888780" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="402" y="455" font-size="10" fill="#5F5E5A">飞轮间互相输入</text>
+</g>
+</svg>
+</div>
+</div>
+
+<div class="fw-three-cards">
+<div class="fw-card fw-card-1">
+<div class="fw-card-tag">内圈 · 每天转动</div>
+<div class="fw-card-name">流动性飞轮</div>
+<div class="fw-card-desc">最经典的金融市场飞轮——纳斯达克、币安都靠这个起家。最快见效，最稳定，提供短期增长。</div>
+<div class="fw-card-loop">
+<div class="fw-loop-step">客户多 + 交易频次高</div>
+<div class="fw-arrow-down">↓</div>
+<div class="fw-loop-step">买卖价差变小、深度变大</div>
+<div class="fw-arrow-down">↓</div>
+<div class="fw-loop-step">体验更好（成交价更优）</div>
+<div class="fw-arrow-down">↓</div>
+<div class="fw-loop-step">做市商主动来提供流动性</div>
+<div class="fw-arrow-down">↓</div>
+<div class="fw-loop-step">吸引新客户 → 回到第一步</div>
+</div>
+<div class="fw-card-meta"><b>关键指标</b>：日均成交额、价差中位数、做市商数量。<b>启动条件</b>：上线前 6 个月与 2-3 家做市商签约提供基础流动性。</div>
+</div>
+
+<div class="fw-card fw-card-2">
+<div class="fw-card-tag">中圈 · 每季推进</div>
+<div class="fw-card-name">资产可达性飞轮</div>
+<div class="fw-card-desc">双边市场飞轮——资金端和资产端互相吸引。这是 Airbnb、Uber 同源逻辑，但用在 RWA 上是新打法。</div>
+<div class="fw-card-loop">
+<div class="fw-loop-step">用户基数 + AUM 增长</div>
+<div class="fw-arrow-down">↓</div>
+<div class="fw-loop-step">头部对冲基金、私募信贷主动找上门</div>
+<div class="fw-arrow-down">↓</div>
+<div class="fw-loop-step">Oria 上的稀缺资产持续增加</div>
+<div class="fw-arrow-down">↓</div>
+<div class="fw-loop-step">"在 Oria 能买到 Apollo Credit、Bridgewater"</div>
+<div class="fw-arrow-down">↓</div>
+<div class="fw-loop-step">高净值客户慕名而来 → 回到第一步</div>
+</div>
+<div class="fw-card-meta"><b>关键指标</b>：上架资产数、稀缺资产占比、新客户中"为某资产而来"的比例。<b>启动条件</b>：第一年与 1-2 家头部 GP 达成独家代币化合作。</div>
+</div>
+
+<div class="fw-card fw-card-3">
+<div class="fw-card-tag">外圈 · 三五年成型</div>
+<div class="fw-card-name">Agent 智能飞轮</div>
+<div class="fw-card-desc">AI 时代独有的飞轮——学习发生在平台层（聚合元数据），不发生在用户 agent 层（隔离私密）。合规可辩护。</div>
+<div class="fw-card-loop">
+<div class="fw-loop-step">Agent 调用 Oria 的次数累积</div>
+<div class="fw-arrow-down">↓</div>
+<div class="fw-loop-step">Oria 看到更多"意图模式"和"执行结果"</div>
+<div class="fw-arrow-down">↓</div>
+<div class="fw-loop-step">Intent Engine 进化得更聪明</div>
+<div class="fw-arrow-down">↓</div>
+<div class="fw-loop-step">所有 agent 通过 Oria 获得更好执行</div>
+<div class="fw-arrow-down">↓</div>
+<div class="fw-loop-step">新 AI 原生公司默认接入 → 回到第一步</div>
+</div>
+<div class="fw-card-meta"><b>关键指标</b>：每月新增 agent 数、意图执行成功率、平均执行延迟、agent 引发的 AUM 占比。<b>启动条件</b>：MCP Server 上线 + 首批 10-20 家 AI 原生公司种子客户。</div>
+</div>
+</div>
+
+<div class="fw-pitfalls">
+<div class="fw-pf-head">不是飞轮的几件事——避免叙事陷阱</div>
+<div class="fw-pf-sub">飞轮这个词被滥用得很厉害，给股东讲的时候必须把"真飞轮"和"伪飞轮"区分开。Oria 拒绝以下三种常见的伪飞轮叙事：</div>
+
+<div class="fw-pf-grid">
+<div class="fw-pf-item">
+<span class="fw-pf-label">伪飞轮 1</span>
+<div class="fw-pf-name">"用户数据 → 算法变好"</div>
+<div class="fw-pf-text">这条在搜索引擎、推荐系统是真的，但在金融服务里不成立。一个客户买了多少美债，跟另一个新客户买什么没关系。<b>合规和隐私规定也禁止跨用户数据训练。</b>所以 Oria 的 Agent 智能飞轮设计在"意图聚合"层面，不是"用户数据"层面。</div>
+</div>
+<div class="fw-pf-item">
+<span class="fw-pf-label">伪飞轮 2</span>
+<div class="fw-pf-name">"AUM 大 → 议价力强 → 费率低"</div>
+<div class="fw-pf-text">这是规模经济，不是飞轮。规模经济线性递减，飞轮指数加速。<b>区别在于飞轮的每一圈让下一圈转得更快，规模经济只是单圈成本更低。</b>Oria 的三个飞轮都不是规模经济伪装。</div>
+</div>
+<div class="fw-pf-item">
+<span class="fw-pf-label">伪飞轮 3</span>
+<div class="fw-pf-name">"用户网络效应"</div>
+<div class="fw-pf-text">真正的网络效应需要"用户之间能产生价值"——Visa、微信、Airbnb 都是。但 Oria 用户彼此不交易、不互动，<b>传统私行几百年都没有过用户网络效应。</b>所以 Oria 不讲这个故事。</div>
+</div>
+<div class="fw-pf-item">
+<span class="fw-pf-label">伪飞轮 4</span>
+<div class="fw-pf-name">"代币 = 飞轮"</div>
+<div class="fw-pf-text">很多 Web3 项目说"用户用平台 → 拿代币 → 代币涨 → 更多人来"。这是反身性投机循环，<b>一旦币价跌就反向加速。</b>Oria 的飞轮基于真实业务指标——交易额、AUM、agent 调用次数——不依赖代币价格。</div>
+</div>
+</div>
+</div>
+
+<div class="fw-metrics">
+<div class="fw-metrics-inner">
+<div class="fw-metrics-title">飞轮转起来的关键证据指标</div>
+<div class="fw-metrics-sub">这九个指标是给股东的"真实测量"——飞轮在转还是没转，看这些数。每季度董事会汇报必看。</div>
+
+<div class="fw-metrics-grid">
+<div class="fw-metric">
+<div class="fw-metric-tag">流动性飞轮</div>
+<div class="fw-metric-name">日均价差</div>
+<div class="fw-metric-target">12 月内 ↓ 50%</div>
+<div class="fw-metric-desc">从 40bps 压到 20bps，证明深度提升。</div>
+</div>
+<div class="fw-metric">
+<div class="fw-metric-tag">流动性飞轮</div>
+<div class="fw-metric-name">做市商数量</div>
+<div class="fw-metric-target">12 月内 2 → 8 家</div>
+<div class="fw-metric-desc">主动入驻的做市商，不是付费请的。</div>
+</div>
+<div class="fw-metric">
+<div class="fw-metric-tag">流动性飞轮</div>
+<div class="fw-metric-name">老客户复购率</div>
+<div class="fw-metric-target">月度 &gt; 40%</div>
+<div class="fw-metric-desc">越用越离不开 = 飞轮内核在转。</div>
+</div>
+<div class="fw-metric">
+<div class="fw-metric-tag">资产可达性</div>
+<div class="fw-metric-name">头部 GP 主动接洽</div>
+<div class="fw-metric-target">第二年 ≥ 5 家</div>
+<div class="fw-metric-desc">他们找我们，不是我们求他们。</div>
+</div>
+<div class="fw-metric">
+<div class="fw-metric-tag">资产可达性</div>
+<div class="fw-metric-name">"为资产而来"占比</div>
+<div class="fw-metric-target">新客调研 ≥ 30%</div>
+<div class="fw-metric-desc">为某只稀缺资产专程开户的客户比例。</div>
+</div>
+<div class="fw-metric">
+<div class="fw-metric-tag">资产可达性</div>
+<div class="fw-metric-name">独家代币化数</div>
+<div class="fw-metric-target">3 年内 ≥ 10 个</div>
+<div class="fw-metric-desc">行业 first-of-its-kind 资产数量。</div>
+</div>
+<div class="fw-metric">
+<div class="fw-metric-tag">Agent 智能</div>
+<div class="fw-metric-name">月活 Agent 数</div>
+<div class="fw-metric-target">3 年内 ≥ 5,000</div>
+<div class="fw-metric-desc">独立 agent 实例，不是单个用户的多次。</div>
+</div>
+<div class="fw-metric">
+<div class="fw-metric-tag">Agent 智能</div>
+<div class="fw-metric-name">意图执行成功率</div>
+<div class="fw-metric-target">12 月内 75% → 95%</div>
+<div class="fw-metric-desc">Intent Engine 学习曲线的核心指标。</div>
+</div>
+<div class="fw-metric">
+<div class="fw-metric-tag">Agent 智能</div>
+<div class="fw-metric-name">Agent 引发 AUM 占比</div>
+<div class="fw-metric-target">3 年内 ≥ 25%</div>
+<div class="fw-metric-desc">由 agent 操作而非人工操作的 AUM 比例。</div>
+</div>
+</div>
+</div>
+</div>
+
+<section class="sim-section" id="simulator">
+
+<div class="sim-cta-bar">
+<div class="sim-cta-icon">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+</div>
+<div class="sim-cta-text"><b>看完图，自己上手玩一下。</b>下面是 36 个月的飞轮模拟器——拖动滑块设定参数，按播放按钮，亲眼看三个飞轮怎么转起来、怎么互相输入加速。试试推迟 Agent 启动月，看最终 AUM 差多少。</div>
+</div>
+
+<div class="sim-header">
+<div class="sim-header-left">
+<div class="sim-eyebrow">Interactive Flywheel Simulator</div>
+<h3 class="sim-title">三轮飞轮 36 个月模拟器</h3>
+<p class="sim-subtitle">拖动左侧滑块设定起点参数和飞轮强度，按播放看 36 个月里三个飞轮怎么互相加速。<strong>关注三件事</strong>：飞轮启动时点、互相输入加速效应、最终的复利曲线形状。</p>
+</div>
+</div>
+
+<div class="sim-layout">
+
+<aside class="sim-controls">
+
+<div class="sim-ctrl-section">
+<div class="sim-ctrl-tag sim-tag-base">起点参数</div>
+<div class="sim-slider-row">
+<div class="sim-slider-label-row">
+<span class="sim-slider-name">起步客户数</span>
+<span class="sim-slider-value" id="sim-v-customers">500</span>
+</div>
+<input class="sim-slider" type="range" min="100" max="3000" step="100" value="500" id="sim-s-customers">
+</div>
+<div class="sim-slider-row">
+<div class="sim-slider-label-row">
+<span class="sim-slider-name">起步资产数</span>
+<span class="sim-slider-value" id="sim-v-assets">15</span>
+</div>
+<input class="sim-slider" type="range" min="5" max="80" step="1" value="15" id="sim-s-assets">
+</div>
+<div class="sim-slider-row">
+<div class="sim-slider-label-row">
+<span class="sim-slider-name">起步月活 Agent</span>
+<span class="sim-slider-value" id="sim-v-agents">10</span>
+</div>
+<input class="sim-slider" type="range" min="0" max="500" step="10" value="10" id="sim-s-agents">
+</div>
+</div>
+
+<div class="sim-ctrl-section">
+<div class="sim-ctrl-tag sim-tag-1">内圈 · 流动性</div>
+<div class="sim-slider-row">
+<div class="sim-slider-label-row">
+<span class="sim-slider-name">客户带客户系数</span>
+<span class="sim-slider-value" id="sim-v-virality">1.08×</span>
+</div>
+<input class="sim-slider sim-s-green" type="range" min="100" max="130" step="1" value="108" id="sim-s-virality">
+<div class="sim-slider-hint">月增 = 当前客户 × (系数 - 1)。</div>
+</div>
+<div class="sim-slider-row">
+<div class="sim-slider-label-row">
+<span class="sim-slider-name">月度复购率</span>
+<span class="sim-slider-value" id="sim-v-retention">35%</span>
+</div>
+<input class="sim-slider sim-s-green" type="range" min="10" max="70" step="1" value="35" id="sim-s-retention">
+<div class="sim-slider-hint">影响交易频次和价差压缩速度。</div>
+</div>
+</div>
+
+<div class="sim-ctrl-section">
+<div class="sim-ctrl-tag sim-tag-2">中圈 · 资产可达</div>
+<div class="sim-slider-row">
+<div class="sim-slider-label-row">
+<span class="sim-slider-name">GP 接洽门槛</span>
+<span class="sim-slider-value" id="sim-v-gpthreshold">$50M</span>
+</div>
+<input class="sim-slider sim-s-amber" type="range" min="10" max="200" step="10" value="50" id="sim-s-gpthreshold">
+<div class="sim-slider-hint">AUM 跨过此值后启动资产飞轮。</div>
+</div>
+<div class="sim-slider-row">
+<div class="sim-slider-label-row">
+<span class="sim-slider-name">稀缺资产吸引力</span>
+<span class="sim-slider-value" id="sim-v-assetpull">3.0×</span>
+</div>
+<input class="sim-slider sim-s-amber" type="range" min="10" max="60" step="1" value="30" id="sim-s-assetpull">
+<div class="sim-slider-hint">每个稀缺资产带来的月度新客户。</div>
+</div>
+</div>
+
+<div class="sim-ctrl-section">
+<div class="sim-ctrl-tag sim-tag-3">外圈 · Agent 智能</div>
+<div class="sim-slider-row">
+<div class="sim-slider-label-row">
+<span class="sim-slider-name">Agent 启动月</span>
+<span class="sim-slider-value" id="sim-v-agentstart">M6</span>
+</div>
+<input class="sim-slider sim-s-purple" type="range" min="0" max="18" step="1" value="6" id="sim-s-agentstart">
+<div class="sim-slider-hint">MCP Server 上线时间。</div>
+</div>
+<div class="sim-slider-row">
+<div class="sim-slider-label-row">
+<span class="sim-slider-name">Agent 复利系数</span>
+<span class="sim-slider-value" id="sim-v-agentcompound">1.15×</span>
+</div>
+<input class="sim-slider sim-s-purple" type="range" min="100" max="140" step="1" value="115" id="sim-s-agentcompound">
+<div class="sim-slider-hint">每月 agent 数复利增长率。</div>
+</div>
+</div>
+
+<div class="sim-ctrl-section" style="padding-bottom: 0;">
+<div class="sim-btn-row">
+<button class="sim-btn sim-btn-primary" id="sim-btn-play">▶ 播放 36 个月</button>
+<button class="sim-btn sim-btn-secondary" id="sim-btn-reset">重置</button>
+</div>
+<div class="sim-preset-row">
+<button class="sim-preset" data-preset="conservative">保守</button>
+<button class="sim-preset" data-preset="base">基准</button>
+<button class="sim-preset" data-preset="aggressive">乐观</button>
+<button class="sim-preset" data-preset="bull">牛市</button>
+</div>
+</div>
+
+</aside>
+
+<div class="sim-results">
+
+<div class="sim-month-bar">
+<div class="sim-month-display">
+<span class="sim-month-label">月份</span>
+<span class="sim-month-num" id="sim-month-num">0</span>
+<span class="sim-month-of">/ 36</span>
+</div>
+<div class="sim-month-progress">
+<div class="sim-month-progress-fill" id="sim-month-progress" style="width: 0%"></div>
+</div>
+<button class="sim-play-btn" id="sim-play-mini">▶</button>
+</div>
+
+<div class="sim-metrics-grid">
+<div class="sim-metric-card sim-mc-1">
+<div class="sim-mc-tag">流动性 · 内圈</div>
+<div class="sim-mc-name">AUM</div>
+<div class="sim-mc-value" id="sim-m-aum">$50M</div>
+<div class="sim-mc-delta" id="sim-d-aum">—</div>
+<div class="sim-mc-bar"><div class="sim-mc-bar-fill" id="sim-bar-aum" style="width: 10%"></div></div>
+</div>
+<div class="sim-metric-card sim-mc-2">
+<div class="sim-mc-tag">资产 · 中圈</div>
+<div class="sim-mc-name">上架资产数</div>
+<div class="sim-mc-value" id="sim-m-assets">15</div>
+<div class="sim-mc-delta" id="sim-d-assets">—</div>
+<div class="sim-mc-bar"><div class="sim-mc-bar-fill" id="sim-bar-assets" style="width: 19%"></div></div>
+</div>
+<div class="sim-metric-card sim-mc-3">
+<div class="sim-mc-tag">Agent · 外圈</div>
+<div class="sim-mc-name">月活 Agent</div>
+<div class="sim-mc-value" id="sim-m-agents">10</div>
+<div class="sim-mc-delta" id="sim-d-agents">—</div>
+<div class="sim-mc-bar"><div class="sim-mc-bar-fill" id="sim-bar-agents" style="width: 0%"></div></div>
+</div>
+</div>
+
+<div class="sim-chart-card">
+<div class="sim-chart-head">
+<div class="sim-chart-title">36 个月 AUM 增长曲线</div>
+<div class="sim-chart-legend">
+<div class="sim-legend-item"><div class="sim-legend-dot" style="background:#1D9E75"></div>流动性贡献</div>
+<div class="sim-legend-item"><div class="sim-legend-dot" style="background:#BA7517"></div>稀缺资产引流</div>
+<div class="sim-legend-item"><div class="sim-legend-dot" style="background:#534AB7"></div>Agent 引发</div>
+</div>
+</div>
+<svg id="sim-chart" width="100%" height="200" viewBox="0 0 720 200" preserveAspectRatio="none">
+<defs>
+<linearGradient id="sim-gradGreen" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" stop-color="#1D9E75" stop-opacity="0.6"/>
+<stop offset="100%" stop-color="#1D9E75" stop-opacity="0.05"/>
+</linearGradient>
+<linearGradient id="sim-gradAmber" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" stop-color="#BA7517" stop-opacity="0.6"/>
+<stop offset="100%" stop-color="#BA7517" stop-opacity="0.05"/>
+</linearGradient>
+<linearGradient id="sim-gradPurple" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" stop-color="#534AB7" stop-opacity="0.6"/>
+<stop offset="100%" stop-color="#534AB7" stop-opacity="0.05"/>
+</linearGradient>
+</defs>
+<g id="sim-chart-grid"></g>
+<path id="sim-chart-area-purple" fill="url(#sim-gradPurple)" d=""/>
+<path id="sim-chart-area-amber" fill="url(#sim-gradAmber)" d=""/>
+<path id="sim-chart-area-green" fill="url(#sim-gradGreen)" d=""/>
+<g id="sim-chart-labels"></g>
+</svg>
+</div>
+
+<div class="sim-fw-state">
+<div class="sim-fws-head">
+<div class="sim-fws-title">三轮当前转速</div>
+<div class="sim-fws-help">RPM = 月度增量 / 当前规模 × 1000</div>
+</div>
+<div class="sim-fws-grid">
+<div class="sim-fws-card sim-fws-1">
+<div class="sim-fws-card-tag">内圈</div>
+<div class="sim-fws-card-name">流动性飞轮</div>
+<div class="sim-fws-rpm-row">
+<div class="sim-fws-rpm-num" id="sim-rpm-1">0</div>
+<div class="sim-fws-rpm-label">RPM</div>
+</div>
+<div class="sim-fws-status sim-status-cold" id="sim-st-1">未启动</div>
+</div>
+<div class="sim-fws-card sim-fws-2">
+<div class="sim-fws-card-tag">中圈</div>
+<div class="sim-fws-card-name">资产可达飞轮</div>
+<div class="sim-fws-rpm-row">
+<div class="sim-fws-rpm-num" id="sim-rpm-2">0</div>
+<div class="sim-fws-rpm-label">RPM</div>
+</div>
+<div class="sim-fws-status sim-status-cold" id="sim-st-2">未启动</div>
+</div>
+<div class="sim-fws-card sim-fws-3">
+<div class="sim-fws-card-tag">外圈</div>
+<div class="sim-fws-card-name">Agent 智能飞轮</div>
+<div class="sim-fws-rpm-row">
+<div class="sim-fws-rpm-num" id="sim-rpm-3">0</div>
+<div class="sim-fws-rpm-label">RPM</div>
+</div>
+<div class="sim-fws-status sim-status-cold" id="sim-st-3">未启动</div>
+</div>
+</div>
+</div>
+
+<div class="sim-insights">
+<div class="sim-in-tag">实时观察</div>
+<div class="sim-in-text" id="sim-insight">点击 <b>播放 36 个月</b>，模拟器会按月推进，三个飞轮会陆续启动并互相加速。注意看：<b>资产飞轮通常在第 8-12 个月开始转</b>（AUM 跨过 GP 接洽门槛）；<b>Agent 飞轮一旦上线，复利速度最快</b>，会在 24 个月后超过流动性贡献。</div>
+</div>
+
+</div>
+</div>
+
+</section>
+
+</div>
+</div>
+
+<div class="wrap" style="padding-top: 0;">
+
 <div class="usp-section" id="usp">
 <div class="section-divider">
 <h2 class="section-title">三大核心卖点</h2>
@@ -3154,9 +4120,324 @@ Oria
 </div>
 
 <div style="text-align: center; margin-top: 60px; padding: 32px 20px 0; font-size: 12px; color: #888780;">
-Oria 平台股东陈述材料 · 平台介绍 + 产品 Demo · v5 · 含 Agent Native 战略层
+Oria 平台股东陈述材料 · 平台介绍 + 产品 Demo · v7 · 含交互式飞轮模拟器
 </div>
 </div>
+
+<script>
+(function() {
+const simState = {
+  customers: 500,
+  assets: 15,
+  agents: 10,
+  virality: 1.08,
+  retention: 0.35,
+  gpThreshold: 50,
+  assetPull: 3.0,
+  agentStart: 6,
+  agentCompound: 1.15,
+  month: 0,
+  history: [],
+  playing: false,
+  timer: null
+};
+
+const presets = {
+  conservative: { customers: 300, assets: 10, agents: 0, virality: 104, retention: 25, gpthreshold: 100, assetpull: 20, agentstart: 12, agentcompound: 108 },
+  base: { customers: 500, assets: 15, agents: 10, virality: 108, retention: 35, gpthreshold: 50, assetpull: 30, agentstart: 6, agentcompound: 115 },
+  aggressive: { customers: 800, assets: 20, agents: 50, virality: 115, retention: 45, gpthreshold: 30, assetpull: 40, agentstart: 3, agentcompound: 122 },
+  bull: { customers: 1500, assets: 30, agents: 100, virality: 120, retention: 55, gpthreshold: 20, assetpull: 50, agentstart: 1, agentcompound: 130 }
+};
+
+const sliders = [
+  { id: 'sim-s-customers', state: 'customers', display: 'sim-v-customers', fmt: v => v },
+  { id: 'sim-s-assets', state: 'assets', display: 'sim-v-assets', fmt: v => v },
+  { id: 'sim-s-agents', state: 'agents', display: 'sim-v-agents', fmt: v => v },
+  { id: 'sim-s-virality', state: 'virality', display: 'sim-v-virality', fmt: v => (v / 100).toFixed(2) + '×', transform: v => v / 100 },
+  { id: 'sim-s-retention', state: 'retention', display: 'sim-v-retention', fmt: v => v + '%', transform: v => v / 100 },
+  { id: 'sim-s-gpthreshold', state: 'gpThreshold', display: 'sim-v-gpthreshold', fmt: v => '$' + v + 'M' },
+  { id: 'sim-s-assetpull', state: 'assetPull', display: 'sim-v-assetpull', fmt: v => (v / 10).toFixed(1) + '×', transform: v => v / 10 },
+  { id: 'sim-s-agentstart', state: 'agentStart', display: 'sim-v-agentstart', fmt: v => 'M' + v },
+  { id: 'sim-s-agentcompound', state: 'agentCompound', display: 'sim-v-agentcompound', fmt: v => (v / 100).toFixed(2) + '×', transform: v => v / 100 }
+];
+
+sliders.forEach(s => {
+  const el = document.getElementById(s.id);
+  if (!el) return;
+  el.addEventListener('input', () => {
+    const raw = parseFloat(el.value);
+    simState[s.state] = s.transform ? s.transform(raw) : raw;
+    document.getElementById(s.display).textContent = s.fmt(raw);
+    if (!simState.playing) reset();
+  });
+});
+
+document.querySelectorAll('.sim-preset').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const p = presets[btn.dataset.preset];
+    Object.entries(p).forEach(([key, val]) => {
+      const sliderId = 'sim-s-' + key;
+      const slider = document.getElementById(sliderId);
+      if (slider) {
+        slider.value = val;
+        slider.dispatchEvent(new Event('input'));
+      }
+    });
+  });
+});
+
+function calculateMonth(prev, m) {
+  const customers = prev.customers;
+  const assets = prev.assets;
+  const agents = prev.agents;
+  const aum = prev.aum;
+
+  const viralityGain = customers * (simState.virality - 1);
+  const retentionMultiplier = 1 + (simState.retention - 0.3) * 0.4;
+  let newCustomersFromLiquidity = viralityGain * retentionMultiplier;
+
+  const aumInMillions = aum / 1000000;
+  const gpActive = aumInMillions > simState.gpThreshold;
+  let newAssets = 0;
+  let newCustomersFromAssets = 0;
+  if (gpActive) {
+    newAssets = Math.min(2, 1 + Math.floor((aumInMillions - simState.gpThreshold) / (simState.gpThreshold * 2)));
+    newCustomersFromAssets = simState.assetPull * assets * 0.5;
+  }
+
+  let newAgents = 0;
+  let newCustomersFromAgents = 0;
+  let agentAumBoost = 0;
+  if (m >= simState.agentStart) {
+    newAgents = agents * (simState.agentCompound - 1);
+    agentAumBoost = agents * 50000;
+    newCustomersFromAgents = newAgents * 0.3;
+  }
+
+  const crossFeedToAgents = (assets > 25) ? newAgents * 0.2 : 0;
+
+  const totalNewCustomers = newCustomersFromLiquidity + newCustomersFromAssets + newCustomersFromAgents;
+
+  const updatedCustomers = customers + totalNewCustomers;
+  const updatedAssets = assets + newAssets;
+  const updatedAgents = agents + newAgents + crossFeedToAgents;
+
+  const avgTicket = 80000 + (assets / 100) * 120000;
+  const updatedAum = aum + totalNewCustomers * avgTicket + agentAumBoost;
+
+  const aumLiq = (prev.aumLiq || 0) + newCustomersFromLiquidity * avgTicket;
+  const aumAsset = (prev.aumAsset || 0) + newCustomersFromAssets * avgTicket;
+  const aumAgent = (prev.aumAgent || 0) + newCustomersFromAgents * avgTicket + agentAumBoost;
+
+  return {
+    customers: updatedCustomers,
+    assets: updatedAssets,
+    agents: updatedAgents,
+    aum: updatedAum,
+    aumLiq, aumAsset, aumAgent,
+    rpm1: customers > 0 ? (newCustomersFromLiquidity / customers) * 1000 : 0,
+    rpm2: assets > 0 ? (newAssets / assets) * 1000 : 0,
+    rpm3: agents > 0 ? (newAgents / agents) * 1000 : 0,
+    gpActive
+  };
+}
+
+function fmtMoney(n) {
+  if (n >= 1e9) return '$' + (n / 1e9).toFixed(2) + 'B';
+  if (n >= 1e6) return '$' + (n / 1e6).toFixed(1) + 'M';
+  if (n >= 1e3) return '$' + (n / 1e3).toFixed(0) + 'K';
+  return '$' + Math.round(n);
+}
+function fmtNum(n) {
+  if (n >= 1e6) return (n / 1e6).toFixed(2) + 'M';
+  if (n >= 1e3) return (n / 1e3).toFixed(1) + 'K';
+  return Math.round(n).toString();
+}
+
+function statusFromRpm(rpm) {
+  if (rpm < 5) return ['未启动', 'sim-status-cold'];
+  if (rpm < 30) return ['预热中', 'sim-status-warm'];
+  if (rpm < 80) return ['转动中', 'sim-status-spinning'];
+  return ['飞速旋转', 'sim-status-flying'];
+}
+
+function updateUI() {
+  const cur = simState.history[simState.history.length - 1] || {
+    customers: simState.customers, assets: simState.assets, agents: simState.agents,
+    aum: simState.customers * 100000, aumLiq: 0, aumAsset: 0, aumAgent: 0,
+    rpm1: 0, rpm2: 0, rpm3: 0
+  };
+  const prev = simState.history.length > 1 ? simState.history[simState.history.length - 2] : null;
+
+  document.getElementById('sim-month-num').textContent = simState.month;
+  document.getElementById('sim-month-progress').style.width = (simState.month / 36 * 100) + '%';
+
+  document.getElementById('sim-m-aum').textContent = fmtMoney(cur.aum);
+  document.getElementById('sim-m-assets').textContent = Math.round(cur.assets);
+  document.getElementById('sim-m-agents').textContent = fmtNum(cur.agents);
+
+  if (prev) {
+    const dAum = ((cur.aum - prev.aum) / prev.aum * 100);
+    const dAssets = cur.assets - prev.assets;
+    const dAgents = ((cur.agents - prev.agents) / Math.max(prev.agents, 1) * 100);
+    document.getElementById('sim-d-aum').innerHTML = `<span class="${dAum >= 0 ? 'sim-mc-delta-up' : 'sim-mc-delta-down'}">${dAum >= 0 ? '↑' : '↓'} ${Math.abs(dAum).toFixed(1)}% MoM</span>`;
+    document.getElementById('sim-d-assets').innerHTML = `<span class="sim-mc-delta-up">+${dAssets} 本月</span>`;
+    document.getElementById('sim-d-agents').innerHTML = `<span class="${dAgents >= 0 ? 'sim-mc-delta-up' : 'sim-mc-delta-down'}">↑ ${dAgents.toFixed(1)}% MoM</span>`;
+  } else {
+    document.getElementById('sim-d-aum').textContent = '—';
+    document.getElementById('sim-d-assets').textContent = '—';
+    document.getElementById('sim-d-agents').textContent = '—';
+  }
+
+  const maxAum = 500e6;
+  const maxAssets = 80;
+  const maxAgents = 50000;
+  document.getElementById('sim-bar-aum').style.width = Math.min(100, cur.aum / maxAum * 100) + '%';
+  document.getElementById('sim-bar-assets').style.width = Math.min(100, cur.assets / maxAssets * 100) + '%';
+  document.getElementById('sim-bar-agents').style.width = Math.min(100, cur.agents / maxAgents * 100) + '%';
+
+  document.getElementById('sim-rpm-1').textContent = Math.round(cur.rpm1);
+  document.getElementById('sim-rpm-2').textContent = Math.round(cur.rpm2);
+  document.getElementById('sim-rpm-3').textContent = Math.round(cur.rpm3);
+
+  [['rpm1', 'sim-st-1'], ['rpm2', 'sim-st-2'], ['rpm3', 'sim-st-3']].forEach(([rpmKey, elId]) => {
+    const [text, cls] = statusFromRpm(cur[rpmKey]);
+    const el = document.getElementById(elId);
+    el.textContent = text;
+    el.className = 'sim-fws-status ' + cls;
+  });
+
+  const ins = document.getElementById('sim-insight');
+  if (simState.month === 0) {
+    ins.innerHTML = '点击 <b>播放 36 个月</b>，模拟器会按月推进，三个飞轮会陆续启动并互相加速。注意看：<b>资产飞轮通常在第 8-12 个月开始转</b>（AUM 跨过 GP 接洽门槛）；<b>Agent 飞轮一旦上线，复利速度最快</b>，会在 24 个月后超过流动性贡献。';
+  } else if (simState.month < simState.agentStart) {
+    ins.innerHTML = `第 ${simState.month} 个月。<b>Agent 飞轮还未启动</b>（设定为 M${simState.agentStart} 上线）。当前增长主要来自流动性飞轮——客户带客户。${cur.gpActive ? '资产飞轮已经开始转动，头部 GP 主动接洽中。' : 'AUM 还未跨过 GP 接洽门槛 $' + simState.gpThreshold + 'M，资产飞轮在等待启动。'}`;
+  } else if (simState.month < 18) {
+    ins.innerHTML = `第 ${simState.month} 个月。<b>三轮已经全部启动</b>。注意看 RPM 卡片——${cur.rpm1 > cur.rpm3 ? '流动性飞轮转得最快（短期主导）' : 'Agent 飞轮已经开始指数加速'}。当前 ${cur.aumAgent / cur.aum * 100 < 10 ? 'Agent 引发的 AUM 占比还很小' : 'Agent 引发的 AUM 占比已显著'}（${(cur.aumAgent / cur.aum * 100).toFixed(1)}%）。`;
+  } else if (simState.month < 30) {
+    const agentPct = (cur.aumAgent / cur.aum * 100).toFixed(1);
+    ins.innerHTML = `第 ${simState.month} 个月。<b>Agent 飞轮的复利效应开始主导</b>。Agent 引发 AUM 占比已经达到 ${agentPct}%。三轮互相输入：稀缺资产吸引 AI 原生公司接入 → Agent 调用增加 → Intent Engine 学习样本累积 → 又拉回更多客户。${cur.aum > 100e6 ? '<b>AUM 已突破 $100M 临界点。</b>' : ''}`;
+  } else {
+    const agentPct = (cur.aumAgent / cur.aum * 100).toFixed(1);
+    ins.innerHTML = `第 ${simState.month} 个月。<b>飞轮已经成型</b>。最终 AUM ${fmtMoney(cur.aum)}，其中 Agent 引发 ${agentPct}%、稀缺资产引流 ${(cur.aumAsset / cur.aum * 100).toFixed(1)}%、流动性贡献 ${(cur.aumLiq / cur.aum * 100).toFixed(1)}%。三个飞轮各自在不同时间尺度上贡献——这就是嵌套飞轮的力量：单一飞轮受挫不会拖垮整体。`;
+  }
+
+  drawChart();
+}
+
+function drawChart() {
+  if (simState.history.length < 2) {
+    document.getElementById('sim-chart-area-green').setAttribute('d', '');
+    document.getElementById('sim-chart-area-amber').setAttribute('d', '');
+    document.getElementById('sim-chart-area-purple').setAttribute('d', '');
+    document.getElementById('sim-chart-grid').innerHTML = '';
+    document.getElementById('sim-chart-labels').innerHTML = '';
+    return;
+  }
+
+  const W = 720, H = 200, padL = 48, padR = 16, padT = 10, padB = 24;
+  const innerW = W - padL - padR;
+  const innerH = H - padT - padB;
+
+  const maxAum = Math.max(...simState.history.map(h => h.aum), 1);
+  const niceMax = Math.ceil(maxAum / 1e7) * 1e7;
+
+  let gridHTML = '';
+  let labelHTML = '';
+  for (let i = 0; i <= 4; i++) {
+    const y = padT + (innerH / 4) * i;
+    const value = niceMax * (1 - i / 4);
+    gridHTML += `<line x1="${padL}" y1="${y}" x2="${W - padR}" y2="${y}" stroke="#E8E6DD" stroke-width="1"/>`;
+    labelHTML += `<text x="${padL - 6}" y="${y + 4}" text-anchor="end" font-size="9" fill="#888780">${fmtMoney(value)}</text>`;
+  }
+  for (let m = 0; m <= 36; m += 6) {
+    const x = padL + (m / 36) * innerW;
+    labelHTML += `<text x="${x}" y="${H - 6}" text-anchor="middle" font-size="9" fill="#888780">M${m}</text>`;
+  }
+  document.getElementById('sim-chart-grid').innerHTML = gridHTML;
+  document.getElementById('sim-chart-labels').innerHTML = labelHTML;
+
+  const xAt = m => padL + (m / 36) * innerW;
+  const yAt = v => padT + innerH * (1 - v / niceMax);
+
+  let pGreen = `M ${xAt(0)} ${yAt(0)}`;
+  let pAmber = `M ${xAt(0)} ${yAt(0)}`;
+  let pPurple = `M ${xAt(0)} ${yAt(0)}`;
+
+  simState.history.forEach((h, i) => {
+    const x = xAt(i);
+    pGreen += ` L ${x} ${yAt(h.aumLiq)}`;
+    pAmber += ` L ${x} ${yAt(h.aumLiq + h.aumAsset)}`;
+    pPurple += ` L ${x} ${yAt(h.aumLiq + h.aumAsset + h.aumAgent)}`;
+  });
+
+  const lastX = xAt(simState.history.length - 1);
+  pGreen += ` L ${lastX} ${yAt(0)} Z`;
+  pAmber += ` L ${lastX} ${yAt(0)} Z`;
+  pPurple += ` L ${lastX} ${yAt(0)} Z`;
+
+  document.getElementById('sim-chart-area-green').setAttribute('d', pGreen);
+  document.getElementById('sim-chart-area-amber').setAttribute('d', pAmber);
+  document.getElementById('sim-chart-area-purple').setAttribute('d', pPurple);
+}
+
+function reset() {
+  if (simState.timer) { clearInterval(simState.timer); simState.timer = null; }
+  simState.playing = false;
+  document.getElementById('sim-btn-play').textContent = '▶ 播放 36 个月';
+  document.getElementById('sim-play-mini').textContent = '▶';
+  simState.month = 0;
+  simState.history = [{
+    customers: simState.customers,
+    assets: simState.assets,
+    agents: simState.agents,
+    aum: simState.customers * 100000,
+    aumLiq: simState.customers * 100000,
+    aumAsset: 0,
+    aumAgent: 0,
+    rpm1: 0, rpm2: 0, rpm3: 0
+  }];
+  updateUI();
+}
+
+function step() {
+  if (simState.month >= 36) {
+    clearInterval(simState.timer);
+    simState.timer = null;
+    simState.playing = false;
+    document.getElementById('sim-btn-play').textContent = '▶ 重新播放';
+    document.getElementById('sim-play-mini').textContent = '▶';
+    return;
+  }
+  simState.month++;
+  const next = calculateMonth(simState.history[simState.history.length - 1], simState.month);
+  simState.history.push(next);
+  updateUI();
+}
+
+function play() {
+  if (simState.playing) {
+    clearInterval(simState.timer);
+    simState.timer = null;
+    simState.playing = false;
+    document.getElementById('sim-btn-play').textContent = '▶ 继续';
+    document.getElementById('sim-play-mini').textContent = '▶';
+    return;
+  }
+  if (simState.month >= 36) reset();
+  simState.playing = true;
+  document.getElementById('sim-btn-play').textContent = '⏸ 暂停';
+  document.getElementById('sim-play-mini').textContent = '⏸';
+  simState.timer = setInterval(step, 200);
+}
+
+document.getElementById('sim-btn-play').addEventListener('click', play);
+document.getElementById('sim-play-mini').addEventListener('click', play);
+document.getElementById('sim-btn-reset').addEventListener('click', reset);
+
+reset();
+})();
+</script>
 
 </body>
 </html>
